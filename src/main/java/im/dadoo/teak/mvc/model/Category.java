@@ -30,7 +30,7 @@ public class Category {
 	private int type;
 	
 	@Many(target = Post.class, field = "categoryId")
-	private List<Post> articles;
+	private List<Post> posts;
 	
 	@Many(target = Category.class, field = "supId")
 	private List<Category> subCategories;
@@ -83,12 +83,20 @@ public class Category {
 		this.type = type;
 	}
 
-	public List<Post> getArticles() {
-		return articles;
+	public List<Post> getPosts() {
+		return posts;
 	}
 
-	public void setArticles(List<Post> articles) {
-		this.articles = articles;
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
+	public List<Category> getSubCategories() {
+		return subCategories;
+	}
+
+	public void setSubCategories(List<Category> subCategories) {
+		this.subCategories = subCategories;
 	}
 	
 }

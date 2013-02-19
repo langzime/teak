@@ -22,11 +22,7 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/categories", method = RequestMethod.GET)
 	public String list() {
-		List<Category> categories = this.cs.treeWithAll();
-		log.debug(categories.size());
-		for (Category c : categories) {
-				log.debug(c.getName());
-		}
+		
 		return "categories";
 	}
 

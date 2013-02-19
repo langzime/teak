@@ -50,10 +50,16 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="dataSource"	ref="dataSource" />
 	</bean>
 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*" />
+			<bean class="im.dadoo.teak.interceptor.CategorySessionInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
 	<!-- @Controller, @Service, @Configuration, etc. -->
-	<context:component-scan base-package="im.dadoo.teak.mvc" />
+	<context:component-scan base-package="im.dadoo.teak" />
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 
