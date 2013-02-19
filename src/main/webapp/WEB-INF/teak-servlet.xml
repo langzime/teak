@@ -38,7 +38,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="basename" value="i18n/messages" />
 	</bean>
 
-<!-- 	<bean id="dataSource"
+	<bean id="dataSource"
 		class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="url" value="jdbc:mysql://db.dadoo.im:3306/teak" />
 		<property name="username" value="root" />
@@ -48,7 +48,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<bean id="dao"
 		class="org.nutz.dao.impl.NutDao">
 		<property name="dataSource"	ref="dataSource" />
-	</bean> -->
+	</bean>
 	
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->

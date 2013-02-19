@@ -18,17 +18,20 @@ public class Category {
 	private String name;
 	
 	@Name
-	private String linkName;
+	private String url;
 	
 	@Column
 	private String description;
 	
 	@Column
-	private int shown;
+	private int parentId;
 	
-	@Many(target = Article.class, field = "categoryId")
-	private List<Article> articles;
+	@Column
+	private int type;
 	
+	@Many(target = Post.class, field = "categoryId")
+	private List<Post> articles;
+
 	public int getId() {
 		return id;
 	}
@@ -45,14 +48,14 @@ public class Category {
 		this.name = name;
 	}
 
-	public String getLinkName() {
-		return linkName;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setLinkName(String linkName) {
-		this.linkName = linkName;
+	public void setUrl(String url) {
+		this.url = url;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
@@ -61,20 +64,28 @@ public class Category {
 		this.description = description;
 	}
 
-	public int getShown() {
-		return shown;
+	public int getParentId() {
+		return parentId;
 	}
 
-	public void setShown(int shown) {
-		this.shown = shown;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
-	public List<Article> getArticles() {
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public List<Post> getArticles() {
 		return articles;
 	}
 
-	public void setArticles(List<Article> articles) {
+	public void setArticles(List<Post> articles) {
 		this.articles = articles;
 	}
-
+	
 }
