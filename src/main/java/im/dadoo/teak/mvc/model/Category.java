@@ -24,13 +24,16 @@ public class Category {
 	private String description;
 	
 	@Column
-	private int parentId;
+	private int supId;
 	
 	@Column
 	private int type;
 	
 	@Many(target = Post.class, field = "categoryId")
 	private List<Post> articles;
+	
+	@Many(target = Category.class, field = "supId")
+	private List<Category> subCategories;
 
 	public int getId() {
 		return id;
@@ -64,12 +67,12 @@ public class Category {
 		this.description = description;
 	}
 
-	public int getParentId() {
-		return parentId;
+	public int getSupId() {
+		return supId;
 	}
 
-	public void setParentId(int parentId) {
-		this.parentId = parentId;
+	public void setSupId(int supId) {
+		this.supId = supId;
 	}
 
 	public int getType() {
