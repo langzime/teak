@@ -1,11 +1,8 @@
-<#import "lib.html" as lib>
+<#import "../lib.html" as lib>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="A Sample CMS">
-	<meta name="author" content="dadooteam">
+	<@lib.meta />
 	<title>Teak CMS admin</title>
 	<@lib.css />
 </head>
@@ -18,10 +15,10 @@
 			<div class="span3">
 				<ul class="nav nav-tabs nav-stacked">
   				<li class="active"><a href="#">Admin</a></li>
-  				<li><a href="/posts">Posts</a></li>
-  				<li><a href="/categories">Categories</a></li>
-  				<li><a href="/pages">Pages</a></li>
-  				<li><a href="/links">Links</a></li>		
+  				<li><a href="/admin/post">Posts</a></li>
+  				<li><a href="/admin/category">Categories</a></li>
+  				<li><a href="/admin/page">Pages</a></li>
+  				<li><a href="/admin/link">Links</a></li>		
 				</ul>
 			</div> <!-- span3 -->
 			<div class="span9">

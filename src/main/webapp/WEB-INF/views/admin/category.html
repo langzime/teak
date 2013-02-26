@@ -1,0 +1,91 @@
+<#import "../lib.html" as lib>
+<!DOCTYPE html>
+<html>
+<head>
+	<@lib.meta />
+	<title>增加类别</title>
+	<@lib.css />
+</head>
+<body>
+	<@lib.header />
+	<@lib.nav />
+	
+	<div class="container">
+		<div class="row">
+			<div class="span2">
+				<ul class="nav nav-tabs nav-stacked">
+  				<li><a href="/admin">Admin</a></li>
+  				<li><a href="/admin/post">Posts</a></li>
+  				<li class="active"><a href="/admin/category">Categories</a></li>
+  				<li><a href="/admin/page">Pages</a></li>
+  				<li><a href="/admin/link">Links</a></li>		
+				</ul>
+			</div> <!-- span3 -->
+			<div class="span6">
+				<form class="form-horizontal" action="/category" method="post">
+					<fieldset>
+						<legend>新增分类</legend>
+						<div class="control-group">
+							<label class="control-label">类别名称</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" name="name">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">类别链接名称</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" name="url">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">类别描述</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" name="description">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">父类别</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" name="supId">
+							</div>
+						</div>
+						<!-- control-group -->
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">保存</button>
+							<button type="reset" class="btn">取消</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div class="span4">
+				<table class="table table-striped well" style="font-size:10px">
+				  <thead>
+				    <tr>
+				      <th>类别名称</th>
+				      <th>类别链接名称</th>
+				      <th>类别描述</th>
+				      <th>父类别</th>
+				      <th>操作</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<#list categories as c>
+				    <tr>
+				      <td>${c.name}</td>
+				      <td>${c.url}</td>
+				      <td>${c.description}</td>
+				      <td>${c.supId}</td>
+				      <td>
+				      	<a href="/category/${c.id}/update">修改</a>
+				      	<a href="/category/${c.id}/delete">删除</a>
+				      </td>
+				    </tr>
+				    </#list>
+				  </tbody>
+				</table>	
+			</div>
+		</div>
+	</div>
+  <@lib.js />
+</body>
+</html>

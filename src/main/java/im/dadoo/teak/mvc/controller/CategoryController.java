@@ -2,6 +2,8 @@ package im.dadoo.teak.mvc.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import im.dadoo.teak.mvc.model.Category;
 import im.dadoo.teak.mvc.service.CategoryService;
 
@@ -9,8 +11,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CategoryController {
@@ -19,11 +23,19 @@ public class CategoryController {
 	
 	@Autowired
 	private CategoryService cs;
-	
-	@RequestMapping(value = "/categories", method = RequestMethod.GET)
-	public String list() {
-		
-		return "categories";
-	}
 
+	@RequestMapping(value = "/category", method = RequestMethod.POST)
+	public String add(@RequestParam String name, @RequestParam String url,
+			@RequestParam String description, @RequestParam int supId, HttpSession session) {
+		this.cs.insert(new Category(name, url, description, supId));
+		session.setAttribute("c", this.cs.treeWithAll());
+		return "redirect:/admin/category";
+	}
+	
+	@RequestMapping(value = "/category/{categoryId}/delete", method = RequestMethod.GET)
+	public String delete(@PathVariable int categoryId, HttpSession session) {
+		this.cs.deleteById(categoryId);
+		session.setAttribute("c", this.cs.treeWithAll());
+		return "redirect:/admin/category";
+	}
 }

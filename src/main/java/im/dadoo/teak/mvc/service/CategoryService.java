@@ -51,7 +51,7 @@ public class CategoryService {
 	public List<Category> listWithAll() {
 		List<Category> categories = this.list();
 		for (Category c : categories) {
-			this.dao.fetchLinks(c, "articles");
+			this.dao.fetchLinks(c, "posts");
 			this.dao.fetchLinks(c, "subCategories");
 		}
 		return categories;
@@ -75,7 +75,7 @@ public class CategoryService {
 	public List<Category> treeWithAll() {
 		List<Category> categories = this.list();
 		for (Category c : categories) {
-			this.dao.fetchLinks(c, "articles");
+			this.dao.fetchLinks(c, "posts");
 			this.dao.fetchLinks(c, "subCategories");
 		}
 		//只留顶层的类别
@@ -90,11 +90,7 @@ public class CategoryService {
 	
 	//会删除该类别下的所有文章，慎用
 	public void deleteById(int id) {
-		Category c = this.fetchById(id);
-		//对于集合型的类别，首先删掉所有文章
-		if (c.getType() == 1) {
-			this.dao.clear(Post.class, Cnd.where("categoryId", "=", id));
-		}
+		this.dao.clear(Post.class, Cnd.where("categoryId", "=", id));
 		this.dao.delete(Post.class, id);
 	}
 }

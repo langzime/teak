@@ -40,7 +40,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 	<bean id="dataSource"
 		class="com.alibaba.druid.pool.DruidDataSource">
-		<property name="url" value="jdbc:mysql://kant.kymair.com:3306/teak" />
+		<property name="url" value="jdbc:mysql://db.dadoo.im:3306/teak?characterEncoding=utf8" />
 		<property name="username" value="root" />
 		<property name="password" value="dadoo2012dadoo" />
 	</bean>
@@ -52,7 +52,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/*" />
+			<mvc:mapping path="/**" />
 			<bean class="im.dadoo.teak.interceptor.CategorySessionInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

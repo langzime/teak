@@ -26,15 +26,21 @@ public class Category {
 	@Column
 	private int supId;
 	
-	@Column
-	private int type;
-	
 	@Many(target = Post.class, field = "categoryId")
 	private List<Post> posts;
 	
 	@Many(target = Category.class, field = "supId")
 	private List<Category> subCategories;
 
+	public Category(){}
+	
+	public Category(String name, String url, String description, int supId) {
+		this.name = name;
+		this.url = url;
+		this.description = description;
+		this.supId = supId;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -73,14 +79,6 @@ public class Category {
 
 	public void setSupId(int supId) {
 		this.supId = supId;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
 	}
 
 	public List<Post> getPosts() {

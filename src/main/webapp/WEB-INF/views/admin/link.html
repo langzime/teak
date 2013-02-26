@@ -1,0 +1,82 @@
+<#import "../lib.html" as lib>
+<!DOCTYPE html>
+<html>
+<head>
+	<@lib.meta />
+	<title>增加Link</title>
+	<@lib.css />
+</head>
+<body>
+	<@lib.header />
+	<@lib.nav />
+	
+	<div class="container">
+		<div class="row">
+			<div class="span2">
+				<ul class="nav nav-tabs nav-stacked">
+  				<li><a href="/admin">Admin</a></li>
+  				<li><a href="/admin/post">Posts</a></li>
+  				<li><a href="/admin/category">Categories</a></li>
+  				<li><a href="/admin/page">Pages</a></li>
+  				<li class="active"><a href="/admin/link">Links</a></li>		
+				</ul>
+			</div> <!-- span3 -->
+			<div class="span6">
+				<form class="form-horizontal" action="/link" method="post">
+					<fieldset>
+						<legend>新增Link</legend>
+						<div class="control-group">
+							<label class="control-label">链接地址</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" name="url">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">名称</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" name="name">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">描述</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" name="description">
+							</div>
+						</div>
+						<!-- control-group -->
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">保存</button>
+							<button type="reset" class="btn">取消</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div class="span4">
+				<table class="table table-striped well" style="font-size:10px">
+				  <thead>
+				    <tr>
+				      <th>链接名</th>
+				      <th>链接地址</th>
+				      <th>描述</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<#list links as l>
+				    <tr>
+				      <td><a href="${l.url}">${l.name}</a></td>
+				      <td>${l.url}</td>
+				      <td>${l.description}</td>
+				      <td>
+				      	<a href="/link/${l.id}/update">修改</a>
+				      	<a href="/link/${l.id}/delete">删除</a>
+				      </td>
+				    </tr>
+				    </#list>
+				  </tbody>
+				</table>	
+			</div>
+		</div>
+	</div>
+  <@lib.js />
+</body>
+</html>

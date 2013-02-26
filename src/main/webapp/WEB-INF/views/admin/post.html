@@ -1,0 +1,91 @@
+<#import "../lib.html" as lib>
+<!DOCTYPE html>
+<html>
+<head>
+	<@lib.meta />
+	<title>增加Post</title>
+	<@lib.css />
+</head>
+<body>
+	<@lib.header />
+	<@lib.nav />
+	
+	<div class="container">
+		<div class="row">
+			<div class="span2">
+				<ul class="nav nav-tabs nav-stacked">
+  				<li><a href="/admin">Admin</a></li>
+  				<li class="active"><a href="/admin/post">Posts</a></li>
+  				<li><a href="/admin/category">Categories</a></li>
+  				<li><a href="/admin/page">Pages</a></li>
+  				<li><a href="/admin/link">Links</a></li>		
+				</ul>
+			</div> <!-- span3 -->
+			<div class="span6">
+				<form class="form-horizontal" action="/post" method="post">
+					<fieldset>
+						<legend>新增Post</legend>
+						<div class="control-group">
+							<label class="control-label">标题</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" name="title">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">作者</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" name="author">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">内容</label>
+							<div class="controls">
+								<textarea class="input-xlarge" name="content" rows="3"></textarea>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">类别</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" name="categoryId">
+							</div>
+						</div>
+						<!-- control-group -->
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">保存</button>
+							<button type="reset" class="btn">取消</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div class="span4">
+				<table class="table table-striped well" style="font-size:10px">
+				  <thead>
+				    <tr>
+				      <th>标题</th>
+				      <th>作者</th>
+				      <th>类别</th>
+				      <th>点击量</th>
+				      <th>操作</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<#list posts as p>
+				    <tr>
+				      <td><a href="/post/${p.id}">${p.title}</a></td>
+				      <td>${p.author}</td>
+				      <td>${p.category.name}</td>
+				      <td>${p.click}</td>
+				      <td>
+				      	<a href="/post/${p.id}/update">修改</a>
+				      	<a href="/post/${p.id}/delete">删除</a>
+				      </td>
+				    </tr>
+				    </#list>
+				  </tbody>
+				</table>	
+			</div>
+		</div>
+	</div>
+  <@lib.js />
+</body>
+</html>

@@ -12,6 +12,17 @@ public class Post {
 
 	public Post(){}
 	
+	public Post(String title, String author, String content, int categoryId) {
+		this.title = title;
+		this.author = author;
+		this.content = content;
+		this.text = content;
+		this.publishTime = System.currentTimeMillis();
+		this.click = 0;
+		this.headerImageName = null;
+		this.categoryId = categoryId;
+	}
+	
 	@Id
 	private long id;
 	
@@ -28,10 +39,10 @@ public class Post {
 	private String text;
 	
 	@Column
-	private Timestamp publishTime;
+	private long publishTime;
 	
 	@Column
-	private Timestamp updateTime;
+	private long updateTime;
 	
 	@Column
 	private long click;
@@ -87,19 +98,19 @@ public class Post {
 		this.text = text;
 	}
 
-	public Timestamp getPublishTime() {
+	public long getPublishTime() {
 		return publishTime;
 	}
 
-	public void setPublishTime(Timestamp publishTime) {
+	public void setPublishTime(long publishTime) {
 		this.publishTime = publishTime;
 	}
 
-	public Timestamp getUpdateTime() {
+	public long getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(long updateTime) {
 		this.updateTime = updateTime;
 	}
 
