@@ -3,8 +3,10 @@ package im.dadoo.teak.mvc.controller;
 import java.util.List;
 
 import im.dadoo.teak.mvc.model.Category;
+import im.dadoo.teak.mvc.model.Link;
 import im.dadoo.teak.mvc.model.Post;
 import im.dadoo.teak.mvc.service.CategoryService;
+import im.dadoo.teak.mvc.service.LinkService;
 import im.dadoo.teak.mvc.service.PostService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class AdminController {
 	
 	@Autowired
 	private PostService ps;
+	
+	@Autowired
+	private LinkService ls;
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String getAdminPage() {
@@ -39,5 +44,12 @@ public class AdminController {
 		List<Post> posts = this.ps.listWithAll();
 		map.addAttribute("posts", posts);
 		return "admin/post";
+	}
+	
+	@RequestMapping(value = "/admin/link", method = RequestMethod.GET)
+	public String getLinkAdminPage(ModelMap map) {
+		List<Link> links = this.ls.list();
+		map.addAttribute("links", links);
+		return "admin/link";
 	}
 }
