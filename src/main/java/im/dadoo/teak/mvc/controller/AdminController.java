@@ -4,9 +4,11 @@ import java.util.List;
 
 import im.dadoo.teak.mvc.model.Category;
 import im.dadoo.teak.mvc.model.Link;
+import im.dadoo.teak.mvc.model.Page;
 import im.dadoo.teak.mvc.model.Post;
 import im.dadoo.teak.mvc.service.CategoryService;
 import im.dadoo.teak.mvc.service.LinkService;
+import im.dadoo.teak.mvc.service.PageService;
 import im.dadoo.teak.mvc.service.PostService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,10 @@ public class AdminController {
 	private CategoryService cs;
 	
 	@Autowired
-	private PostService ps;
+	private PostService pos;
+	
+	@Autowired
+	private PageService pas;
 	
 	@Autowired
 	private LinkService ls;
@@ -41,9 +46,16 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/post", method = RequestMethod.GET)
 	public String getPostAdminPage(ModelMap map) {
-		List<Post> posts = this.ps.listWithAll();
+		List<Post> posts = this.pos.listWithAll();
 		map.addAttribute("posts", posts);
 		return "admin/post";
+	}
+	
+	@RequestMapping(value = "/admin/page", method = RequestMethod.GET)
+	public String getPageAdminPage(ModelMap map) {
+		List<Page> pages = this.pas.list();
+		map.addAttribute("pages", pages);
+		return "admin/page";
 	}
 	
 	@RequestMapping(value = "/admin/link", method = RequestMethod.GET)

@@ -1,31 +1,18 @@
 package im.dadoo.teak.mvc.model;
 
-import java.sql.Timestamp;
-
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Id;
-import org.nutz.dao.entity.annotation.One;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
-@Table("t_post")
-public class Post {
+@Table("t_page")
+public class Page {
 
-	public Post(){}
-	
-	public Post(String title, String author, String content, int categoryId) {
-		this.title = title;
-		this.author = author;
-		this.content = content;
-		this.text = content;
-		this.publishTime = System.currentTimeMillis();
-		this.updateTime = this.publishTime;
-		this.click = 0;
-		this.headerImageName = null;
-		this.categoryId = categoryId;
-	}
-	
 	@Id
 	private long id;
+	
+	@Name
+	private String name;
 	
 	@Column
 	private String title;
@@ -47,24 +34,34 @@ public class Post {
 	
 	@Column
 	private long click;
-	
-	@Column
-	private String headerImageName;
-	
-	@Column
-	private int categoryId;
-	
-	@One(target = Category.class, field = "categoryId")
-	private Category category;
-	
-	private boolean newPost;
 
+	public Page(){}
+	
+	public Page(String name, String title, String author, String content) {
+		this.name = name;
+		this.title = title;
+		this.author = author;
+		this.content = content;
+		this.text = content;
+		this.publishTime = System.currentTimeMillis();
+		this.updateTime = this.publishTime;
+		this.click = 0;
+	}
+	
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getTitle() {
@@ -121,38 +118,6 @@ public class Post {
 
 	public void setClick(long click) {
 		this.click = click;
-	}
-
-	public String getHeaderImageName() {
-		return headerImageName;
-	}
-
-	public void setHeaderImageName(String headerImageName) {
-		this.headerImageName = headerImageName;
-	}
-
-	public int getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public boolean isNewPost() {
-		return newPost;
-	}
-
-	public void setNewPost(boolean newPost) {
-		this.newPost = newPost;
 	}
 
 }
