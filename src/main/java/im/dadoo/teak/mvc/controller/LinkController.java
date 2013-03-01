@@ -16,16 +16,25 @@ public class LinkController {
 	@Autowired
 	private LinkService ls;
 	
-	@RequestMapping(value = "/link", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/link", method = RequestMethod.POST)
 	public String add(@RequestParam String url, @RequestParam String name, 
 			@RequestParam String description) {
 		this.ls.insert(new Link(url, name, description));
-		return "redirect:/admin/link";
+		return "redirect:/admin/links";
 	}
 	
-	@RequestMapping(value = "/link/{linkId}/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/link/{linkId}/delete", method = RequestMethod.GET)
 	public String delete(@PathVariable int linkId) {
 		this.ls.deleteById(linkId);
-		return "redirect:/admin/link";
+		return "redirect:/admin/links";
+	}
+	
+	@RequestMapping(value = "/admin/link/{linkId}/update", method = RequestMethod.POST)
+	public String update(@PathVariable int linkId, @RequestParam String url, 
+			@RequestParam String name, @RequestParam String description) {
+		Link link = new Link(url, name, description);
+		link.setId(linkId);
+		this.ls.update(link);
+		return "redirect:/admin/links";
 	}
 }

@@ -14,6 +14,7 @@ import im.dadoo.teak.mvc.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -37,31 +38,55 @@ public class AdminController {
 		return "admin/admin";
 	}
 	
-	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/categories", method = RequestMethod.GET)
 	public String getCategoryAdminPage(ModelMap map) {
 		List<Category> categories = this.cs.list();
 		map.addAttribute("categories", categories);
+		return "admin/categories";
+	}
+	
+	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
+	public String getCategoryAddPage() {
 		return "admin/category";
 	}
 	
-	@RequestMapping(value = "/admin/post", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/category/{categoryId}/update", method = RequestMethod.GET)
+	public String getCategoryUpdatePage(@PathVariable int categoryId, ModelMap map) {
+		Category category = this.cs.fetchById(categoryId);
+		map.addAttribute("category", category);
+		return "admin/category";
+	}
+	
+	@RequestMapping(value = "/admin/posts", method = RequestMethod.GET)
 	public String getPostAdminPage(ModelMap map) {
 		List<Post> posts = this.pos.listWithAll();
 		map.addAttribute("posts", posts);
-		return "admin/post";
+		return "admin/posts";
 	}
 	
-	@RequestMapping(value = "/admin/page", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/pages", method = RequestMethod.GET)
 	public String getPageAdminPage(ModelMap map) {
 		List<Page> pages = this.pas.list();
 		map.addAttribute("pages", pages);
-		return "admin/page";
+		return "admin/pages";
 	}
 	
-	@RequestMapping(value = "/admin/link", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/links", method = RequestMethod.GET)
 	public String getLinkAdminPage(ModelMap map) {
 		List<Link> links = this.ls.list();
 		map.addAttribute("links", links);
+		return "admin/links";
+	}
+	
+	@RequestMapping(value = "/admin/link", method = RequestMethod.GET)
+	public String getLinkAddPage() {
+		return "admin/link";
+	}
+	
+	@RequestMapping(value = "/admin/link/{linkId}/update", method = RequestMethod.GET)
+	public String getLinkUpdatePage(@PathVariable int linkId, ModelMap map) {
+		Link link = this.ls.fetchById(linkId);
+		map.addAttribute("link", link);
 		return "admin/link";
 	}
 }

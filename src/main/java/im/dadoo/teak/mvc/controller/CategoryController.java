@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import im.dadoo.teak.mvc.model.Category;
+import im.dadoo.teak.mvc.model.Link;
 import im.dadoo.teak.mvc.service.CategoryService;
 
 import org.apache.commons.logging.Log;
@@ -24,18 +25,29 @@ public class CategoryController {
 	@Autowired
 	private CategoryService cs;
 
-	@RequestMapping(value = "/category", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/category", method = RequestMethod.POST)
 	public String add(@RequestParam String name, @RequestParam String url,
 			@RequestParam String description, @RequestParam int supId, HttpSession session) {
 		this.cs.insert(new Category(name, url, description, supId));
 		session.setAttribute("c", this.cs.treeWithAll());
-		return "redirect:/admin/category";
+		return "redirect:/admin/categories";
 	}
 	
 	@RequestMapping(value = "/category/{categoryId}/delete", method = RequestMethod.GET)
 	public String delete(@PathVariable int categoryId, HttpSession session) {
 		this.cs.deleteById(categoryId);
 		session.setAttribute("c", this.cs.treeWithAll());
-		return "redirect:/admin/category";
+		return "redirect:/admin/categories";
+	}
+	
+	@RequestMapping(value = "/admin/category/{categoryId}/update", method = RequestMethod.POST)
+	public String update(@PathVariable int categoryId, @RequestParam String url, 
+			@RequestParam String name, @RequestParam String description, 
+			@RequestParam int supId, HttpSession session) {
+		Category category = new Category(url, name, description, supId);
+		category.setId(categoryId);
+		this.cs.update(category);
+		session.setAttribute("c", this.cs.treeWithAll());
+		return "redirect:/admin/categories";
 	}
 }

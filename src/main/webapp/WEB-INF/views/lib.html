@@ -64,6 +64,86 @@
 <!-- nav -->
 </#macro>
 
+<#macro AdminLeftNav>
+<div class="accordion" id="left-nav">
+	<div class="accordion-group">
+  	<div class="accordion-heading">
+     <a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapseAdmin">
+     	用户
+     </a>
+    </div>
+    <div id="collapseAdmin" class="accordion-body collapse">
+    	<div class="accordion-inner">
+	    	<ul>
+	    		<li><a href="#">All Users</a></li>
+	    	</ul>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+  	<div class="accordion-heading">
+    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapsePost">
+      	Post
+      </a>
+    </div>
+    <div id="collapsePost" class="accordion-body collapse">
+    	<div class="accordion-inner">
+	    	<ul>
+					<li><a href="/admin/posts">All Posts</a></li>
+					<li><a href="/admin/post">Add Post</a></li>
+				</ul>
+      </div>
+    </div>
+  </div>
+	<div class="accordion-group">
+   	<div class="accordion-heading">
+     	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapseCategory">
+       	Category
+       </a>
+     </div>
+     <div id="collapseCategory" class="accordion-body collapse">
+     	<div class="accordion-inner">
+     		<ul>
+     			<li><a href="/admin/categories">All Categories</a></li>
+     			<li><a href="/admin/category">Add Category</a></li>
+     		</ul>		
+       </div>
+     </div>
+   </div>
+   <div class="accordion-group">
+   	<div class="accordion-heading">
+     	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapsePage">
+       	Page
+       </a>
+     </div>
+     <div id="collapsePage" class="accordion-body collapse">
+     	<div class="accordion-inner">
+     		<ul>
+     			<li><a href="/admin/pages">All Pages</a></li>
+     			<li><a href="/admin/page">Add Page</a></li>
+     		</ul>
+      </div>
+    </div>
+   </div>
+   <div class="accordion-group">
+   	<div class="accordion-heading">
+     	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapseLink">
+       	Link
+       </a>
+     </div>
+     <div id="collapseLink" class="accordion-body collapse">
+     	<div class="accordion-inner">
+     		<ul>
+     			<li><a href="/admin/links">All Links</a></li>
+     			<li><a href="/admin/link">Add Link</a></li>
+     		</ul>	
+      </div>
+    </div>
+  </div>
+</div>
+
+</#macro>
+
 <#macro js>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>

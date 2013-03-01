@@ -5,6 +5,7 @@
 	<@lib.meta />
 	<title>Teak CMS admin</title>
 	<@lib.css />
+	
 </head>
 <body>
 	<@lib.header />
@@ -13,19 +14,18 @@
 	<div class="container">
 		<div class="row">
 			<div class="span3">
-				<ul class="nav nav-tabs nav-stacked">
-  				<li class="active"><a href="#">Admin</a></li>
-  				<li><a href="/admin/post">Posts</a></li>
-  				<li><a href="/admin/category">Categories</a></li>
-  				<li><a href="/admin/page">Pages</a></li>
-  				<li><a href="/admin/link">Links</a></li>		
-				</ul>
+				<@lib.AdminLeftNav />
 			</div> <!-- span3 -->
 			<div class="span9">
 				AAA
 			</div>
 		</div>
 	</div>
-  <@lib.js />
+	<@lib.js />
+  <script>
+		$(function(){
+			$('#collapseAdmin').addClass('in');
+		});
+	</script>
 </body>
 </html>

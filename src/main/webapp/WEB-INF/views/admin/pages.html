@@ -1,0 +1,54 @@
+<#import "../lib.html" as lib>
+<!DOCTYPE html>
+<html>
+<head>
+	<@lib.meta />
+	<title>All Pages</title>
+	<@lib.css />
+</head>
+<body>
+	<@lib.header />
+	<@lib.nav />
+	
+	<div class="container">
+		<div class="row">
+			<div class="span2">
+				<@lib.AdminLeftNav />
+			</div> <!-- span2 -->
+			<div class="span10">
+				<table class="table table-striped well" style="font-size:10px">
+				  <thead>
+				    <tr>
+				    	<th>页名</th>
+				      <th>标题</th>
+				      <th>作者</th>
+				      <th>点击量</th>
+				      <th>操作</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<#list pages as p>
+				    <tr>
+				      <td class="span3"><a href="/page/${p.id}">${p.name}</a></td>
+				      <td class="span3">${p.title}</td>
+				      <td class="span2">${p.author}</td>
+				      <td class="span1">${p.click}</td>
+				      <td class="span1">
+				      	<a href="/admin/page/${p.id}/update">修改</a>
+				      	<a href="/admin/page/${p.id}/delete">删除</a>
+				      </td>
+				    </tr>
+				    </#list>
+				  </tbody>
+				</table>	
+			</div>
+		</div>
+	</div>
+  <@lib.js />
+  <script>
+		$(function(){
+			$('#collapsePage').addClass('in');
+		});
+	</script>
+</body>
+</html>
