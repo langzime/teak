@@ -2,6 +2,7 @@ package im.dadoo.teak.mvc.service;
 
 import java.util.List;
 
+import im.dadoo.teak.mvc.model.Link;
 import im.dadoo.teak.mvc.model.Post;
 
 import org.nutz.dao.Dao;
@@ -16,6 +17,20 @@ public class PostService {
 	
 	public Post insert(Post post) {
 		return this.dao.insert(post);
+	}
+	
+	public Post fetchById(long id) {
+		return this.dao.fetch(Post.class, id);
+	}
+	
+	public Post fetchByIdWithAll(long id) {
+		Post post = this.dao.fetch(Post.class, id);
+		this.dao.fetchLinks(post, "category");
+		return post;
+	}
+	
+	public int update(Post post) {
+		return this.dao.update(post);
 	}
 	
 	public void deleteById(long id) {

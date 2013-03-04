@@ -6,10 +6,12 @@ import im.dadoo.teak.mvc.model.Category;
 import im.dadoo.teak.mvc.model.Link;
 import im.dadoo.teak.mvc.model.Page;
 import im.dadoo.teak.mvc.model.Post;
+import im.dadoo.teak.mvc.model.User;
 import im.dadoo.teak.mvc.service.CategoryService;
 import im.dadoo.teak.mvc.service.LinkService;
 import im.dadoo.teak.mvc.service.PageService;
 import im.dadoo.teak.mvc.service.PostService;
+import im.dadoo.teak.mvc.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,9 +35,19 @@ public class AdminController {
 	@Autowired
 	private LinkService ls;
 	
+	@Autowired
+	private UserService us;
+	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String getAdminPage() {
 		return "admin/admin";
+	}
+	
+	@RequestMapping(value = "/admin/user/{userId}/update", method = RequestMethod.GET)
+	public String getUserUpdatePage(@PathVariable int userId, ModelMap map) {
+		User user = this.us.fetchById(userId);
+		map.addAttribute("user", user);
+		return "admin/user";
 	}
 	
 	@RequestMapping(value = "/admin/categories", method = RequestMethod.GET)
@@ -64,11 +76,35 @@ public class AdminController {
 		return "admin/posts";
 	}
 	
+	@RequestMapping(value = "/admin/post", method = RequestMethod.GET)
+	public String getPostAddPage() {
+		return "admin/post";
+	}
+	
+	@RequestMapping(value = "/admin/post/{postId}/update", method = RequestMethod.GET)
+	public String getPostUpdatePage(@PathVariable int postId, ModelMap map) {
+		Post post = this.pos.fetchById(postId);
+		map.addAttribute("post", post);
+		return "admin/post";
+	}
+	
 	@RequestMapping(value = "/admin/pages", method = RequestMethod.GET)
 	public String getPageAdminPage(ModelMap map) {
 		List<Page> pages = this.pas.list();
 		map.addAttribute("pages", pages);
 		return "admin/pages";
+	}
+	
+	@RequestMapping(value = "/admin/page", method = RequestMethod.GET)
+	public String getPageAddPage() {
+		return "admin/page";
+	}
+	
+	@RequestMapping(value = "/admin/page/{pageId}/update", method = RequestMethod.GET)
+	public String getPageUpdatePage(@PathVariable int pageId, ModelMap map) {
+		Page page = this.pas.fetchById(pageId);
+		map.addAttribute("page", page);
+		return "admin/page";
 	}
 	
 	@RequestMapping(value = "/admin/links", method = RequestMethod.GET)

@@ -38,13 +38,17 @@ public class Page {
 	public Page(){}
 	
 	public Page(String name, String title, String author, String content) {
+		this(name, title, author, content, System.currentTimeMillis());
+	}
+	
+	public Page(String name, String title, String author, String content, long publishTime) {
 		this.name = name;
 		this.title = title;
 		this.author = author;
 		this.content = content;
 		this.text = content;
-		this.publishTime = System.currentTimeMillis();
-		this.updateTime = this.publishTime;
+		this.publishTime = publishTime;
+		this.updateTime = System.currentTimeMillis();
 		this.click = 0;
 	}
 	

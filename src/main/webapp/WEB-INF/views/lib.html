@@ -68,14 +68,14 @@
 <div class="accordion" id="left-nav">
 	<div class="accordion-group">
   	<div class="accordion-heading">
-     <a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapseAdmin">
+     <a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapseUser">
      	用户
      </a>
     </div>
-    <div id="collapseAdmin" class="accordion-body collapse">
+    <div id="collapseUser" class="accordion-body collapse">
     	<div class="accordion-inner">
 	    	<ul>
-	    		<li><a href="#">All Users</a></li>
+	    		<li><a href="/admin/user/1/update">修改管理员密码</a></li>
 	    	</ul>
       </div>
     </div>
@@ -142,6 +142,21 @@
   </div>
 </div>
 
+</#macro>
+
+<#macro bottom>
+<div class="row">
+	<div class="span12">	
+		<ul>
+			<li>版权所有&copy;华中科技大学中国当代写作研究中心&nbsp;2012&nbsp;|</li>
+			<li>&nbsp;地址：湖北省武汉市珞喻路1037号华中科技大学东五楼三楼&nbsp;|</li>
+			<li>&nbsp;邮编：430074&nbsp;|</li>
+			<li>&nbsp;联系电话：027-87559614&nbsp;|</li>
+			<li>&nbsp;邮箱：jiangjun1870@126.com&nbsp;|&nbsp;</li>
+			<li><a href="/admin">管理入口</a></li>
+		</ul>
+	</div>
+</div>
 </#macro>
 
 <#macro js>

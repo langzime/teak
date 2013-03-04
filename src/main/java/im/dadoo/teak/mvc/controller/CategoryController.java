@@ -12,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,7 +34,7 @@ public class CategoryController {
 		return "redirect:/admin/categories";
 	}
 	
-	@RequestMapping(value = "/category/{categoryId}/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/category/{categoryId}/delete", method = RequestMethod.GET)
 	public String delete(@PathVariable int categoryId, HttpSession session) {
 		this.cs.deleteById(categoryId);
 		session.setAttribute("c", this.cs.treeWithAll());
@@ -49,5 +50,12 @@ public class CategoryController {
 		this.cs.update(category);
 		session.setAttribute("c", this.cs.treeWithAll());
 		return "redirect:/admin/categories";
+	}
+	
+	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
+	public String getPosts(@PathVariable int categoryId, ModelMap map) {
+		Category category = this.cs.fetchByIdWithAll(categoryId);
+		map.addAttribute("category", category);
+		return "category";
 	}
 }

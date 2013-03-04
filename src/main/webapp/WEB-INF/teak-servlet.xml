@@ -52,6 +52,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<bean class="im.dadoo.teak.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="im.dadoo.teak.interceptor.CategorySessionInterceptor" />
 		</mvc:interceptor>

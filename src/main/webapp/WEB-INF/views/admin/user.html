@@ -1,0 +1,64 @@
+<#import "../lib.html" as lib>
+<!DOCTYPE html>
+<html>
+<head>
+	<@lib.meta />
+	<#if user??>
+		<title>Update User</title>
+	<#else>
+		<title>Add User</title>
+	</#if>
+	<@lib.css />
+</head>
+<body>
+	<@lib.header />
+	<@lib.nav />
+	
+	<div class="container">
+		<div class="row">
+			<div class="span2">
+				<@lib.AdminLeftNav />
+			</div> <!-- span2 -->
+			<div class="span6">
+				<#if user??>
+					<form class="form-horizontal" action="/admin/user/${user.id}/update" method="post">
+				<#else>
+					<form class="form-horizontal" action="/admin/user" method="post">
+				</#if>
+					<fieldset>
+						<#if user??>
+							<legend>修改User</legend>
+						<#else>
+							<legend>新增User</legend>
+						</#if>
+						<div class="control-group">
+							<label class="control-label">旧密码</label>
+							<div class="controls">
+								<input id="oldPassword" type="password" class="input-xlarge" name="oldPassword">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">新密码</label>
+							<div class="controls">
+								<input id="newPassword" type="password" class="input-xlarge" name="newPassword">
+							</div>
+						</div>
+						
+						<!-- control-group -->
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">保存</button>
+							<button type="reset" class="btn">取消</button>
+						</div>
+					</fieldset>
+				</form>	
+			</div>
+		</div>
+	</div>
+  <@lib.js />
+  <script>
+		$(function(){
+			$('#collapseUser').addClass('in');
+		});
+	</script>
+</body>
+</html>

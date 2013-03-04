@@ -18,6 +18,14 @@ public class PageService {
 		return this.dao.insert(page);
 	}
 	
+	public Page fetchById(long id) {
+		return this.dao.fetch(Page.class, id);
+	}
+	
+	public int update(Page page) {
+		return this.dao.update(page);
+	}
+	
 	public void deleteById(long id) {
 		this.dao.delete(Page.class, id);
 	}

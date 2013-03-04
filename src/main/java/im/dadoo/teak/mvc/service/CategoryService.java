@@ -22,14 +22,19 @@ public class CategoryService {
 		return c.getId();
 	}
 	
-	public boolean update(Category c) {
-		int t = this.dao.update(c);
-		if (t == 1) return true;
-		else        return false;
+	public int update(Category c) {
+		return this.dao.update(c);
 	}
 	
 	public Category fetchById(int id) {
 		return this.dao.fetch(Category.class, id);
+	}
+	
+	public Category fetchByIdWithAll(int id) {
+		Category c = this.dao.fetch(Category.class, id);
+		this.dao.fetchLinks(c, "subCategories");
+		this.dao.fetchLinks(c, "posts");
+		return c;
 	}
 	
 	public Category fetchByUrl(String url) {

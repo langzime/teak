@@ -13,12 +13,16 @@ public class Post {
 	public Post(){}
 	
 	public Post(String title, String author, String content, int categoryId) {
+		this(title, author, content, System.currentTimeMillis(), categoryId);
+	}
+	
+	public Post(String title, String author, String content, long publishTime, int categoryId) {
 		this.title = title;
 		this.author = author;
 		this.content = content;
 		this.text = content;
-		this.publishTime = System.currentTimeMillis();
-		this.updateTime = this.publishTime;
+		this.publishTime = publishTime;
+		this.updateTime = System.currentTimeMillis();
 		this.click = 0;
 		this.headerImageName = null;
 		this.categoryId = categoryId;

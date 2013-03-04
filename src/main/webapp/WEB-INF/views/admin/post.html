@@ -3,7 +3,11 @@
 <html>
 <head>
 	<@lib.meta />
-	<title>增加Post</title>
+	<#if post??>
+		<title>Update Post</title>
+	<#else>
+		<title>Add Post</title>
+	</#if>
 	<@lib.css />
 </head>
 <body>
@@ -13,79 +17,72 @@
 	<div class="container">
 		<div class="row">
 			<div class="span2">
-				<ul class="nav nav-tabs nav-stacked">
-  				<li><a href="/admin">Admin</a></li>
-  				<li class="active"><a href="/admin/post">Posts</a></li>
-  				<li><a href="/admin/category">Categories</a></li>
-  				<li><a href="/admin/page">Pages</a></li>
-  				<li><a href="/admin/link">Links</a></li>		
-				</ul>
-			</div> <!-- span3 -->
+				<@lib.AdminLeftNav />
+			</div> <!-- span2 -->
 			<div class="span6">
-				<form class="form-horizontal" action="/post" method="post">
+				<#if post??>
+					<form class="form-horizontal" action="/admin/post/${post.id}/update" method="post">
+				<#else>
+					<form class="form-horizontal" action="/admin/post" method="post">
+				</#if>
 					<fieldset>
-						<legend>新增Post</legend>
+						<#if post??>
+							<legend>修改Post</legend>
+						<#else>
+							<legend>新增Post</legend>
+						</#if>
 						<div class="control-group">
 							<label class="control-label">标题</label>
 							<div class="controls">
-								<input type="text" class="input-xlarge" name="title">
+								<input id="title" type="text" class="input-xlarge" name="title">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">作者</label>
 							<div class="controls">
-								<input type="text" class="input-xlarge" name="author">
+								<input id="author" type="text" class="input-xlarge" name="author">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">内容</label>
 							<div class="controls">
-								<textarea class="input-xlarge" name="content" rows="3"></textarea>
+								<textarea id="content" class="input-xlarge" name="content" rows="3"></textarea>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<input id="publishTime" type="hidden" class="input-xlarge" name="publishTime" readonly="">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">类别</label>
 							<div class="controls">
-								<input type="text" class="input-xlarge" name="categoryId">
+								<input id="categoryId" type="text" class="input-xlarge" name="categoryId">
 							</div>
-						</div>
+						</div>			
 						<!-- control-group -->
 						<div class="form-actions">
 							<button type="submit" class="btn btn-primary">保存</button>
 							<button type="reset" class="btn">取消</button>
 						</div>
 					</fieldset>
-				</form>
-			</div>
-			<div class="span4">
-				<table class="table table-striped well" style="font-size:10px">
-				  <thead>
-				    <tr>
-				      <th>标题</th>
-				      <th>作者</th>
-				      <th>类别</th>
-				      <th>点击量</th>
-				      <th>操作</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				  	<#list posts as p>
-				    <tr>
-				      <td><a href="/post/${p.id}">${p.title}</a></td>
-				      <td>${p.author}</td>
-				      <td>${p.category.name}</td>
-				      <td>${p.click}</td>
-				      <td>
-				      	<a href="/post/${p.id}/update">修改</a>
-				      	<a href="/post/${p.id}/delete">删除</a>
-				      </td>
-				    </tr>
-				    </#list>
-				  </tbody>
-				</table>	
+				</form>	
 			</div>
 		</div>
 	</div>
   <@lib.js />
+  <script>
+		$(function(){
+			$('#collapsePost').addClass('in');
+			<#if post??>
+				$('#title').val('${post.title}');
+				$('#author').val('${post.author}');
+				$('#content').val('${post.content}');
+				$('#publishTime').val('${post.publishTime}');
+				$('#categoryId').val('${post.categoryId}');
+				
+			</#if>
+		});
+	</script>
 </body>
 </html>
