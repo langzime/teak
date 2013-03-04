@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="span8 offset2">
-				<form class="form-horizontal" action="/login" method="post">
+				<form id="login" class="form-horizontal" action="/login" method="post">
 	        <fieldset>
 	          <legend>登录</legend>
 	          <div class="control-group">
@@ -39,5 +39,14 @@
 	</div>
 	<@lib.bottom />
   <@lib.js />
+  
+  
+  <script>
+  	$(function(){
+  		$('#login').submit(function(e){
+  			$('#password').val(CryptoJS.MD5($('#password').val()));
+  		});
+  	});
+  </script>
 </body>
 </html>

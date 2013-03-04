@@ -21,9 +21,9 @@
 			</div> <!-- span2 -->
 			<div class="span6">
 				<#if user??>
-					<form class="form-horizontal" action="/admin/user/${user.id}/update" method="post">
+					<form id="user-form" class="form-horizontal" action="/admin/user/${user.id}/update" method="post">
 				<#else>
-					<form class="form-horizontal" action="/admin/user" method="post">
+					<form id="user-form" class="form-horizontal" action="/admin/user" method="post">
 				</#if>
 					<fieldset>
 						<#if user??>
@@ -58,6 +58,10 @@
   <script>
 		$(function(){
 			$('#collapseUser').addClass('in');
+			$('#user-form').submit(function(e){
+	  			$('#oldPassword').val(CryptoJS.MD5($('#oldPassword').val()));
+	  			$('#newPassword').val(CryptoJS.MD5($('#newPassword').val()));
+	  		});
 		});
 	</script>
 </body>
