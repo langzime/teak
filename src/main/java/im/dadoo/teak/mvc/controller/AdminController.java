@@ -2,6 +2,8 @@ package im.dadoo.teak.mvc.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import im.dadoo.teak.mvc.model.Category;
 import im.dadoo.teak.mvc.model.Link;
 import im.dadoo.teak.mvc.model.Page;
@@ -39,7 +41,9 @@ public class AdminController {
 	private UserService us;
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String getAdminPage() {
+	public String getAdminPage(HttpSession session) {
+		String s = session.getServletContext().getRealPath("/");
+		System.out.println(s);
 		return "admin/admin";
 	}
 	

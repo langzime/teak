@@ -19,11 +19,11 @@
 			<div class="span2">
 				<@lib.AdminLeftNav />
 			</div> <!-- span2 -->
-			<div class="span6">
+			<div class="span10">
 				<#if post??>
-					<form class="form-horizontal" action="/admin/post/${post.id}/update" method="post">
+					<form class="form-horizontal" action="/admin/post/${post.id}/update" method="post" enctype="multipart/form-data">
 				<#else>
-					<form class="form-horizontal" action="/admin/post" method="post">
+					<form class="form-horizontal" action="/admin/post" method="post" enctype="multipart/form-data">
 				</#if>
 					<fieldset>
 						<#if post??>
@@ -44,22 +44,28 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">内容</label>
+							<label class="control-label">类别</label>
 							<div class="controls">
-								<textarea id="content" class="input-xlarge" name="content" rows="3"></textarea>
+								<input id="categoryId" type="text" class="input-xlarge" name="categoryId">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">标题图</label>
+							<div class="controls">
+								<input id="headerImage" type="file" class="input-file" name="headerImage">
 							</div>
 						</div>
 						<div class="control-group">
 							<div class="controls">
 								<input id="publishTime" type="hidden" class="input-xlarge" name="publishTime" readonly="">
 							</div>
-						</div>
+						</div>	
 						<div class="control-group">
-							<label class="control-label">类别</label>
+							<label class="control-label">内容</label>
 							<div class="controls">
-								<input id="categoryId" type="text" class="input-xlarge" name="categoryId">
+								<textarea id="content" name="content" rows="12" cols="80" style="width: 100%"></textarea>
 							</div>
-						</div>			
+						</div>
 						<!-- control-group -->
 						<div class="form-actions">
 							<button type="submit" class="btn btn-primary">保存</button>
@@ -74,13 +80,14 @@
   <script>
 		$(function(){
 			$('#collapsePost').addClass('in');
+			$('#content').xheditor({modalWidth:700,modalHeight:500,upBtnText:'浏览',upLinkUrl:"!ckfinder/upload.html",upImgUrl:"!ckfinder/upload.html?type=Images",upFlashUrl:"!ckfinder/upload.html?type=Flash",upMediaUrl:"!ckfinder/upload.html"});
+			//content.focus();
 			<#if post??>
 				$('#title').val('${post.title}');
 				$('#author').val('${post.author}');
-				$('#content').val('${post.content}');
+				$('#content').setSource('${post.content}');
 				$('#publishTime').val('${post.publishTime}');
 				$('#categoryId').val('${post.categoryId}');
-				
 			</#if>
 		});
 	</script>

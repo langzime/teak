@@ -38,6 +38,11 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="basename" value="i18n/messages" />
 	</bean>
 
+	<bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="uploadTempDir" value="upload/temp" />
+	</bean>
+		
 	<bean id="dataSource"
 		class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="url" value="jdbc:mysql://db.dadoo.im:3306/teak?characterEncoding=utf8" />

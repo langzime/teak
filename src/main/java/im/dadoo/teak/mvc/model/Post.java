@@ -12,11 +12,11 @@ public class Post {
 
 	public Post(){}
 	
-	public Post(String title, String author, String content, int categoryId) {
-		this(title, author, content, System.currentTimeMillis(), categoryId);
+	public Post(String title, String author, String content, String headerImagePath, int categoryId) {
+		this(title, author, content, headerImagePath, System.currentTimeMillis(), categoryId);
 	}
 	
-	public Post(String title, String author, String content, long publishTime, int categoryId) {
+	public Post(String title, String author, String content, String headerImagePath, long publishTime, int categoryId) {
 		this.title = title;
 		this.author = author;
 		this.content = content;
@@ -24,7 +24,7 @@ public class Post {
 		this.publishTime = publishTime;
 		this.updateTime = System.currentTimeMillis();
 		this.click = 0;
-		this.headerImageName = null;
+		this.headerImagePath = null;
 		this.categoryId = categoryId;
 	}
 	
@@ -53,7 +53,7 @@ public class Post {
 	private long click;
 	
 	@Column
-	private String headerImageName;
+	private String headerImagePath;
 	
 	@Column
 	private int categoryId;
@@ -127,12 +127,12 @@ public class Post {
 		this.click = click;
 	}
 
-	public String getHeaderImageName() {
-		return headerImageName;
+	public String getHeaderImagePath() {
+		return headerImagePath;
 	}
 
-	public void setHeaderImageName(String headerImageName) {
-		this.headerImageName = headerImageName;
+	public void setHeaderImagePath(String headerImagePath) {
+		this.headerImagePath = headerImagePath;
 	}
 
 	public int getCategoryId() {
