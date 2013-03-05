@@ -2,6 +2,8 @@ package im.dadoo.teak.mvc.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpSession;
+
 import im.dadoo.teak.mvc.model.Post;
 import im.dadoo.teak.mvc.service.FileService;
 import im.dadoo.teak.mvc.service.PostService;
@@ -25,9 +27,11 @@ public class PostController {
 	private FileService fs;
 	
 	@RequestMapping(value = "/admin/post", method = RequestMethod.POST)
-	public String add(@RequestParam String title, @RequestParam String author, 
-			@RequestParam String content, @RequestParam int categoryId, @RequestParam MultipartFile headerImage) throws IllegalStateException, IOException {
-		String headerImagePath = this.fs.save(headerImage);
+	public String add(HttpSession session, @RequestParam String title, @RequestParam String author, 
+			@RequestParam String content, @RequestParam int categoryId, 
+			@RequestParam MultipartFile headerImage) throws IllegalStateException, IOException {
+		String root = session.getServletContext().getRealPath("/");
+		String headerImagePath = this.fs.save(headerImage, root);
 		System.out.println(headerImagePath);
 		Post post = new Post(title, author, content, headerImagePath, categoryId);
 
@@ -43,12 +47,14 @@ public class PostController {
 	}
 	
 	@RequestMapping(value = "/admin/post/{postId}/update", method = RequestMethod.POST)
-	public String update(@PathVariable int postId, @RequestParam String title, 
-			@RequestParam String author, @RequestParam String content, @RequestParam MultipartFile headerImage,
+	public String update(HttpSession session, @PathVariable int postId, @RequestParam String title, 
+			@RequestParam String author, @RequestParam String content, 
+			@RequestParam MultipartFile headerImage,
 			@RequestParam long publishTime, @RequestParam int categoryId) throws IllegalStateException, IOException {
 		Post post = null;
-		if (headerImage != null) {
-			String headerImagePath = this.fs.save(headerImage);
+		if (headerImage != null && headerImage.getSize() > 0) {
+			String root = session.getServletContext().getRealPath("/");
+			String headerImagePath = this.fs.save(headerImage, root);
 			post = new Post(title, author, content, headerImagePath, publishTime, categoryId);
 		}
 		else {

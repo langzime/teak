@@ -34,6 +34,9 @@
 		</div>
 		<div class="row">
 			<div class="span12">
+				<#if post.headerImagePath??>
+					<div style="margin:20px 0px;text-align:center"><img src="${post.headerImagePath}"></div>
+				</#if>
 				${post.content}
 			</div>
 		</div>

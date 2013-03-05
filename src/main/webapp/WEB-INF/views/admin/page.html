@@ -19,7 +19,7 @@
 			<div class="span2">
 				<@lib.AdminLeftNav />
 			</div> <!-- span2 -->
-			<div class="span6">
+			<div class="span10">
 				<#if page??>
 					<form class="form-horizontal" action="/admin/page/${page.id}/update" method="post">
 				<#else>
@@ -50,14 +50,14 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">内容</label>
 							<div class="controls">
-								<textarea id="content" class="input-xlarge" name="content" rows="3"></textarea>
+								<input id="publishTime" type="hidden" class="input-xlarge" name="publishTime" readonly="">
 							</div>
 						</div>
 						<div class="control-group">
+							<label class="control-label">内容</label>
 							<div class="controls">
-								<input id="publishTime" type="hidden" class="input-xlarge" name="publishTime" readonly="">
+								<textarea id="content" class="input-xlarge" name="content" rows="12" cols="80" style="width:100%"></textarea>
 							</div>
 						</div>
 						<!-- control-group -->
@@ -74,6 +74,7 @@
   <script>
 		$(function(){
 			$('#collapsePage').addClass('in');
+			$('#content').xheditor({html5Upload:false,modalWidth:700,modalHeight:500,upBtnText:'浏览',upImgUrl:"/upload/image",upImgExt:"jpg,jpeg,gif,png"});
 			<#if page??>
 				$('#name').val('${page.name}');
 				$('#title').val('${page.title}');

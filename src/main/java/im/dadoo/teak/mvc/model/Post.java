@@ -24,7 +24,7 @@ public class Post {
 		this.publishTime = publishTime;
 		this.updateTime = System.currentTimeMillis();
 		this.click = 0;
-		this.headerImagePath = null;
+		this.headerImagePath = headerImagePath;
 		this.categoryId = categoryId;
 	}
 	

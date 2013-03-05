@@ -1,11 +1,15 @@
 package im.dadoo.teak.mvc.controller;
 
+import javax.servlet.http.HttpSession;
+
 import im.dadoo.teak.mvc.model.Page;
 import im.dadoo.teak.mvc.model.Post;
+import im.dadoo.teak.mvc.service.FileService;
 import im.dadoo.teak.mvc.service.PageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,5 +44,17 @@ public class PageController {
 		page.setId(pageId);
 		this.pas.update(page);
 		return "redirect:/admin/pages";
+	}
+	
+	@RequestMapping(value = "/page/{pageId}", method = RequestMethod.GET)
+	public String getPost(@PathVariable long pageId, ModelMap map) {
+		Page page = this.pas.fetchById(pageId);
+		if (page != null) {
+			map.addAttribute("page", page);
+			return "page";
+		}
+		else {
+			return "404";
+		}
 	}
 }

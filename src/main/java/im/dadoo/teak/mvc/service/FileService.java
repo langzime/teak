@@ -9,13 +9,20 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileService {
 
-	public String save(MultipartFile file) throws IllegalStateException, IOException {
+	private static final String ROOT_DIR = "\\WEB-INF\\static\\";
+	private static final String FILE_ROOT_URL = "\\static\\";
+	
+	public String save(MultipartFile file, String rootPath) throws IllegalStateException, IOException {
 		if (!file.isEmpty()) {
 			String filename = "" + System.currentTimeMillis() + "-" + file.getOriginalFilename();
-			String filepath = "static/images/" + filename;
+			String filepath = rootPath + ROOT_DIR + filename;
 			File localFile = new File(filepath);
+			localFile.mkdirs();
+			localFile.createNewFile();
+			
 			file.transferTo(localFile);
-			return localFile.getAbsolutePath();
+			System.out.println(filepath);
+			return FILE_ROOT_URL + filename;
 		}
 		else {
 			return null;

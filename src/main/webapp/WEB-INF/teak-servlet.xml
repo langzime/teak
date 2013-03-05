@@ -73,6 +73,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<!-- Enables the Spring MVC @Controller programming model -->
 
 	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
+	<mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
 	<mvc:annotation-driven />
 
 </beans>

@@ -41,9 +41,7 @@ public class AdminController {
 	private UserService us;
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String getAdminPage(HttpSession session) {
-		String s = session.getServletContext().getRealPath("/");
-		System.out.println(s);
+	public String getAdminPage() {
 		return "admin/admin";
 	}
 	

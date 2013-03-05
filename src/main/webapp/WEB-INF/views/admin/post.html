@@ -80,12 +80,12 @@
   <script>
 		$(function(){
 			$('#collapsePost').addClass('in');
-			$('#content').xheditor({modalWidth:700,modalHeight:500,upBtnText:'浏览',upLinkUrl:"!ckfinder/upload.html",upImgUrl:"!ckfinder/upload.html?type=Images",upFlashUrl:"!ckfinder/upload.html?type=Flash",upMediaUrl:"!ckfinder/upload.html"});
+			$('#content').xheditor({html5Upload:false,modalWidth:700,modalHeight:500,upBtnText:'浏览',upImgUrl:"/upload/image",upImgExt:"jpg,jpeg,gif,png"});
 			//content.focus();
 			<#if post??>
 				$('#title').val('${post.title}');
 				$('#author').val('${post.author}');
-				$('#content').setSource('${post.content}');
+				$('#content').val('${post.content}');
 				$('#publishTime').val('${post.publishTime}');
 				$('#categoryId').val('${post.categoryId}');
 			</#if>
