@@ -96,6 +96,6 @@ public class CategoryService {
 	//会删除该类别下的所有文章，慎用
 	public void deleteById(int id) {
 		this.dao.clear(Post.class, Cnd.where("categoryId", "=", id));
-		this.dao.delete(Post.class, id);
+		this.dao.delete(Category.class, id);
 	}
 }
