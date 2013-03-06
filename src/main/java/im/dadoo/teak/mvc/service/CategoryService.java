@@ -36,6 +36,13 @@ public class CategoryService {
 		return c;
 	}
 	
+	public Category fetchByUrlWithAll(String url) {
+		Category c = this.dao.fetch(Category.class, url);
+		this.dao.fetchLinks(c, "subCategories");
+		this.dao.fetchLinks(c, "posts");
+		return c;
+	}
+	
 	public Category fetchByUrl(String url) {
 		return this.dao.fetch(Category.class, url);
 	}

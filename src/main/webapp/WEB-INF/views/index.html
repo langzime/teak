@@ -3,14 +3,128 @@
 <html>
 <head>
 	<@lib.meta />
-	<title>Teak CMS</title>
+	<title>中国当代写作研究中心</title>
 	<@lib.css />
+	<link href="/resources/css/index.css" rel="stylesheet">
 </head>
 <body>
-	<@lib.header />
-	<@lib.nav />
-	
-	<@lib.bottom />
+	<div class="container">
+		<@lib.header />
+		<@lib.nav />
+		
+		<!-- 图片新闻 -->
+		<div class="row img-news">
+			<div class="span6 offset3">
+				<div id="myCarousel" class="carousel slide">
+					<div class="carousel-inner">
+					<#list imagenews.posts as post>
+						<#if post_index = 0> 
+						<div class="active item">
+						<#else>
+						<div class="item">
+						</#if>
+							<img style="width:600px;height:300px" src="${post.headerImagePath}" alt="">
+							<div class="carousel-caption">
+								<h4><a href="/post/${post.id}">${post.title}</a></h4>
+							</div>
+						</div>
+						</#list>
+					</div>
+					<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+					<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+				</div>
+			</div><!--span6-->
+		</div><!-- row -->
+		
+		<!-- 主体 -->
+		<div class="row main">
+			<!-- 中间部分 -->
+			<div class="span8">
+				<div class="row">
+					<div class="span8 board1">
+						<h1>
+							<img src="/resources/img/board-h1.gif" alt="">
+							<a href="/page/${introduction.id}">中心介绍</a>
+						</h1>
+						<p>${introduction.content}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span4 board1">
+						<h1>
+							<img src="/resources/img/board-h1.gif" alt="">
+							<a href="/category/${activity.id}">学术活动</a>
+						</h1>
+						<ul>
+							<#list activity.posts as post>
+							<li>
+								<dl class="dl-horizontal">
+									<dt><img src="/resources/img/li-header2.gif" alt="">${post.publishTime?number_to_date}</dt>
+									<dd><a href="/post/${post.id}">${post.title}</a><img src="/resources/img/new.gif"></dd>
+								</dl>	
+							</li>
+							</#list>
+						</ul>
+					</div>
+					<div class="span4 board1">
+						<h1>
+							<img src="/resources/img/board-h1.gif" alt="">
+							<a href="/category/${notice.id}">中心公告</a>
+						</h1>
+						<ul>
+							<#list notice.posts as post>
+							<li>
+								<dl class="dl-horizontal">
+									<dt><img src="/resources/img/li-header2.gif" alt="">${post.publishTime?number_to_date}</dt>
+									<dd><a href="/post/${post.id}">${post.title}</a></dd>
+								</dl>
+							</li>
+							</#list>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="span4">
+				<div class="row">
+					<div class="span4 board2">
+						<h1>
+							<img src="/resources/img/board-h1.gif" alt="">
+							<a href="/category/${roll.id}">滚动新闻</a>
+						</h1>
+						<marquee direction="up"  scrollamount="3" onMouseOut="this.start()" onMouseOver="this.stop()">
+						<ul>
+							<#list roll.posts as post>
+							<li>
+								<dl class="dl-horizontal">
+									<dt><img src="/resources/img/li-header2.gif" alt="">${post.publishTime?number_to_date}</dt>
+									<dd><a href="/post/${post.id}">${post.title}</a></dd>
+								</dl>
+							</li>
+							</#list>
+						</ul>
+						</marquee>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span4 board2">
+						<h1>
+							<img src="/resources/img/board-h1.gif" alt="">
+							相关链接
+						</h1>
+						<ul>
+							<#list links as link>
+								<li>
+									<img src="/resources/img/li-header2.gif" alt="">
+									<a href="${link.url}">${link.name}</a>
+								</li>
+							</#list>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<@lib.bottom />
+	</div>
   <@lib.js />
 </body>
 </html>

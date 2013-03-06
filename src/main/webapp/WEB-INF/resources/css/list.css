@@ -1,0 +1,42 @@
+.list-content {
+	margin-top:20px;
+}
+
+.list-content h1 {
+	color:rgb(0, 43, 94);
+	border-bottom: 3px solid rgb(188, 37, 64);
+	margin-top:0px;
+	font-size:14px;
+	text-align:center;
+}
+
+table {
+	width:100%;
+}
+
+.table-icon {
+	width:5%;
+	text-align:center;
+}
+
+.table-title {
+	width:70%;
+	text-align:center;
+}
+
+.table-title a {
+	color:rgb(0, 43, 94);
+}
+
+.table-title a:hover {
+	color:rgb(189, 26, 29);
+}
+
+.table-date {
+	width:25%;
+	text-align:right;
+}
+
+.pagination {
+	margin-top:40px;
+}

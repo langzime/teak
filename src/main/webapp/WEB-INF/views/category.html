@@ -7,13 +7,15 @@
 	<@lib.css />
 </head>
 <body>
-	<@lib.header />
-	<@lib.nav />
 	
 	<div class="container">
-		<div class="row">
+	
+		<@lib.header />
+		<@lib.nav />
+		
+		<div class="row" style="margin-top:20px">
 			<div class="span12">
-				<h1>${category.name}</h1>
+				<h2>${category.name}</h2>
 			</div>
 		</div>
 		<div class="row">
@@ -38,6 +40,8 @@
 				</table>
 			</div>
 		</div>
+		
+		<@lib.bottom />
 	</div>
 	
   <@lib.js />

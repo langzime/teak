@@ -11,11 +11,13 @@
 	<@lib.css />
 </head>
 <body>
-	<@lib.header />
-	<@lib.nav />
 	
 	<div class="container">
-		<div class="row">
+	
+		<@lib.header />
+		<@lib.nav />
+		
+		<div class="row" style="margin-top:20px">
 			<div class="span2">
 				<@lib.AdminLeftNav />
 			</div> <!-- span2 -->
@@ -53,6 +55,8 @@
 				</form>	
 			</div>
 		</div>
+		
+		<@lib.bottom />
 	</div>
   <@lib.js />
   <script>

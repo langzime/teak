@@ -7,10 +7,13 @@
 	<@lib.css />
 </head>
 <body>
-	<@lib.header />
-	<@lib.nav />
+	
 	
 	<div class="container">
+	
+		<@lib.header />
+		<@lib.nav />
+		
 		<div class="row">
 			<div class="span8 offset2">
 				<form id="login" class="form-horizontal" action="/login" method="post">
@@ -36,8 +39,10 @@
 	      </form>
 	     </div>
 		</div>
+		
+		<@lib.bottom />
 	</div>
-	<@lib.bottom />
+	
   <@lib.js />
   
   
