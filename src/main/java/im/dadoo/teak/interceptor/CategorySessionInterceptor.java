@@ -1,35 +1,28 @@
 package im.dadoo.teak.interceptor;
 
-import im.dadoo.teak.mvc.model.Category;
-import im.dadoo.teak.mvc.service.CategoryService;
 
-import java.util.List;
+import im.dadoo.teak.mvc.service.MenuService;
+import im.dadoo.teak.util.Util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
 public class CategorySessionInterceptor extends HandlerInterceptorAdapter {
-
-	private static Log log = LogFactory.getLog(CategorySessionInterceptor.class);
 	
 	@Autowired
-	private CategoryService cs;
+	private MenuService ms;
 	
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		
 		HttpSession session = request.getSession();
-		if (session.getAttribute("c") == null) {
-			List<Category> categories = this.cs.treeWithAll();
-			log.debug(categories.size());
-			session.setAttribute("c", categories);
+		if (session.getAttribute(Util.MENU_SESSION_NAME) == null) {
+			session.setAttribute(Util.MENU_SESSION_NAME, this.ms.getMenu());
 		}
 		return true;
 	}

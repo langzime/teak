@@ -22,6 +22,10 @@ public class PageService {
 		return this.dao.fetch(Page.class, id);
 	}
 	
+	public Page fetchByName(String name) {
+		return this.dao.fetch(Page.class, name);
+	}
+	
 	public int update(Page page) {
 		return this.dao.update(page);
 	}

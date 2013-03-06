@@ -30,6 +30,22 @@ public class CategoryService {
 		return this.dao.fetch(Category.class, id);
 	}
 	
+	public Category fetchByUrlWithSubs(String url) {
+		Category c = this.dao.fetch(Category.class, url);
+		this.dao.fetchLinks(c, "subCategories");
+		return c;
+	}
+	
+	public Category fetchByUrl(String url) {
+		return this.dao.fetch(Category.class, url);
+	}
+	
+	public Category fetchByIdWithSubs(int id) {
+		Category c = this.dao.fetch(Category.class, id);
+		this.dao.fetchLinks(c, "subCategories");
+		return c;
+	}
+	
 	public Category fetchByIdWithAll(int id) {
 		Category c = this.dao.fetch(Category.class, id);
 		this.dao.fetchLinks(c, "subCategories");
@@ -37,9 +53,6 @@ public class CategoryService {
 		return c;
 	}
 	
-	public Category fetchByUrl(String url) {
-		return this.dao.fetch(Category.class, url);
-	}
 	
 	public List<Category> list() {
 		return this.dao.query(Category.class, null);

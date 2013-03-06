@@ -22,9 +22,9 @@ public class PageController {
 	private PageService pas;
 	
 	@RequestMapping(value = "/admin/page", method = RequestMethod.POST)
-	public String add(@RequestParam String name, @RequestParam String title, 
+	public String add(@RequestParam String name, @RequestParam String url, @RequestParam String title, 
 			@RequestParam String author, @RequestParam String content) {
-		Page page = new Page(name, title, author, content);
+		Page page = new Page(name, url, title, author, content);
 		this.pas.insert(page);
 		return "redirect:/admin/pages";
 	}
@@ -37,10 +37,10 @@ public class PageController {
 	}
 	
 	@RequestMapping(value = "/admin/page/{pageId}/update", method = RequestMethod.POST)
-	public String update(@PathVariable int pageId, @RequestParam String name, 
+	public String update(@PathVariable int pageId, @RequestParam String name, @RequestParam String url,
 			@RequestParam String title, @RequestParam String author, 
 			@RequestParam String content, @RequestParam long publishTime) {
-		Page page = new Page(name, title, author, content, publishTime);
+		Page page = new Page(name, url, title, author, content, publishTime);
 		page.setId(pageId);
 		this.pas.update(page);
 		return "redirect:/admin/pages";

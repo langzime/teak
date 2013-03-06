@@ -34,24 +34,27 @@
 						<!-- Everything you want hidden at 940px or less, place within here -->
 						<div class="nav-collapse">
 							<!-- .nav, .navbar-search, .navbar-form, etc -->
-							<#assign categories=Session.c>
+
 							<ul class="nav">
-								<#list categories as c>
+								<#list menu.categoryMenu as c>
 								<#if !c.subCategories??>
-								<li><a href="/category/${c.url}">${c.name}</a></li>
+								<li><a href="/category/${c.id}">${c.name}</a></li>
 								<#else>
 								<li class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" href="/category/${c.url}"> 
+									<a class="dropdown-toggle" data-toggle="dropdown" href="/category/${c.id}"> 
 										${c.name}<b class="caret"></b>
 									</a>
 									<ul class="dropdown-menu">
 										<!-- links -->
 										<#list c.subCategories as subc>
-										<li><a href="/category/${c.url}">${subc.name}</a></li>
+										<li><a href="/category/${subc.id}">${subc.name}</a></li>
 										</#list>
 									</ul>
 								</li>
 								</#if>
+								</#list>
+								<#list menu.pageMenu as p>
+								<li><a href="/page/${p.id}">${p.name}</a></li>
 								</#list>
 							</ul>
 						</div>

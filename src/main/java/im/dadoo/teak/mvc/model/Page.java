@@ -12,6 +12,9 @@ public class Page {
 	private long id;
 	
 	@Name
+	private String url;
+	
+	@Column
 	private String name;
 	
 	@Column
@@ -37,12 +40,13 @@ public class Page {
 
 	public Page(){}
 	
-	public Page(String name, String title, String author, String content) {
-		this(name, title, author, content, System.currentTimeMillis());
+	public Page(String name, String url, String title, String author, String content) {
+		this(name, url, title, author, content, System.currentTimeMillis());
 	}
 	
-	public Page(String name, String title, String author, String content, long publishTime) {
+	public Page(String name, String url, String title, String author, String content, long publishTime) {
 		this.name = name;
+		this.url = url;
 		this.title = title;
 		this.author = author;
 		this.content = content;
@@ -58,6 +62,14 @@ public class Page {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public String getName() {
