@@ -60,13 +60,15 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
-	public String getCategoryAddPage() {
+	public String getCategoryAddPage(ModelMap map) {
+		map.addAttribute("categories", this.cs.list());
 		return "admin/category";
 	}
 	
 	@RequestMapping(value = "/admin/category/{categoryId}/update", method = RequestMethod.GET)
 	public String getCategoryUpdatePage(@PathVariable int categoryId, ModelMap map) {
 		Category category = this.cs.fetchById(categoryId);
+		map.addAttribute("categories", this.cs.list());
 		map.addAttribute("category", category);
 		return "admin/category";
 	}
@@ -79,13 +81,15 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/post", method = RequestMethod.GET)
-	public String getPostAddPage() {
+	public String getPostAddPage(ModelMap map) {
+		map.addAttribute("categories", this.cs.list());
 		return "admin/post";
 	}
 	
 	@RequestMapping(value = "/admin/post/{postId}/update", method = RequestMethod.GET)
 	public String getPostUpdatePage(@PathVariable int postId, ModelMap map) {
 		Post post = this.pos.fetchById(postId);
+		map.addAttribute("categories", this.cs.list());
 		map.addAttribute("post", post);
 		return "admin/post";
 	}

@@ -21,40 +21,40 @@
 			<div class="span2">
 				<@lib.AdminLeftNav />
 			</div> <!-- span2 -->
-			<div class="span6">
+			<div class="span10">
 				<#if link??>
-					<form class="form-horizontal" action="/admin/link/${link.id}/update" method="post">
+					<form id="link-form" class="form-horizontal" action="/admin/link/${link.id}/update" method="post">
 				<#else>
-					<form class="form-horizontal" action="/admin/link" method="post">
+					<form id="link-form" class="form-horizontal" action="/admin/link" method="post">
 				</#if>
 					<fieldset>
 						<#if link??>
-							<legend>修改Link</legend>
+							<legend>修改链接</legend>
 						<#else>
-							<legend>新增Link</legend>
+							<legend>新增链接</legend>
 						</#if>
 						<div class="control-group">
-							<label class="control-label">链接地址</label>
+							<label class="control-label">链接地址(*)</label>
 							<div class="controls">
-								<input id="url" type="url" class="input-xlarge" name="url">
+								<input id="url" type="url" class="input-xlarge" name="url" maxlength="100">
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">名称</label>
+							<label class="control-label">名称(*)</label>
 							<div class="controls">
-								<input id="name" type="text" class="input-xlarge" name="name">
+								<input id="name" type="text" class="input-xlarge" name="name" maxlength="20">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">描述</label>
 							<div class="controls">
-								<input id="description" type="text" class="input-xlarge" name="description">
+								<input id="description" type="text" class="input-xlarge" name="description" maxlength="100">
 							</div>
 						</div>
 						<!-- control-group -->
 						<div class="form-actions">
 							<button type="submit" class="btn btn-primary">保存</button>
-							<button type="reset" class="btn">取消</button>
+							<a class="btn" href="/admin/links">返回</a>
 						</div>
 					</fieldset>
 				</form>	
@@ -71,6 +71,16 @@
 				$('#name').val('${link.name}');
 				$('#description').val('${link.description}');
 			</#if>
+			
+			$('#link-form').submit(function(e){
+				if ($('#name').val() == undefined || $('#url').val() == undefined) {
+					alert("请将内容填写完整");
+					return false;
+				}
+				else {
+					return true;
+				}
+			});
 		});
 	</script>
 </body>

@@ -42,10 +42,10 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "/admin/category/{categoryId}/update", method = RequestMethod.POST)
-	public String update(@PathVariable int categoryId, @RequestParam String url, 
-			@RequestParam String name, @RequestParam String description, 
+	public String update(@PathVariable int categoryId, @RequestParam String name, 
+			@RequestParam String url, @RequestParam String description, 
 			@RequestParam int supId, HttpSession session) {
-		Category category = new Category(url, name, description, supId);
+		Category category = new Category(name, url, description, supId);
 		category.setId(categoryId);
 		this.cs.update(category);
 		session.setAttribute("c", this.cs.treeWithAll());

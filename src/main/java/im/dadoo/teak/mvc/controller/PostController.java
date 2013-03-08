@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpSession;
 
 import im.dadoo.teak.mvc.model.Post;
+import im.dadoo.teak.mvc.service.CategoryService;
 import im.dadoo.teak.mvc.service.FileService;
 import im.dadoo.teak.mvc.service.PostService;
 
@@ -72,6 +73,8 @@ public class PostController {
 		Post post = this.pos.fetchByIdWithAll(postId);
 		if (post != null) {
 			map.addAttribute("post", post);
+			post.setClick(post.getClick() + 1);
+			this.pos.update(post);
 			return "post";
 		}
 		else {

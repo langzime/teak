@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -14,14 +15,20 @@ public class FileService {
 	
 	public String save(MultipartFile file, String rootPath) throws IllegalStateException, IOException {
 		if (!file.isEmpty()) {
-			String filename = "" + System.currentTimeMillis() + "-" + file.getOriginalFilename();
-			String filepath = rootPath + ROOT_DIR + filename;
-			File localFile = new File(filepath);
+			String[] ts = file.getOriginalFilename().split("\\.");
+			System.out.println(file.getOriginalFilename());
+			System.out.println(ts.length);
+			String suffix = ts[ts.length - 1];
+			
+			String filename = String.valueOf(System.currentTimeMillis()) + Math.random();
+			filename = DigestUtils.md5DigestAsHex(filename.getBytes("UTF-8")) + "." + suffix;
+			String localFilepath = rootPath + ROOT_DIR + filename;
+			File localFile = new File(localFilepath);
 			localFile.mkdirs();
 			localFile.createNewFile();
 			
 			file.transferTo(localFile);
-			System.out.println(filepath);
+			System.out.println(localFilepath);
 			return FILE_ROOT_URL + filename;
 		}
 		else {

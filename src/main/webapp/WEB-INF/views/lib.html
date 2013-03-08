@@ -1,4 +1,5 @@
 <#macro meta>
+<#setting url_escaping_charset='UTF-8'>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="A Sample CMS">
@@ -64,14 +65,14 @@
   <div class="accordion-group">
   	<div class="accordion-heading">
     	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapsePost">
-      	Post
+      	文章
       </a>
     </div>
     <div id="collapsePost" class="accordion-body collapse">
     	<div class="accordion-inner">
 	    	<ul>
-					<li><a href="/admin/posts">All Posts</a></li>
-					<li><a href="/admin/post">Add Post</a></li>
+					<li><a href="/admin/posts">浏览所有文章</a></li>
+					<li><a href="/admin/post">新增文章</a></li>
 				</ul>
       </div>
     </div>
@@ -79,14 +80,14 @@
 	<div class="accordion-group">
    	<div class="accordion-heading">
      	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapseCategory">
-       	Category
+       	分类
        </a>
      </div>
      <div id="collapseCategory" class="accordion-body collapse">
      	<div class="accordion-inner">
      		<ul>
-     			<li><a href="/admin/categories">All Categories</a></li>
-     			<li><a href="/admin/category">Add Category</a></li>
+     			<li><a href="/admin/categories">浏览所有分类</a></li>
+     			<li><a href="/admin/category">新增分类</a></li>
      		</ul>		
        </div>
      </div>
@@ -94,14 +95,14 @@
    <div class="accordion-group">
    	<div class="accordion-heading">
      	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapsePage">
-       	Page
+       	页面
        </a>
      </div>
      <div id="collapsePage" class="accordion-body collapse">
      	<div class="accordion-inner">
      		<ul>
-     			<li><a href="/admin/pages">All Pages</a></li>
-     			<li><a href="/admin/page">Add Page</a></li>
+     			<li><a href="/admin/pages">查看所有页面</a></li>
+     			<li><a href="/admin/page">新增页面</a></li>
      		</ul>
       </div>
     </div>
@@ -109,14 +110,14 @@
    <div class="accordion-group">
    	<div class="accordion-heading">
      	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapseLink">
-       	Link
+       	链接
        </a>
      </div>
      <div id="collapseLink" class="accordion-body collapse">
      	<div class="accordion-inner">
      		<ul>
-     			<li><a href="/admin/links">All Links</a></li>
-     			<li><a href="/admin/link">Add Link</a></li>
+     			<li><a href="/admin/links">查看所有链接</a></li>
+     			<li><a href="/admin/link">新增链接</a></li>
      		</ul>	
       </div>
     </div>
@@ -141,8 +142,8 @@
 </#macro>
 
 <#macro js>
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+<script src="/resources/js/jquery-1.9.1.min.js"></script>
+<script src="/resources/js/jquery-migrate-1.1.1.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/xheditor-1.2.1/xheditor-1.2.1.min.js"></script>
 <script src="/resources/xheditor-1.2.1/xheditor_lang/zh-cn.js"></script>

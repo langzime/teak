@@ -23,38 +23,38 @@
 			</div> <!-- span2 -->
 			<div class="span10">
 				<#if page??>
-					<form class="form-horizontal" action="/admin/page/${page.id}/update" method="post">
+					<form id="page-form" class="form-horizontal" action="/admin/page/${page.id}/update" method="post">
 				<#else>
-					<form class="form-horizontal" action="/admin/page" method="post">
+					<form id="page-form" class="form-horizontal" action="/admin/page" method="post">
 				</#if>
 					<fieldset>
 						<#if page??>
-							<legend>修改Page</legend>
+							<legend>修改页面</legend>
 						<#else>
-							<legend>新增Page</legend>
+							<legend>新增页面</legend>
 						</#if>
 						<div class="control-group">
-							<label class="control-label">页名</label>
+							<label class="control-label">页面名(*)</label>
 							<div class="controls">
-								<input id="name" type="text" class="input-xlarge" name="name">
+								<input id="name" type="text" class="input-xlarge" name="name" maxlength="30">
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">页面url</label>
+							<label class="control-label">页面英文名(唯一标识*)</label>
 							<div class="controls">
-								<input id="url" type="text" class="input-xlarge" name="url">
+								<input id="url" type="text" class="input-xlarge" name="url" maxlength="30">
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">标题</label>
+							<label class="control-label">标题(*)</label>
 							<div class="controls">
-								<input id="title" type="text" class="input-xlarge" name="title">
+								<input id="title" type="text" class="input-xlarge" name="title" maxlength="50">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">作者</label>
 							<div class="controls">
-								<input id="author" type="text" class="input-xlarge" name="author">
+								<input id="author" type="text" class="input-xlarge" name="author" maxlength="20">
 							</div>
 						</div>
 						<div class="control-group">
@@ -63,7 +63,7 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">内容</label>
+							<label class="control-label">内容(*)</label>
 							<div class="controls">
 								<textarea id="content" class="input-xlarge" name="content" rows="12" cols="80" style="width:100%"></textarea>
 							</div>
@@ -71,7 +71,7 @@
 						<!-- control-group -->
 						<div class="form-actions">
 							<button type="submit" class="btn btn-primary">保存</button>
-							<button type="reset" class="btn">取消</button>
+							<a class="btn" href="/admin/pages">返回</a>
 						</div>
 					</fieldset>
 				</form>	
@@ -93,6 +93,17 @@
 				$('#content').val('${page.content}');
 				$('#publishTime').val('${page.publishTime}');	
 			</#if>
+			
+			$('#page-form').submit(function(e){
+				if ($('#name').val() == undefined || $('#url').val() == undefined || 
+						$('#title').val() == undefined || $('#content').val() == undefined) {
+					alert("请将内容填写完整");
+					return false;
+				}
+				else {
+					return true;
+				}
+			});
 		});
 	</script>
 </body>

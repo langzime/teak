@@ -51,6 +51,8 @@ public class PageController {
 		Page page = this.pas.fetchById(pageId);
 		if (page != null) {
 			map.addAttribute("page", page);
+			page.setClick(page.getClick() + 1);
+			this.pas.update(page);
 			return "page";
 		}
 		else {

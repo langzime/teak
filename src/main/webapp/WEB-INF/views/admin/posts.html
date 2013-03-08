@@ -39,7 +39,9 @@
 				      <td class="span2">${p.publishTime?number_to_datetime}</td>
 				      <td class="span1">
 				      	<a href="/admin/post/${p.id}/update">修改</a>
-				      	<a href="/admin/post/${p.id}/delete">删除</a>
+				      	<a href="/admin/post/${p.id}/delete" onClick="return confirm('确定要删除吗？删除后不可恢复')">
+				      		删除
+				      	</a>
 				      </td>
 				    </tr>
 				    </#list>

@@ -45,8 +45,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		
 	<bean id="dataSource"
 		class="com.alibaba.druid.pool.DruidDataSource">
-		<property name="url" value="jdbc:mysql://db.dadoo.im:3306/teak?characterEncoding=utf8" />
-		<property name="username" value="root" />
+		<property name="url" value="jdbc:mysql://localhost:3306/teak?characterEncoding=utf8" />
+		<property name="username" value="teak" />
 		<property name="password" value="dadoo2012dadoo" />
 	</bean>
 	

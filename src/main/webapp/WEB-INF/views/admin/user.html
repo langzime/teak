@@ -29,27 +29,32 @@
 				</#if>
 					<fieldset>
 						<#if user??>
-							<legend>修改User</legend>
+							<legend>修改管理员密码</legend>
 						<#else>
 							<legend>新增User</legend>
 						</#if>
 						<div class="control-group">
 							<label class="control-label">旧密码</label>
 							<div class="controls">
-								<input id="oldPassword" type="password" class="input-xlarge" name="oldPassword">
+								<input id="oldPassword" type="password" class="input-xlarge" name="oldPassword" maxlength="30">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">新密码</label>
 							<div class="controls">
-								<input id="newPassword" type="password" class="input-xlarge" name="newPassword">
+								<input id="newPassword" type="password" class="input-xlarge" name="newPassword" maxlength="30">
 							</div>
 						</div>
-						
+						<div class="control-group">
+							<label class="control-label">新密码确认</label>
+							<div class="controls">
+								<input id="newConfirmPassword" type="password" class="input-xlarge" name="newConfirmPassword" maxlength="30">
+							</div>
+						</div>
 						<!-- control-group -->
 						<div class="form-actions">
 							<button type="submit" class="btn btn-primary">保存</button>
-							<button type="reset" class="btn">取消</button>
+							<a class="btn" href="/admin">返回</a>
 						</div>
 					</fieldset>
 				</form>	
@@ -65,6 +70,17 @@
 			$('#user-form').submit(function(e){
 	  			$('#oldPassword').val(CryptoJS.MD5($('#oldPassword').val()));
 	  			$('#newPassword').val(CryptoJS.MD5($('#newPassword').val()));
+	  			$('#newConfirmPassword').val(CryptoJS.MD5($('#newConfirmPassword').val()));
+	  			if ($('#newConfirmPassword').val() == $('#newPassword').val()) {
+	  				return true;
+	  			}
+	  			else {
+	  				alert("两次密码输入不一致");
+	  				$('#oldPassword').val("");
+		  			$('#newPassword').val("");
+		  			$('#newConfirmPassword').val("");
+	  				return false;
+	  			}
 	  		});
 		});
 	</script>

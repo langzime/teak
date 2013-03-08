@@ -34,7 +34,7 @@
 				      <td class="span5">${l.description}</td>
 				      <td class="span1">
 				      	<a href="/admin/link/${l.id}/update">修改</a>
-				      	<a href="/admin/link/${l.id}/delete">删除</a>
+				      	<a href="/admin/link/${l.id}/delete" onClick="return confirm('确定要删除吗？删除后不可恢复')">删除</a>
 				      </td>
 				    </tr>
 				    </#list>

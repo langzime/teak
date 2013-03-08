@@ -19,10 +19,10 @@
 				<table class="table table-striped well" style="font-size:10px">
 				  <thead>
 				    <tr>
-				      <th>类别名称</th>
-				      <th>类别链接名称</th>
-				      <th>类别描述</th>
-				      <th>父类别</th>
+				      <th>分类名</th>
+				      <th>分类英文名(唯一标识)</th>
+				      <th>分类描述</th>
+				      <th>父类</th>
 				      <th>操作</th>
 				    </tr>
 				  </thead>
@@ -35,7 +35,7 @@
 				      <td class="span1">${c.supId}</td>
 				      <td class="span1">
 				      	<a href="/admin/category/${c.id}/update">修改</a>
-				      	<a href="/admin/category/${c.id}/delete">删除</a>
+				      	<!-- <a href="/admin/category/${c.id}/delete">删除</a> -->
 				      </td>
 				    </tr>
 				    </#list>

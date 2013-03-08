@@ -60,7 +60,13 @@
 							<li>
 								<dl class="dl-horizontal">
 									<dt><img src="/resources/img/li-header2.gif" alt="">${post.publishTime?number_to_date}</dt>
-									<dd><a href="/post/${post.id}">${post.title}</a><img src="/resources/img/new.gif"></dd>
+									<dd><a href="/post/${post.id}">
+										<#if (post.title)?length gt 20>
+											${post.title[0..19]}
+										<#else>
+											${post.title}
+										</#if>
+									</a></dd>
 								</dl>	
 							</li>
 							</#list>
@@ -103,7 +109,13 @@
 							<li>
 								<dl class="dl-horizontal">
 									<dt><img src="/resources/img/li-header2.gif" alt="">${post.publishTime?number_to_date}</dt>
-									<dd><a href="/post/${post.id}">${post.title}</a></dd>
+									<dd><a href="/post/${post.id}">
+										<#if (post.title)?length gt 20>
+											${post.title[0..19]}
+										<#else>
+											${post.title}
+										</#if>
+									</a></dd>
 								</dl>
 							</li>
 							</#list>
@@ -121,7 +133,13 @@
 							<#list links as link>
 								<li>
 									<img src="/resources/img/li-header2.gif" alt="">
-									<a href="${link.url}">${link.name}</a>
+									<a href="${link.url}">
+										<#if (link.name)?length gt 20>
+											${link.name[0..19]}
+										<#else>
+											${link.name}
+										</#if>
+									</a>
 								</li>
 							</#list>
 						</ul>
