@@ -1,6 +1,7 @@
 package im.dadoo.teak.mvc.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import im.dadoo.teak.mvc.model.Category;
@@ -16,6 +17,9 @@ public class CategoryService {
 
 	@Autowired
 	private Dao dao;
+	
+	@Autowired
+	private PostService pos;
 	
 	public int insert(Category c) {
 		this.dao.insert(c);
@@ -39,7 +43,14 @@ public class CategoryService {
 	public Category fetchByUrlWithAll(String url) {
 		Category c = this.dao.fetch(Category.class, url);
 		this.dao.fetchLinks(c, "subCategories");
-		this.dao.fetchLinks(c, "posts");
+		c.setPosts(this.pos.listByCategoryId(c.getId()));
+		return c;
+	}
+	
+	public Category fetchByUrlWithAll(String url, int limit) {
+		Category c = this.dao.fetch(Category.class, url);
+		this.dao.fetchLinks(c, "subCategories");
+		c.setPosts(this.pos.listByCategoryId(c.getId(), limit));
 		return c;
 	}
 	
@@ -56,10 +67,16 @@ public class CategoryService {
 	public Category fetchByIdWithAll(int id) {
 		Category c = this.dao.fetch(Category.class, id);
 		this.dao.fetchLinks(c, "subCategories");
-		this.dao.fetchLinks(c, "posts");
+		c.setPosts(this.pos.listByCategoryId(id));
 		return c;
 	}
 	
+	public Category fetchByIdWithAll(int id, int limit) {
+		Category c = this.dao.fetch(Category.class, id);
+		this.dao.fetchLinks(c, "subCategories");
+		c.setPosts(this.pos.listByCategoryId(id, limit));
+		return c;
+	}
 	
 	public List<Category> list() {
 		return this.dao.query(Category.class, null);
@@ -76,7 +93,7 @@ public class CategoryService {
 	public List<Category> listWithAll() {
 		List<Category> categories = this.list();
 		for (Category c : categories) {
-			this.dao.fetchLinks(c, "posts");
+			c.setPosts(this.pos.listByCategoryId(c.getId()));
 			this.dao.fetchLinks(c, "subCategories");
 		}
 		return categories;
@@ -100,7 +117,7 @@ public class CategoryService {
 	public List<Category> treeWithAll() {
 		List<Category> categories = this.list();
 		for (Category c : categories) {
-			this.dao.fetchLinks(c, "posts");
+			c.setPosts(this.pos.listByCategoryId(c.getId()));
 			this.dao.fetchLinks(c, "subCategories");
 		}
 		//只留顶层的类别

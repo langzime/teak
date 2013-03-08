@@ -5,6 +5,7 @@ import java.util.List;
 import im.dadoo.teak.mvc.model.Link;
 import im.dadoo.teak.mvc.model.Post;
 
+import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,8 +38,22 @@ public class PostService {
 		this.dao.delete(Post.class, id);
 	}
 	
+	public List<Post> list(int limit) {
+		List<Post> list =  this.dao.query(Post.class, Cnd.where(null).desc("publishTime"));
+		return this.limit(list, limit);
+	}
+	
 	public List<Post> list() {
-		return this.dao.query(Post.class, null);
+		return this.dao.query(Post.class, Cnd.where(null).desc("publishTime"));
+	}
+	
+	public List<Post> listByCategoryId(int categoryId, int limit) {
+		List<Post> list = this.dao.query(Post.class, Cnd.where("categoryId", "=", categoryId).desc("publishTime"));
+		return this.limit(list, limit);
+	}
+	
+	public List<Post> listByCategoryId(int categoryId) {
+		return this.dao.query(Post.class, Cnd.where("categoryId", "=", categoryId).desc("publishTime"));
 	}
 	
 	public List<Post> listWithAll(){
@@ -47,5 +62,22 @@ public class PostService {
 			post = this.dao.fetchLinks(post, "category");
 		}
 		return list;
+	}
+	
+	public List<Post> listWithAll(int limit){
+		List<Post> list = this.list(limit);
+		for (Post post : list) {
+			post = this.dao.fetchLinks(post, "category");
+		}
+		return list;
+	}
+	
+	private List<Post> limit(List<Post> list, int limit) {
+		if (list.size() > 10) {
+			return list.subList(0, limit);
+		}
+		else {
+			return list;
+		}
 	}
 }

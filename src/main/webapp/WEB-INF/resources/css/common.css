@@ -12,7 +12,10 @@ a:hover {
 h1 {
 	font-family: "微软雅黑","WenQuanYi Micro Hei","宋体";
 }
-
+ li {
+ 	list-style-type:none;
+ }
+ 
 .header {
 	height:100px;
 	background:url("../img/top-bg.png") repeat-x scroll 0% 0% transparent;
@@ -33,7 +36,7 @@ h1 {
 	margin-bottom:0px;
 }
 
-.nav-pills li a {
+.nav li a {
 	font-family: "微软雅黑","WenQuanYi Micro Hei","宋体";
 	font-weight:bold;
 	font-size:14px;
@@ -42,23 +45,10 @@ h1 {
 	color:white;
 }
 
-.nav-pills li a:hover {
+.nav li a:hover {
 	color:#002961;
 }
-.dl-horizontal {
-	float:left;
-	margin-bottom:5px;
-	margin-top:0px;
-}
-.dl-horizontal dt{
-	width:auto;
-	margin:0px;
-}
 
-.dl-horizontal dd {
-	float:left;
-	margin-left:15px;
-}
 .bottom {
 	margin-top:20px;
 	padding-top:10px;
@@ -74,6 +64,7 @@ h1 {
 	color:white;
 	float:left;
 	font-size:12px;
+	list-style-type:none;
 }
 
 .bottom ul li a {

@@ -8,7 +8,7 @@ import org.nutz.dao.entity.annotation.One;
 import org.nutz.dao.entity.annotation.Table;
 
 @Table("t_post")
-public class Post {
+public class Post implements Comparable<Post> {
 
 	public Post(){}
 	
@@ -157,6 +157,19 @@ public class Post {
 
 	public void setNewPost(boolean newPost) {
 		this.newPost = newPost;
+	}
+
+	public int compareTo(Post p) {
+		// TODO Auto-generated method stub
+		if (this.publishTime < p.publishTime) {
+			return -1;
+		}
+		else if (this.publishTime == p.publishTime) {
+			return 0;
+		}
+		else {
+			return 1;
+		}
 	}
 
 }

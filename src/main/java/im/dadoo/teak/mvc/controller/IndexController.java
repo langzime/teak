@@ -8,6 +8,7 @@ import im.dadoo.teak.mvc.service.LinkService;
 import im.dadoo.teak.mvc.service.PageService;
 import im.dadoo.teak.mvc.service.PostService;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -36,10 +37,10 @@ public class IndexController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(ModelMap map) {
-		Category activity = this.cs.fetchByUrlWithAll("activity");
-		Category imagenews = this.cs.fetchByUrlWithAll("imagenews");
-		Category notice = this.cs.fetchByUrlWithAll("notice");
-		Category roll = this.cs.fetchByUrlWithAll("roll");
+		Category activity = this.cs.fetchByUrlWithAll("activity", 10);
+		Category imagenews = this.cs.fetchByUrlWithAll("imagenews", 5);
+		Category notice = this.cs.fetchByUrlWithAll("notice", 10);
+		Category roll = this.cs.fetchByUrlWithAll("roll", 10);
 		
 		Page introduction = this.pas.fetchByName("introduction");
 		List<Link> links = this.ls.list();
