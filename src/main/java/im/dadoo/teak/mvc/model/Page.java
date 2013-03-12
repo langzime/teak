@@ -1,5 +1,7 @@
 package im.dadoo.teak.mvc.model;
 
+import im.dadoo.teak.util.Util;
+
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Id;
 import org.nutz.dao.entity.annotation.Name;
@@ -50,7 +52,7 @@ public class Page {
 		this.title = title;
 		this.author = author;
 		this.content = content;
-		this.text = content;
+		this.text = Util.parse(this.content);
 		this.publishTime = publishTime;
 		this.updateTime = System.currentTimeMillis();
 		this.click = 0;

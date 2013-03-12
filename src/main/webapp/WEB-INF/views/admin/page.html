@@ -84,13 +84,13 @@
   <script>
 		$(function(){
 			$('#collapsePage').addClass('in');
-			$('#content').xheditor({html5Upload:false,modalWidth:700,modalHeight:500,upBtnText:'浏览',upImgUrl:"/upload/image",upImgExt:"jpg,jpeg,gif,png"});
+			$('#content').xheditor({html5Upload:false,modalWidth:700,modalHeight:500,upBtnText:'浏览',upImgUrl:"/upload/image",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"/upload/image", upFlashExt:"flv,swf"});
 			<#if page??>
 				$('#name').val('${page.name}');
 				$('#url').val('${page.url}');
 				$('#title').val('${page.title}');
 				$('#author').val('${page.author}');
-				$('#content').val('${page.content}');
+				$('#content').val("${page.content?js_string}");
 				$('#publishTime').val('${page.publishTime}');	
 			</#if>
 			

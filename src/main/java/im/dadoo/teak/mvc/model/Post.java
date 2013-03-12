@@ -1,5 +1,7 @@
 package im.dadoo.teak.mvc.model;
 
+import im.dadoo.teak.util.Util;
+
 import java.sql.Timestamp;
 
 import org.nutz.dao.entity.annotation.Column;
@@ -20,6 +22,7 @@ public class Post implements Comparable<Post> {
 		this.title = title;
 		this.author = author;
 		this.content = content;
+		this.text = Util.parse(this.content);
 		this.text = content;
 		this.publishTime = publishTime;
 		this.updateTime = System.currentTimeMillis();
