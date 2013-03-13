@@ -47,9 +47,9 @@
 							<a href="/page/${introduction.id}">${introduction.name}</a>
 						</h1>
 						<#if (introduction.text)?length gt 200>
-							<p>${introduction.text[0..199]}......<a href="/page/${introduction.id}">更多</a></p>
+							${introduction.text[0..199]}......<a href="/page/${introduction.id}">更多</a>
 						<#else>
-							<p>${introduction.text}</p>
+							${introduction.text}
 						</#if>
 					</div>
 				</div>
