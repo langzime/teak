@@ -46,6 +46,7 @@
 							<img src="/resources/img/board-h1.gif" alt="">
 							<a href="/page/${introduction.id}">${introduction.name}</a>
 						</h1>
+						&nbsp;&nbsp;
 						<#if (introduction.text)?length gt 200>
 							${introduction.text[0..199]}......<a href="/page/${introduction.id}">更多</a>
 						<#else>
@@ -62,16 +63,14 @@
 						<ul class="post-list">
 							<#list activity.posts as post>
 							<li>
-								<dl class="dl-horizontal">
-									<dt><img src="/resources/img/li-header2.gif" alt="">${post.publishTime?number_to_date}</dt>
-									<dd><a href="/post/${post.id}">
-										<#if (post.title)?length gt 20>
-											${post.title[0..19]}
-										<#else>
-											${post.title}
-										</#if>
-									</a></dd>
-								</dl>	
+								<img src="/resources/img/li-header2.gif" alt="">&nbsp;&nbsp;<strong>${post.publishTime?number_to_date}</strong>
+								<a href="/post/${post.id}">
+									<#if (post.title)?length gt 20>
+										${post.title[0..19]}
+									<#else>
+										${post.title}
+									</#if>
+								</a>
 							</li>
 							</#list>
 						</ul>
@@ -84,16 +83,14 @@
 						<ul class="post-list">
 							<#list notice.posts as post>
 							<li>
-								<dl class="dl-horizontal">
-									<dt><img src="/resources/img/li-header2.gif" alt="">${post.publishTime?number_to_date}</dt>
-									<dd><a href="/post/${post.id}">
-										<#if (post.title)?length gt 20>
-											${post.title[0..19]}
-										<#else>
-											${post.title}
-										</#if>
-									</a></dd>
-								</dl>
+								<img src="/resources/img/li-header2.gif" alt="">&nbsp;&nbsp;<strong>${post.publishTime?number_to_date}</strong>
+								<a href="/post/${post.id}">
+									<#if (post.title)?length gt 20>
+										${post.title[0..19]}
+									<#else>
+										${post.title}
+									</#if>
+								</a>
 							</li>
 							</#list>
 						</ul>
@@ -111,16 +108,14 @@
 						<ul class="post-list">
 							<#list roll.posts as post>
 							<li>
-								<dl class="dl-horizontal">
-									<dt><img src="/resources/img/li-header2.gif" alt="">${post.publishTime?number_to_date}</dt>
-									<dd><a href="/post/${post.id}">
-										<#if (post.title)?length gt 20>
-											${post.title[0..19]}
-										<#else>
-											${post.title}
-										</#if>
-									</a></dd>
-								</dl>
+								<img src="/resources/img/li-header2.gif" alt="">&nbsp;&nbsp;<strong>${post.publishTime?number_to_date}</strong>
+								<a href="/post/${post.id}">
+									<#if (post.title)?length gt 20>
+										${post.title[0..19]}
+									<#else>
+										${post.title}
+									</#if>
+								</a>
 							</li>
 							</#list>
 						</ul>
@@ -131,7 +126,7 @@
 					<div class="span4 board2">
 						<h1>
 							<img src="/resources/img/board-h1.gif" alt="">
-							友情链接
+							<a href="#">友情链接</a>
 						</h1>
 						<ul class="post-list">
 							<#list links as link>

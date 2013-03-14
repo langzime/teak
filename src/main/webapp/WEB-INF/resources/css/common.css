@@ -1,6 +1,6 @@
 body {
-	font-family: "宋体","WenQuanYi Micro Hei","微软雅黑";
-	font-size:13px;
+	font-family: "微软雅黑","WenQuanYi Micro Hei","宋体";
+	font-size:14px;
 }
 
 
@@ -12,9 +12,11 @@ a:hover {
 h1 {
 	font-family: "微软雅黑","WenQuanYi Micro Hei","宋体";
 }
- li {
+
+li {
+	float:none;
  	list-style-type:none;
- }
+}
  
 .header {
 	height:100px;
