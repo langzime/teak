@@ -4,7 +4,6 @@
 	<groupId>im.dadoo</groupId>
 	<artifactId>teak</artifactId>
 	<packaging>war</packaging>
-	<version>0.1</version>
 	<name>teak Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
@@ -95,4 +94,5 @@
 	<build>
 		<finalName>teak</finalName>
 	</build>
+	<version>2.0</version>
 </project>
