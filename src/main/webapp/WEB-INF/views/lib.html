@@ -1,0 +1,160 @@
+<#macro meta>
+<#setting url_escaping_charset='UTF-8'>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A Sample CMS">
+<meta name="author" content="dadooteam">
+</#macro>
+
+<#macro header>
+	<div class="row header">
+		<div class="span12">
+			<img src="/resources/img/logo.jpg" alt="">
+			<img src="/resources/img/title-logo.png" alt="" style="margin-left:120px;margin-top:18px">
+		</div>
+	</div> <!-- /header -->	
+</#macro>
+
+<#macro nav>
+	<div class="row nav-wrapper">
+		<div class="span12">
+			<ul class="nav nav-pills">
+				<li><a href="/">首页</a></li>
+		    <#list menu.categoryMenu as c>
+					<#if (c.subCategories?size=0)>
+						<li><a href="/category/${c.id}">${c.name}</a></li>
+					<#else>
+						<li class="dropdown">
+   						<a class="dropdown-toggle" data-toggle="dropdown" href="/category/${c.id}">
+   							<b class="caret"></b>
+   							${c.name}
+   						</a>
+   						<ul class="dropdown-menu">
+   							<#list c.subCategories as subc>
+									<li><a href="/category/${subc.id}">${subc.name}</a></li>
+								</#list>
+   						</ul>
+ 						</li>
+ 					</#if>
+ 				</#list>
+ 				<#list menu.pageMenu as p>
+					<li><a href="/page/${p.id}">${p.name}</a></li>
+				</#list>
+				<li><a href="/forum">交流论坛</a></li>
+			</ul>
+		</div>
+	</div>
+</#macro>
+
+<#macro AdminLeftNav>
+<div class="accordion" id="left-nav">
+	<div class="accordion-group">
+  	<div class="accordion-heading">
+     <a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapseUser">
+     	用户
+     </a>
+    </div>
+    <div id="collapseUser" class="accordion-body collapse">
+    	<div class="accordion-inner">
+	    	<ul>
+	    		<li><a href="/admin/user/1/update">修改管理员密码</a></li>
+	    	</ul>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+  	<div class="accordion-heading">
+    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapsePost">
+      	文章
+      </a>
+    </div>
+    <div id="collapsePost" class="accordion-body collapse">
+    	<div class="accordion-inner">
+	    	<ul>
+					<li><a href="/admin/posts">浏览所有文章</a></li>
+					<li><a href="/admin/post">新增文章</a></li>
+				</ul>
+      </div>
+    </div>
+  </div>
+	<div class="accordion-group">
+   	<div class="accordion-heading">
+     	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapseCategory">
+       	分类
+       </a>
+     </div>
+     <div id="collapseCategory" class="accordion-body collapse">
+     	<div class="accordion-inner">
+     		<ul>
+     			<li><a href="/admin/categories">浏览所有分类</a></li>
+     			<li><a href="/admin/category">新增分类</a></li>
+     		</ul>		
+       </div>
+     </div>
+   </div>
+   <div class="accordion-group">
+   	<div class="accordion-heading">
+     	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapsePage">
+       	页面
+       </a>
+     </div>
+     <div id="collapsePage" class="accordion-body collapse">
+     	<div class="accordion-inner">
+     		<ul>
+     			<li><a href="/admin/pages">查看所有页面</a></li>
+     			<li><a href="/admin/page">新增页面</a></li>
+     		</ul>
+      </div>
+    </div>
+   </div>
+   <div class="accordion-group">
+   	<div class="accordion-heading">
+     	<a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapseLink">
+       	链接
+       </a>
+     </div>
+     <div id="collapseLink" class="accordion-body collapse">
+     	<div class="accordion-inner">
+     		<ul>
+     			<li><a href="/admin/links">查看所有链接</a></li>
+     			<li><a href="/admin/link">新增链接</a></li>
+     		</ul>	
+      </div>
+    </div>
+  </div>
+</div>
+
+</#macro>
+
+<#macro bottom>
+<div class="row bottom">
+	<div class="span12">	
+		<ul>
+			<li>版权所有&copy;华中科技大学中国当代写作研究中心&nbsp;2012&nbsp;|</li>
+			<li>&nbsp;地址：湖北省武汉市珞喻路1037号华中科技大学东五楼三楼&nbsp;|</li>
+			<li>&nbsp;邮编：430074&nbsp;|</li>
+			<li>&nbsp;联系电话：027-87559614&nbsp;|</li>
+			<li>&nbsp;邮箱：jiangjun1870@126.com&nbsp;|&nbsp;</li>
+			<li><a href="/admin">管理入口</a></li>
+		</ul>
+	</div>
+</div>
+</#macro>
+
+<#macro js>
+<script src="/resources/js/jquery-1.9.1.min.js"></script>
+<script src="/resources/js/jquery-migrate-1.1.1.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/xheditor-1.2.1/xheditor-1.2.1.min.js"></script>
+<script src="/resources/xheditor-1.2.1/xheditor_lang/zh-cn.js"></script>
+<script src="/resources/js/md5.js"></script>
+</#macro>
+
+<#macro css>
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/common.css" rel="stylesheet">
+</#macro>

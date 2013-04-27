@@ -1,7 +1,5 @@
 package im.dadoo.teak.mvc.controller;
 
-import java.util.List;
-
 import im.dadoo.teak.mvc.model.Link;
 import im.dadoo.teak.mvc.service.LinkService;
 
@@ -11,19 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LinkController {
 
 	@Autowired
 	private LinkService ls;
-	
-	@RequestMapping(value = "/links", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Link> list() {
-		return this.ls.list();
-	}
 	
 	@RequestMapping(value = "/admin/link", method = RequestMethod.POST)
 	public String add(@RequestParam String url, @RequestParam String name, 

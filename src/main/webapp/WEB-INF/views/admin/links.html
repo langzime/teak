@@ -1,0 +1,54 @@
+<#import "../lib.html" as lib>
+<!DOCTYPE html>
+<html>
+<head>
+	<@lib.meta />
+	<title>All Links</title>
+	<@lib.css />
+</head>
+<body>
+	
+	<div class="container">
+		<@lib.header />
+		<@lib.nav />
+		
+		<div class="row" style="margin-top:20px">
+			<div class="span2">
+				<@lib.AdminLeftNav />
+			</div> <!-- span2 -->
+			<div class="span10">
+				<table class="table table-striped well" style="font-size:10px">
+				  <thead>
+				    <tr>
+				      <th>链接名</th>
+				      <th>链接地址</th>
+				      <th>描述</th>
+				      <th>操作</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<#list links as l>
+				    <tr>
+				      <td class="span2"><a href="${l.url}">${l.name}</a></td>
+				      <td class="span2">${l.url}</td>
+				      <td class="span5">${l.description}</td>
+				      <td class="span1">
+				      	<a href="/admin/link/${l.id}/update">修改</a>
+				      	<a href="/admin/link/${l.id}/delete" onClick="return confirm('确定要删除吗？删除后不可恢复')">删除</a>
+				      </td>
+				    </tr>
+				    </#list>
+				  </tbody>
+				</table>	
+			</div>
+		</div>
+		<@lib.bottom />
+	</div>
+  <@lib.js />
+  <script>
+		$(function(){
+			$('#collapseLink').addClass('in');
+		});
+	</script>
+</body>
+</html>

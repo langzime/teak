@@ -1,0 +1,153 @@
+<#import "lib.html" as lib>
+<!DOCTYPE html>
+<html>
+<head>
+	<@lib.meta />
+	<title>中国当代写作研究中心</title>
+	<@lib.css />
+	<link href="/resources/css/index.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<@lib.header />
+		<@lib.nav />
+		
+		<!-- 图片新闻 -->
+		<div class="row img-news">
+			<div class="span6 offset3">
+				<div id="myCarousel" class="carousel slide">
+					<div class="carousel-inner">
+					<#list imagenews.posts as post>
+						<#if post_index = 0> 
+						<div class="active item">
+						<#else>
+						<div class="item">
+						</#if>
+							<img style="width:600px;height:400px" src="${post.headerImagePath}" alt="">
+							<div class="carousel-caption">
+								<h4><a href="/post/${post.id}">${post.title}</a></h4>
+							</div>
+						</div>
+						</#list>
+					</div>
+					<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+					<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+				</div>
+			</div><!--span6-->
+		</div><!-- row -->
+		
+		<!-- 主体 -->
+		<div class="row main">
+			<!-- 中间部分 -->
+			<div class="span8">
+				<div class="row">
+					<div class="span8 board1">
+						<h1>
+							<img src="/resources/img/board-h1.gif" alt="">
+							<a href="/page/${introduction.id}">${introduction.name}</a>
+						</h1>
+						&nbsp;&nbsp;
+						<#if (introduction.text)?length gt 200>
+							${introduction.text[0..199]}......<a href="/page/${introduction.id}">更多</a>
+						<#else>
+							${introduction.text}
+						</#if>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span4 board1">
+						<h1>
+							<img src="/resources/img/board-h1.gif" alt="">
+							<a href="/category/${activity.id}">${activity.name}</a>
+						</h1>
+						<ul class="post-list">
+							<#list activity.posts as post>
+							<li>
+								<img src="/resources/img/li-header2.gif" alt="">&nbsp;&nbsp;<strong>${post.publishTime?number_to_date}</strong>
+								<a href="/post/${post.id}">
+									<#if (post.title)?length gt 20>
+										${post.title[0..19]}
+									<#else>
+										${post.title}
+									</#if>
+								</a>
+							</li>
+							</#list>
+						</ul>
+					</div>
+					<div class="span4 board1">
+						<h1>
+							<img src="/resources/img/board-h1.gif" alt="">
+							<a href="/category/${notice.id}">${notice.name}</a>
+						</h1>
+						<ul class="post-list">
+							<#list notice.posts as post>
+							<li>
+								<img src="/resources/img/li-header2.gif" alt="">&nbsp;&nbsp;<strong>${post.publishTime?number_to_date}</strong>
+								<a href="/post/${post.id}">
+									<#if (post.title)?length gt 20>
+										${post.title[0..19]}
+									<#else>
+										${post.title}
+									</#if>
+								</a>
+							</li>
+							</#list>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="span4">
+				<div class="row">
+					<div class="span4 board2">
+						<h1>
+							<img src="/resources/img/board-h1.gif" alt="">
+							<a href="/category/${roll.id}">${roll.name}</a>
+						</h1>
+						<marquee direction="up"  scrollamount="3" onMouseOut="this.start()" onMouseOver="this.stop()">
+						<ul class="post-list">
+							<#list roll.posts as post>
+							<li>
+								<img src="/resources/img/li-header2.gif" alt="">&nbsp;&nbsp;<strong>${post.publishTime?number_to_date}</strong>
+								<a href="/post/${post.id}">
+									<#if (post.title)?length gt 20>
+										${post.title[0..19]}
+									<#else>
+										${post.title}
+									</#if>
+								</a>
+							</li>
+							</#list>
+						</ul>
+						</marquee>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span4 board2">
+						<h1>
+							<img src="/resources/img/board-h1.gif" alt="">
+							<a href="#">友情链接</a>
+						</h1>
+						<ul class="post-list">
+							<#list links as link>
+								<li>
+									<img src="/resources/img/li-header2.gif" alt="">
+									<a href="${link.url}">
+										<#if (link.name)?length gt 20>
+											${link.name[0..19]}
+										<#else>
+											${link.name}
+										</#if>
+									</a>
+								</li>
+							</#list>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<@lib.bottom />
+	</div>
+  <@lib.js />
+</body>
+</html>
