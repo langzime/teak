@@ -84,6 +84,7 @@ public class PostController {
 	
 	@RequestMapping(value = "/posts/category/{categoryId}", method = RequestMethod.GET)
 	public String list(@PathVariable Integer categoryId, ModelMap map) {
+		map.addAttribute("posts", this.pos.listByCategoryId(categoryId));
 		return "";
 	}
 }
