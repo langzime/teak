@@ -2,35 +2,38 @@ package im.dadoo.teak.mvc.service;
 
 import java.util.List;
 
+import im.dadoo.teak.mvc.dao.LinkDao;
 import im.dadoo.teak.mvc.domain.Link;
 
-import org.nutz.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class LinkService {
 
 	@Autowired
-	private Dao dao;
+	private LinkDao linkDao;
 	
-	public Link insert(Link link) {
-		return this.dao.insert(link);
+	public void save(Link link) {
+		this.linkDao.save(link);
 	}
 	
-	public Link fetchById(int id) {
-		return this.dao.fetch(Link.class, id);
+	public void update(Link link) {
+		this.linkDao.update(link);
 	}
 	
-	public void deleteById(int id) {
-		this.dao.delete(Link.class, id);
+	public Link fetchById(Integer id) {
+		return this.linkDao.fetchById(id);
+	}
+	
+	public void deleteById(Integer id) {
+		this.linkDao.deleteById(id);
 	}
 	
 	public List<Link> list() {
-		return this.dao.query(Link.class, null);
+		return this.linkDao.list();
 	}
-	
-	public int update(Link link) {
-		return this.dao.update(link);
-	}
+
 }

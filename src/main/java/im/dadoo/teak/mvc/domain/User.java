@@ -6,20 +6,16 @@ public class User {
 	private String name;
 	private String password;
 	private Long signinDatetime;
+	private Integer state;
 
 	public User() {}
-	
-	public User(String name, String password, Long signinDatetime) {
-		this.name = name;
-		this.password = password;
-		this.signinDatetime = signinDatetime;
-	}
 	
 	public static User create(String name, String password) {
 		User user = new User();
 		user.name = name;
 		user.password = password;
 		user.signinDatetime = System.currentTimeMillis();
+		user.state = 0;
 		return user;
 	}
 
@@ -53,6 +49,14 @@ public class User {
 
 	public void setSigninDatetime(Long signinDatetime) {
 		this.signinDatetime = signinDatetime;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
 	}
 	
 	

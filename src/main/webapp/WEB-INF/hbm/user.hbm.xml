@@ -12,6 +12,7 @@
 		<property name="name" column="name" type="string" not-null="true"/>
 		<property name="password" column="password" type="string" not-null="true"/>
 		<property name="signinDatetime" column="signin_datetime" type="java.lang.Long" />
+		<property name="state" column="state" type="java.lang.Integer" />
 		
 	</class>
 </hibernate-mapping>
