@@ -1,7 +1,7 @@
 package im.dadoo.teak.mvc.service;
 
-import im.dadoo.teak.mvc.model.Category;
-import im.dadoo.teak.mvc.model.Page;
+import im.dadoo.teak.mvc.domain.Category;
+import im.dadoo.teak.mvc.domain.Page;
 import im.dadoo.teak.util.Menu;
 
 import java.util.List;

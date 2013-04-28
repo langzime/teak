@@ -2,8 +2,8 @@ package im.dadoo.teak.mvc.controller;
 
 import javax.servlet.http.HttpSession;
 
-import im.dadoo.teak.mvc.model.Page;
-import im.dadoo.teak.mvc.model.Post;
+import im.dadoo.teak.mvc.domain.Page;
+import im.dadoo.teak.mvc.domain.Post;
 import im.dadoo.teak.mvc.service.FileService;
 import im.dadoo.teak.mvc.service.PageService;
 

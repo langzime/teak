@@ -1,7 +1,7 @@
 package im.dadoo.teak.util;
 
-import im.dadoo.teak.mvc.model.Category;
-import im.dadoo.teak.mvc.model.Page;
+import im.dadoo.teak.mvc.domain.Category;
+import im.dadoo.teak.mvc.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;

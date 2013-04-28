@@ -1,10 +1,11 @@
 package im.dadoo.teak.mvc.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import im.dadoo.teak.mvc.model.Post;
+import im.dadoo.teak.mvc.domain.Post;
 import im.dadoo.teak.mvc.service.CategoryService;
 import im.dadoo.teak.mvc.service.FileService;
 import im.dadoo.teak.mvc.service.PostService;
@@ -27,6 +28,17 @@ public class PostController {
 	@Autowired
 	private FileService fs;
 	
+	@Autowired
+	private CategoryService cs;
+	
+	//post增加页面
+	@RequestMapping(value = "/admin/post", method = RequestMethod.GET)
+	public String getPostAddPage(ModelMap map) {
+		map.addAttribute("categories", this.cs.list());
+		return "admin/post";
+	}
+	
+	//post增加响应
 	@RequestMapping(value = "/admin/post", method = RequestMethod.POST)
 	public String add(HttpSession session, @RequestParam String title, @RequestParam String author, 
 			@RequestParam String content, @RequestParam int categoryId, 
@@ -45,6 +57,15 @@ public class PostController {
 		System.out.println(postId);
 		this.pos.deleteById(postId);
 		return "redirect:/admin/posts";
+	}
+	
+	//post更新页面
+	@RequestMapping(value = "/admin/post/{postId}/update", method = RequestMethod.GET)
+	public String getPostUpdatePage(@PathVariable int postId, ModelMap map) {
+		Post post = this.pos.fetchById(postId);
+		map.addAttribute("categories", this.cs.list());
+		map.addAttribute("post", post);
+		return "admin/post";
 	}
 	
 	@RequestMapping(value = "/admin/post/{postId}/update", method = RequestMethod.POST)
@@ -68,6 +89,13 @@ public class PostController {
 		return "redirect:/admin/posts";
 	}
 	
+	@RequestMapping(value = "/admin/posts", method = RequestMethod.GET)
+	public String getPostAdminPage(ModelMap map) {
+		List<Post> posts = this.pos.listWithAll();
+		map.addAttribute("posts", posts);
+		return "admin/posts";
+	}
+	
 	@RequestMapping(value = "/post/{postId}", method = RequestMethod.GET)
 	public String getPost(@PathVariable long postId, ModelMap map) {
 		Post post = this.pos.fetchByIdWithAll(postId);
@@ -85,6 +113,7 @@ public class PostController {
 	@RequestMapping(value = "/posts/category/{categoryId}", method = RequestMethod.GET)
 	public String list(@PathVariable Integer categoryId, ModelMap map) {
 		map.addAttribute("posts", this.pos.listByCategoryId(categoryId));
-		return "";
+		map.addAttribute("category", this.cs.fetchById(categoryId));
+		return "post-list";
 	}
 }

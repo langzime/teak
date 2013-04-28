@@ -1,8 +1,8 @@
 package im.dadoo.teak.mvc.controller;
 
-import im.dadoo.teak.mvc.model.Category;
-import im.dadoo.teak.mvc.model.Link;
-import im.dadoo.teak.mvc.model.Page;
+import im.dadoo.teak.mvc.domain.Category;
+import im.dadoo.teak.mvc.domain.Link;
+import im.dadoo.teak.mvc.domain.Page;
 import im.dadoo.teak.mvc.service.CategoryService;
 import im.dadoo.teak.mvc.service.LinkService;
 import im.dadoo.teak.mvc.service.PageService;

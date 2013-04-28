@@ -2,8 +2,8 @@ package im.dadoo.teak.mvc.service;
 
 import java.util.List;
 
-import im.dadoo.teak.mvc.model.Link;
-import im.dadoo.teak.mvc.model.Post;
+import im.dadoo.teak.mvc.domain.Link;
+import im.dadoo.teak.mvc.domain.Post;
 
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;

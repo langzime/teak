@@ -2,7 +2,7 @@ package im.dadoo.teak.mvc.service;
 
 import java.util.List;
 
-import im.dadoo.teak.mvc.model.Link;
+import im.dadoo.teak.mvc.domain.Link;
 
 import org.nutz.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import im.dadoo.teak.mvc.model.Category;
-import im.dadoo.teak.mvc.model.Link;
+import im.dadoo.teak.mvc.domain.Category;
 import im.dadoo.teak.mvc.service.CategoryService;
+import im.dadoo.teak.mvc.service.PostService;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,6 +25,9 @@ public class CategoryController {
 	
 	@Autowired
 	private CategoryService cs;
+	
+	@Autowired
+	private PostService pos;
 
 	@RequestMapping(value = "/admin/category", method = RequestMethod.POST)
 	public String add(@RequestParam String name, @RequestParam String url,
@@ -54,8 +57,8 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
 	public String getPosts(@PathVariable int categoryId, ModelMap map) {
-		Category category = this.cs.fetchByIdWithAll(categoryId);
-		map.addAttribute("category", category);
-		return "category";
+		map.addAttribute("posts", this.pos.listByCategoryId(categoryId));
+		map.addAttribute("category", this.cs.fetchById(categoryId));
+		return "post-list";
 	}
 }

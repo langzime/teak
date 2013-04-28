@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="im.dadoo.teak.mvc.domain.Page" table="t_page">
+		
+		<id name="id" column="id" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		
+		<property name="name" column="name" type="string" not-null="true"/>
+		<property name="title" column="title" type="string" not-null="true"/>
+		<property name="author" column="author" type="string" />
+		<property name="html" column="html" type="string" />
+		<property name="text" column="text" type="string" />
+		<property name="publishDatetime" column="publish_datetime" type="java.lang.Long" />
+		<property name="updateDatetime" column="update_datetime" type="java.lang.Long" />
+		<property name="click" column="click" type="java.lang.Long" />
+		<property name="state" column="state" type="java.lang.Integer" />
+		
+	</class>
+</hibernate-mapping>

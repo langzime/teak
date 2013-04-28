@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="im.dadoo.teak.mvc.domain.Category" table="t_category">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="increment" />
+		</id>
+		
+		<property name="name" column="name" type="string" not-null="true"/>
+		
+		<property name="description" column="description" type="string" />
+		<property name="state" column="state" type="java.lang.Integer" not-null="true" />
+		
+		<many-to-one name="sup" column="sup_id" 
+			class="im.dadoo.teak.mvc.domain.Category" lazy="false" />
+			
+		<set name="subs">
+			<key column="sup_id" />
+			<one-to-many class="im.dadoo.teak.mvc.domain.Category" />
+		</set>
+		
+		<set name="posts" order-by="id desc">
+			<key column="category_id" />
+			<one-to-many class="im.dadoo.teak.mvc.domain.Post" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

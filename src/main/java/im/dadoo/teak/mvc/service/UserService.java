@@ -1,6 +1,6 @@
 package im.dadoo.teak.mvc.service;
 
-import im.dadoo.teak.mvc.model.User;
+import im.dadoo.teak.mvc.domain.User;
 
 import org.nutz.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;

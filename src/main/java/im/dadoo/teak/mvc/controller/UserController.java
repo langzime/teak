@@ -1,6 +1,6 @@
 package im.dadoo.teak.mvc.controller;
 
-import im.dadoo.teak.mvc.model.User;
+import im.dadoo.teak.mvc.domain.User;
 import im.dadoo.teak.mvc.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;

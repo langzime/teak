@@ -1,37 +1,27 @@
-package im.dadoo.teak.mvc.model;
+package im.dadoo.teak.mvc.domain;
 
-import org.nutz.dao.entity.annotation.Column;
-import org.nutz.dao.entity.annotation.Id;
-import org.nutz.dao.entity.annotation.Table;
-
-@Table("t_link")
 public class Link {
-
-	@Id
-	private int id;
 	
-	@Column
+	private Integer id;
 	private String url;
-	
-	@Column
 	private String name;
-	
-	@Column
 	private String description;
 
 	public Link(){}
 	
-	public Link(String url, String name, String description) {
-		this.url = url;
-		this.name = name;
-		this.description = description;
+	public static Link create(String url, String name, String description) {
+		Link link = new Link();
+		link.url = url;
+		link.name = name;
+		link.description = description;
+		return link;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	private void setId(Integer id) {
 		this.id = id;
 	}
 

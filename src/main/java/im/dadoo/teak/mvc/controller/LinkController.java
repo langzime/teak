@@ -1,6 +1,6 @@
 package im.dadoo.teak.mvc.controller;
 
-import im.dadoo.teak.mvc.model.Link;
+import im.dadoo.teak.mvc.domain.Link;
 import im.dadoo.teak.mvc.service.LinkService;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@ package im.dadoo.teak.mvc.controller;
 
 import javax.servlet.http.HttpSession;
 
-import im.dadoo.teak.mvc.model.User;
+import im.dadoo.teak.mvc.domain.User;
 import im.dadoo.teak.mvc.service.UserService;
 
 import org.apache.commons.logging.Log;

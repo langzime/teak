@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import im.dadoo.teak.mvc.model.Category;
-import im.dadoo.teak.mvc.model.Link;
-import im.dadoo.teak.mvc.model.Page;
-import im.dadoo.teak.mvc.model.Post;
-import im.dadoo.teak.mvc.model.User;
+import im.dadoo.teak.mvc.domain.Category;
+import im.dadoo.teak.mvc.domain.Link;
+import im.dadoo.teak.mvc.domain.Page;
+import im.dadoo.teak.mvc.domain.Post;
+import im.dadoo.teak.mvc.domain.User;
 import im.dadoo.teak.mvc.service.CategoryService;
 import im.dadoo.teak.mvc.service.LinkService;
 import im.dadoo.teak.mvc.service.PageService;
@@ -73,26 +73,11 @@ public class AdminController {
 		return "admin/category";
 	}
 	
-	@RequestMapping(value = "/admin/posts", method = RequestMethod.GET)
-	public String getPostAdminPage(ModelMap map) {
-		List<Post> posts = this.pos.listWithAll();
-		map.addAttribute("posts", posts);
-		return "admin/posts";
-	}
 	
-	@RequestMapping(value = "/admin/post", method = RequestMethod.GET)
-	public String getPostAddPage(ModelMap map) {
-		map.addAttribute("categories", this.cs.list());
-		return "admin/post";
-	}
 	
-	@RequestMapping(value = "/admin/post/{postId}/update", method = RequestMethod.GET)
-	public String getPostUpdatePage(@PathVariable int postId, ModelMap map) {
-		Post post = this.pos.fetchById(postId);
-		map.addAttribute("categories", this.cs.list());
-		map.addAttribute("post", post);
-		return "admin/post";
-	}
+	
+	
+	
 	
 	@RequestMapping(value = "/admin/pages", method = RequestMethod.GET)
 	public String getPageAdminPage(ModelMap map) {

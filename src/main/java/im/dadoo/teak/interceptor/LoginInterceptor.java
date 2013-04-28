@@ -3,7 +3,8 @@ package im.dadoo.teak.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import im.dadoo.teak.mvc.model.User;
+import im.dadoo.teak.mvc.domain.User;
+
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
