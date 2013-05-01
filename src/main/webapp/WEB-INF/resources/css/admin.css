@@ -1,0 +1,34 @@
+.admin-nav {
+	margin-top:40px;
+}
+
+.form-horizontal .controls {
+    margin-left: 0px;
+}
+
+.table {
+	width:100%;
+}
+
+.table-date {
+	width:30%;
+}
+
+.table-title {
+	width:60%;
+}
+
+.table-op {
+	width:10%;
+}
+
+.admin-title {
+	width:90%;
+	float:left;
+	margin:0px;
+}
+
+ .new-add {
+	 float:left;
+	 margin:0px;
+ }

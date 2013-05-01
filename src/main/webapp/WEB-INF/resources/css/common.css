@@ -1,0 +1,76 @@
+body {
+	font-family: "微软雅黑","WenQuanYi Micro Hei","宋体";
+	font-size:14px;
+}
+
+
+
+a:hover {
+	text-decoration:none;
+}
+
+h1 {
+	font-family: "微软雅黑","WenQuanYi Micro Hei","宋体";
+}
+
+li {
+	float:none;
+ 	list-style-type:none;
+}
+ 
+.header {
+	height:100px;
+	background:url("../img/top-bg.png") repeat-x scroll 0% 0% transparent;
+	vertical-align:middle;
+}
+
+.header img {
+	margin:auto;
+	float:left;
+	vertical-align:middle;
+}
+
+.nav-wrapper {
+	background-color:#257ca7;
+}
+
+.nav {
+	margin-bottom:0px;
+}
+
+.nav li a {
+	font-family: "微软雅黑","WenQuanYi Micro Hei","宋体";
+	font-weight:bold;
+	font-size:14px;
+	width:88px;
+	text-align:center;
+	color:white;
+}
+
+.nav li a:hover {
+	color:#002961;
+}
+
+.bottom {
+	margin-top:20px;
+	padding-top:10px;
+	background-color:#257ca7;
+	position:relative;
+}
+
+.bottom p {
+	font-size:12px;
+}
+
+.bottom ul li {
+	color:white;
+	float:left;
+	font-size:12px;
+	list-style-type:none;
+}
+
+.bottom ul li a {
+	color:black;
+	float:left;
+	font-size:12px;
+}

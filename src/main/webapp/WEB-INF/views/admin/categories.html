@@ -1,0 +1,56 @@
+<#import "../lib.html" as lib>
+<!DOCTYPE html>
+<html>
+<head>
+	<@lib.meta />
+	<title>All Categories</title>
+	<@lib.css />
+</head>
+<body>
+	<div class="container">
+		<@lib.header />
+		<@lib.nav />
+		
+		<div class="row" style="margin-top:20px">
+			<div class="span2">
+				<@lib.AdminLeftNav />
+			</div> <!-- span2 -->
+			<div class="span10">
+				<table class="table table-striped well" style="font-size:10px">
+				  <thead>
+				    <tr>
+				      <th>分类名</th>
+				      <th>分类英文名(唯一标识)</th>
+				      <th>分类描述</th>
+				      <th>父类</th>
+				      <th>操作</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<#list categories as c>
+				    <tr>
+				      <td class="span2">${c.name}</td>
+				      <td class="span2">${c.url}</td>
+				      <td class="span4">${c.description}</td>
+				      <td class="span1">${c.supId}</td>
+				      <td class="span1">
+				      	<a href="/admin/category/${c.id}/update">修改</a>
+				      	<!-- <a href="/admin/category/${c.id}/delete">删除</a> -->
+				      </td>
+				    </tr>
+				    </#list>
+				  </tbody>
+				</table>	
+			</div>
+		</div>
+		
+		<@lib.bottom />
+	</div>
+  <@lib.js />
+  <script>
+		$(function(){
+			$('#collapseCategory').addClass('in');
+		});
+	</script>
+</body>
+</html>

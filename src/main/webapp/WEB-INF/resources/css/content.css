@@ -1,0 +1,19 @@
+hr {
+	border:1px solid #C0C0C0;
+}
+
+.breadcrumb {
+	margin-top:10px;
+}
+
+.content h1  {
+	text-align: center;
+	font-size:2em;
+}
+
+.content-info {
+	text-align:center;
+	font-size:1em;
+	color:#0099FF;
+	margin-bottom:20px;
+}

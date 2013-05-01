@@ -3,10 +3,10 @@
 <html>
 <head>
 	<@lib.meta />
-	<title>${post.title}-中国当代写作研究中心</title>
+	<title>${page.name}</title>
 	<@lib.css />
 	<style>
-		.post-info{
+		.page-title{
 			text-align:center;
 			border-bottom:#ccc 1px solid;
 			color:#999;
@@ -16,29 +16,27 @@
 	</style>
 </head>
 <body>
+	
 	<div class="container">
-		
+	
 		<@lib.header />
 		<@lib.nav />
 		
 		<div class="row">
 			<div class="span12">
-				<h1 style="text-align:center;margin-top:20px">${post.title}</h1>
+				<h1 style="text-align:center">${page.title}</h1>
 			</div>
 		</div>
 		<div class="row">
-			<div class="span12 post-info">
-				发布时间:${post.publishTime?number_to_datetime}&nbsp;&nbsp;&nbsp;
-				作者:${post.author}&nbsp;&nbsp;&nbsp;
-				浏览次数:${post.click}
+			<div class="span12 page-title">
+				发布时间:${page.publishTime?number_to_datetime}
+				作者:${page.author}
+				浏览次数:${page.click}
 			</div>
 		</div>
 		<div class="row">
 			<div class="span12">
-				<#if post.headerImagePath??>
-					<div style="margin:20px 0px;text-align:center"><img src="${post.headerImagePath}"></div>
-				</#if>
-				${post.content}
+				${page.content}
 			</div>
 		</div>
 		

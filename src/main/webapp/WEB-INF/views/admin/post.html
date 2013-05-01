@@ -1,0 +1,116 @@
+<#import "../lib.html" as lib>
+<!DOCTYPE html>
+<html>
+<head>
+	<@lib.meta />
+	<#if post??>
+		<title>Update Post</title>
+	<#else>
+		<title>Add Post</title>
+	</#if>
+	<@lib.css />
+</head>
+<body>
+	
+	<div class="container">
+	
+		<@lib.header />
+		<@lib.nav />
+		
+		<div class="row" style="margin-top:20px">
+			<div class="span2">
+				<@lib.AdminLeftNav />
+			</div> <!-- span2 -->
+			<div class="span10">
+				<#if post??>
+					<form id="post-form" class="form-horizontal" action="/admin/post/${post.id}/update" method="post" enctype="multipart/form-data">
+				<#else>
+					<form id="post-form" class="form-horizontal" action="/admin/post" method="post" enctype="multipart/form-data">
+				</#if>
+					<fieldset>
+						<#if post??>
+							<legend>修改文章</legend>
+						<#else>
+							<legend>新增文章</legend>
+						</#if>
+						<div class="control-group">
+							<label class="control-label">标题(*)</label>
+							<div class="controls">
+								<input id="title" type="text" class="input-xlarge" name="title" maxlength="30">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">作者</label>
+							<div class="controls">
+								<input id="author" type="text" class="input-xlarge" name="author" maxlength="20">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">分类(*)</label>
+							<div class="controls">
+								<select id="categoryId" name="categoryId">
+									<#list categories as category>
+										<#if post?? && category.id = post.categoryId>
+											<option value="${category.id}" selected="selected">${category.name}</option>
+										<#else>
+											<option value="${category.id}">${category.name}</option>
+										</#if>
+									</#list>
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">标题图</label>
+							<div class="controls">
+								<input id="thumbnail" type="file" class="input-file" name="thumbnail">
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<input id="publishDatetime" type="hidden" class="input-xlarge" name="publishDatetime" readonly="">
+							</div>
+						</div>	
+						<div class="control-group">
+							<label class="control-label">内容(*)</label>
+							<div class="controls">
+								<textarea id="html" name="html" rows="12" cols="80" style="width: 100%"></textarea>
+							</div>
+						</div>
+						<!-- control-group -->
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">保存</button>
+							<a class="btn" href="/admin/posts">返回</a>
+						</div>
+					</fieldset>
+				</form>	
+			</div>
+		</div>
+		<@lib.bottom />
+	</div>
+  <@lib.js />
+  <script>
+		$(function(){
+			$('#collapsePost').addClass('in');
+			$('#html').xheditor({html5Upload:false,modalWidth:700,modalHeight:500,upBtnText:'浏览',upImgUrl:"/upload/image",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"/upload/image", upFlashExt:"flv,swf"});
+			//content.focus();
+			<#if post??>
+				$('#title').val('${post.title}');
+				$('#author').val('${post.author}');
+				$('#html').val('${post.html?js_string}');
+				$('#publishTime').val('${post.publishTime}');
+				$('#categoryId').val('${post.categoryId}');
+			</#if>
+			
+			$('#post-form').submit(function(e){
+				if ($('#title').val() == undefined || $('#html').val() == undefined) {
+					alert("请将内容填写完整");
+					return false;
+				}
+				else {
+					return true;
+				}
+			});
+		});
+	</script>
+</body>
+</html>

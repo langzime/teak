@@ -1,5 +1,5 @@
 /*!
- * Bootstrap v2.3.1
+ * Bootstrap v2.3.0
  *
  * Copyright 2012 Twitter, Inc
  * Licensed under the Apache License v2.0
@@ -205,7 +205,7 @@ textarea {
 }
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Microsoft YaHei', 'WenQuanYi Micro Hei';
   font-size: 14px;
   line-height: 20px;
   color: #333333;
@@ -810,7 +810,7 @@ address {
 code,
 pre {
   padding: 0 3px 2px;
-  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+  font-family: 'Courier New', 'WenQuanYi Micro Hei Mono';
   font-size: 12px;
   color: #333333;
   -webkit-border-radius: 3px;
@@ -1214,7 +1214,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Microsoft YaHei', 'WenQuanYi Micro Hei';
 }
 label {
   display: block;
@@ -3573,7 +3573,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-search .search-query {
   margin-bottom: 0;
   padding: 4px 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Microsoft YaHei', 'WenQuanYi Micro Hei';
   font-size: 13px;
   font-weight: normal;
   line-height: 1;
