@@ -1,5 +1,7 @@
 package im.dadoo.teak.mvc.service;
 
+import im.dadoo.teak.mvc.dao.CategoryDao;
+import im.dadoo.teak.mvc.dao.PageDao;
 import im.dadoo.teak.mvc.domain.Category;
 import im.dadoo.teak.mvc.domain.Page;
 import im.dadoo.teak.util.Menu;
@@ -10,58 +12,44 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
 
 @Service
+@Transactional(propagation = Propagation.REQUIRED)
 public class MenuService {
 	
-	private Menu menu;
+	@Autowired
+	private CategoryDao categoryDao;
 	
 	@Autowired
-	private CategoryService cs;
-	
-	@Autowired
-	private PageService pas;
+	private PageDao pageDao;
 
-	@PostConstruct
-	public void init() {
-		this.menu = new Menu();
+	public Menu create() {
+		Menu menu = new Menu();
 		
-		List<Category> categoryMenu = this.menu.getCategoryMenu();
+		List<Category> categoryMenu = menu.getCategoryMenu();
 		
-		Category c1 = this.cs.fetchByUrlWithSubs("notice");
+		Category c1 = this.categoryDao.fetchByName("中心公告");
+		c1.getSubs().size();
 		categoryMenu.add(c1);
 		
-		Category c2 = this.cs.fetchByUrlWithSubs("activity");
+		Category c2 = this.categoryDao.fetchByName("学术活动");
+		c2.getSubs().size();
 		categoryMenu.add(c2);
 		
-		Category c3 = this.cs.fetchByUrlWithSubs("research");
+		Category c3 = this.categoryDao.fetchByName("学术研究");
+		c3.getSubs().size();
 		categoryMenu.add(c3);
 		
-		List<Page> pageMenu = this.menu.getPageMenu();
+		List<Page> pageMenu = menu.getPageMenu();
 		
-		Page p1 = this.pas.fetchByName("introduction");
+		Page p1 = this.pageDao.fetchByName("中心介绍");
+		
 		pageMenu.add(p1);
 		
-	}
-	
-	public void refresh() {
-		List<Category> categoryMenu = this.menu.getCategoryMenu();
-		for (Category c : categoryMenu) {
-			c = this.cs.fetchByIdWithSubs(c.getId());
-		}
-		
-		List<Page> pageMenu = this.menu.getPageMenu();
-		for (Page p : pageMenu) {
-			p = this.pas.fetchById(p.getId());
-		}
-	}
-
-	public Menu getMenu() {
 		return menu;
-	}
-
-	public void setMenu(Menu menu) {
-		this.menu = menu;
+		
 	}
 	
 }

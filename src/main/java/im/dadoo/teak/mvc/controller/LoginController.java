@@ -27,11 +27,12 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(HttpSession session, @RequestParam String username, @RequestParam String password) {
+	public String login(HttpSession session, @RequestParam String name, @RequestParam String password) {
 		System.out.println(password);
-		User user = this.us.fetchByUsername(username);
-		if (user.getPassword().equals(password)) {
-			user.setSigninDateTime(System.currentTimeMillis());
+
+		if (this.us.signin(name, password)) {
+			User user = this.us.fetchByName(name);
+			user.setSigninDatetime(System.currentTimeMillis());
 			this.us.update(user);
 			session.setAttribute("loginUser", user);
 			return "redirect:/admin";

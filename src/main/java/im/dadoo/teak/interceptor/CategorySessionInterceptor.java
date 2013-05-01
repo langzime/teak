@@ -22,7 +22,7 @@ public class CategorySessionInterceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session = request.getSession();
 		if (session.getAttribute(Util.MENU_SESSION_NAME) == null) {
-			session.setAttribute(Util.MENU_SESSION_NAME, this.ms.getMenu());
+			session.setAttribute(Util.MENU_SESSION_NAME, this.ms.create());
 		}
 		return true;
 	}

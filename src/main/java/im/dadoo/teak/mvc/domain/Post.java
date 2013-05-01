@@ -30,6 +30,7 @@ public class Post{
 		post.click = (long) 0;
 		post.thumbnailPath = thumbnailPath;
 		post.category = category;
+		post.state = 0;
 		
 		return post;
 	}

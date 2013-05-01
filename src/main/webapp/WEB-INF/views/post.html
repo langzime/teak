@@ -1,50 +1,143 @@
-<#import "lib.html" as lib>
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="zh_cn">
 <head>
-	<@lib.meta />
-	<title>${post.title}-中国当代写作研究中心</title>
-	<@lib.css />
-	<style>
-		.post-info{
-			text-align:center;
-			border-bottom:#ccc 1px solid;
-			color:#999;
-			height:30px;
-			line-height:30px;
-		}
-	</style>
+
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet/less" href="less/style.less">
+
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+	<script src="js/less-1.3.3.min.js"></script>
+	<script src="js/bootstrap.js"></script>
 </head>
-<body>
-	<div class="container">
-		
-		<@lib.header />
-		<@lib.nav />
-		
-		<div class="row">
-			<div class="span12">
-				<h1 style="text-align:center;margin-top:20px">${post.title}</h1>
+<body class="posts">
+	<!-- header -->
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					AAA
+				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="span12 post-info">
-				发布时间:${post.publishTime?number_to_datetime}&nbsp;&nbsp;&nbsp;
-				作者:${post.author}&nbsp;&nbsp;&nbsp;
-				浏览次数:${post.click}
-			</div>
-		</div>
-		<div class="row">
-			<div class="span12">
-				<#if post.headerImagePath??>
-					<div style="margin:20px 0px;text-align:center"><img src="${post.headerImagePath}"></div>
-				</#if>
-				${post.content}
-			</div>
-		</div>
-		
-		<@lib.bottom />
 	</div>
-	
-  <@lib.js />
+
+	<!-- menu -->
+	<div class="menu">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<div class="navbar">
+					  <div class="navbar-inner">
+					    <ul class="nav">
+					      <li class="active"><a href="#">首页</a></li>
+					      <li><a href="#">Link</a></li>
+					      <li><a href="#">Link</a></li>
+					    </ul>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- main -->
+	<div class="main">
+		<div class="container">
+			<div class="row">
+				<!-- content -->
+				<div class="span8 content">
+					<div class="board">
+						<div class="board-title" style="text-align:center">
+							<h1>
+								<a href="#">
+									<span>Category Title</span>
+								</a>
+								<small>
+									发布时间:2013-04-26 20:30:16    作者:    浏览次数:8
+								</small>
+							</h1>
+							
+						</div>
+						<div class="board-content">
+							<div class="thumbnail-wrapper">
+								<img width="400px" src="img/001.jpg">
+							</div>
+							<p>
+								Itaque corporis in similique hic dolor repudiandae sequi fugit ab rerum vel doloremque quod vero culpa deserunt laborum excepturi nesciunt soluta! Officiis facere ullam quaerat optio nobis maiores eveniet eaque doloremque consectetur sit qui aspernatur molestiae fuga. Expedita enim dolorem velit debitis.
+
+Officiis perferendis asperiores numquam voluptatibus architecto atque deserunt eligendi. Atque necessitatibus rerum culpa neque pariatur doloribus. Harum iure est ullam earum sint labore a fuga cumque reprehenderit facere quia velit quaerat animi pariatur amet accusamus consectetur ratione excepturi eaque nihil tenetur provident laudantium numquam voluptas dicta porro facilis soluta deserunt voluptate doloribus.
+
+
+Totam odit dolor eum quia ipsam vitae alias nesciunt recusandae magnam excepturi facere autem accusantium dolores voluptatibus magni. Necessitatibus natus consequatur temporibus nisi nobis soluta minima possimus et odit quas sunt commodi reprehenderit qui amet perspiciatis recusandae sed architecto quae porro cupiditate ipsa id facere itaque eos quod atque labore vero omnis.
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita unde harum nemo perspiciatis nobis labore earum esse iure quisquam adipisci odio quaerat eveniet obcaecati hic sapiente omnis eum eos iusto libero ipsum veniam dicta id repellat cum quibusdam voluptatibus minus sunt. Necessitatibus provident veritatis dignissimos porro adipisci excepturi magni eos.
+
+
+Itaque corporis in similique hic dolor repudiandae
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam quasi ullam in ipsam totam facere molestias dolor debitis sed ea consequatur ab. Odit officia fugit iste ea deserunt rerum recusandae veritatis et saepe aliquam amet neque nostrum maxime sapiente magni blanditiis esse suscipit pariatur placeat error vel illum minima corporis.
+							</p>
+						</div>
+					</div>
+				</div>
+				<!-- sidebar -->
+				<div class="span4 sidebar">
+					<div class="row">
+						<div class="span4 board">
+							<div class="board-title">
+								<h3>
+									<a href="#">
+										<i class="icon-tasks"></i>
+										<span>abc</span>
+									</a>
+								</h3>
+							</div>
+							<div class="board-content">
+								<marquee direction="up" scrollamount="3" onmouseout="this.start()" onmouseover="this.stop()">
+								<ol class="post-list">
+									<li>
+										<a href="#"><span class="number">01</span></a>
+										<div class="list-content">
+											<h5>title</h5>
+											<a href="#">datetime</a>
+											<span class="click pull-right">
+												1234<i class="icon-eye-open"></i>
+											</span>
+										</div>
+									</li>
+									<li>
+										<a href="#"><span class="number">02</span></a>
+										<div class="list-content">
+											<h5>title</h5>
+											<a href="#">datetime</a>
+										</div>
+									</li>
+								</ol>
+							</marquee>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span4 board">
+							JJJ
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					footer
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -17,6 +17,21 @@ public class Page {
 
 	public Page(){}
 
+	public static Page create(String name, String title, String author, String html) {
+		Page page = new Page();
+		
+		page.name = name;
+		page.title = title;
+		page.author = author;
+		page.html = html;
+		page.text = Util.parse(html);
+		page.publishDatetime = System.currentTimeMillis();
+		page.click = (long) 0;
+		page.state = 0;
+				
+		return page;
+	}
+	
 	public Long getId() {
 		return id;
 	}

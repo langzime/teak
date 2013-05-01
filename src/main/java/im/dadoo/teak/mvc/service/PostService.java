@@ -1,83 +1,103 @@
 package im.dadoo.teak.mvc.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import im.dadoo.teak.mvc.domain.Link;
+import im.dadoo.teak.mvc.dao.CategoryDao;
+import im.dadoo.teak.mvc.dao.PostDao;
+import im.dadoo.teak.mvc.domain.Category;
+import im.dadoo.teak.mvc.domain.Page;
 import im.dadoo.teak.mvc.domain.Post;
+import im.dadoo.teak.util.Util;
 
-import org.nutz.dao.Cnd;
-import org.nutz.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class PostService {
 
 	@Autowired
-	private Dao dao;
+	private PostDao postDao;
 	
-	public Post insert(Post post) {
-		return this.dao.insert(post);
+	@Autowired
+	private CategoryDao categoryDao;
+	
+	public void save(String title, String author, String html, String thumbnailPath, Integer categoryId) {
+		Category category = this.categoryDao.fetchById(categoryId);
+		Post post = Post.create(title, author, html, thumbnailPath, category);
+		this.postDao.save(post);
 	}
 	
-	public Post fetchById(long id) {
-		return this.dao.fetch(Post.class, id);
+	public void save(Post post) {
+		this.postDao.save(post);
+	}
+
+	public void update(Long id, String title, String author, String html, String thumbnailPath,
+			Integer categoryId) {
+		Post post = this.postDao.fetchById(id);
+		Category category = this.categoryDao.fetchById(categoryId);
+		
+		post.setTitle(title);
+		post.setAuthor(author);
+		post.setHtml(html);
+		post.setText(Util.parse(html));
+		post.setThumbnailPath(thumbnailPath);
+		post.setCategory(category);
+		
+		this.postDao.update(post);
+		
 	}
 	
-	public Post fetchByIdWithAll(long id) {
-		Post post = this.dao.fetch(Post.class, id);
-		this.dao.fetchLinks(post, "category");
-		return post;
+	public void update(Long id, String title, String author, String html, Integer categoryId) {
+		Post post = this.postDao.fetchById(id);
+		Category category = this.categoryDao.fetchById(categoryId);
+		
+		post.setTitle(title);
+		post.setAuthor(author);
+		post.setHtml(html);
+		post.setText(Util.parse(html));
+		post.setCategory(category);
+		
+		this.postDao.update(post);
+		
 	}
 	
-	public int update(Post post) {
-		return this.dao.update(post);
+	public void update(Post post) {
+		this.postDao.update(post);
 	}
 	
 	public void deleteById(long id) {
-		this.dao.delete(Post.class, id);
-	}
-	
-	public List<Post> list(int limit) {
-		List<Post> list =  this.dao.query(Post.class, Cnd.where(null).desc("publishTime"));
-		return this.limit(list, limit);
+		this.postDao.deleteById(id);
 	}
 	
 	public List<Post> list() {
-		return this.dao.query(Post.class, Cnd.where(null).desc("publishTime"));
+		return this.postDao.list();
 	}
 	
-	public List<Post> listByCategoryId(int categoryId, int limit) {
-		List<Post> list = this.dao.query(Post.class, Cnd.where("categoryId", "=", categoryId).desc("publishTime"));
-		return this.limit(list, limit);
+	public List<Post> list(Integer state) {
+		return this.postDao.list(state);
 	}
 	
-	public List<Post> listByCategoryId(int categoryId) {
-		return this.dao.query(Post.class, Cnd.where("categoryId", "=", categoryId).desc("publishTime"));
+	public Post fetchById(Long id) {
+		return this.postDao.fetchById(id);
 	}
 	
-	public List<Post> listWithAll(){
-		List<Post> list = this.list();
-		for (Post post : list) {
-			post = this.dao.fetchLinks(post, "category");
-		}
-		return list;
+	public List<Post> listByCategoryId(Integer categoryId) {
+		Category category = this.categoryDao.fetchById(categoryId);
+		return new ArrayList<Post>(category.getPosts());
 	}
-	
-	public List<Post> listWithAll(int limit){
-		List<Post> list = this.list(limit);
-		for (Post post : list) {
-			post = this.dao.fetchLinks(post, "category");
-		}
-		return list;
-	}
-	
-	private List<Post> limit(List<Post> list, int limit) {
-		if (list.size() > 10) {
-			return list.subList(0, limit);
+
+	public Post visit(Long id) {
+		Post post = this.postDao.fetchById(id);
+		if (post != null && post.getState() == Util.STATE_NORMAL) {
+			post.setClick(post.getClick() + 1);
+			return post;
 		}
 		else {
-			return list;
+			return null;
 		}
 	}
 }

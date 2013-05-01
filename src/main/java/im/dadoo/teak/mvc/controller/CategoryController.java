@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import im.dadoo.teak.mvc.domain.Category;
 import im.dadoo.teak.mvc.service.CategoryService;
 import im.dadoo.teak.mvc.service.PostService;
+import im.dadoo.teak.util.Util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,33 +31,31 @@ public class CategoryController {
 	private PostService pos;
 
 	@RequestMapping(value = "/admin/category", method = RequestMethod.POST)
-	public String add(@RequestParam String name, @RequestParam String url,
-			@RequestParam String description, @RequestParam int supId, HttpSession session) {
-		this.cs.insert(new Category(name, url, description, supId));
-		session.setAttribute("c", this.cs.treeWithAll());
+	public String add(@RequestParam String name, @RequestParam String description, 
+			@RequestParam Integer supId, HttpSession session) {
+		Category category = Category.create(name, description, this.cs.fetchById(supId));
+		this.cs.save(category);
+		session.setAttribute("c", this.cs.list(Util.STATE_NORMAL));
 		return "redirect:/admin/categories";
 	}
 	
 	@RequestMapping(value = "/admin/category/{categoryId}/delete", method = RequestMethod.GET)
-	public String delete(@PathVariable int categoryId, HttpSession session) {
+	public String delete(@PathVariable Integer categoryId, HttpSession session) {
 		this.cs.deleteById(categoryId);
-		session.setAttribute("c", this.cs.treeWithAll());
+		session.setAttribute("c", this.cs.list(Util.STATE_NORMAL));
 		return "redirect:/admin/categories";
 	}
 	
 	@RequestMapping(value = "/admin/category/{categoryId}/update", method = RequestMethod.POST)
-	public String update(@PathVariable int categoryId, @RequestParam String name, 
-			@RequestParam String url, @RequestParam String description, 
-			@RequestParam int supId, HttpSession session) {
-		Category category = new Category(name, url, description, supId);
-		category.setId(categoryId);
-		this.cs.update(category);
-		session.setAttribute("c", this.cs.treeWithAll());
+	public String update(@PathVariable Integer categoryId, @RequestParam String name, 
+			@RequestParam String description, @RequestParam Integer supId, HttpSession session) {
+		this.cs.update(categoryId, name, description, supId);
+		session.setAttribute("c", this.cs.list(Util.STATE_NORMAL));
 		return "redirect:/admin/categories";
 	}
 	
 	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
-	public String getPosts(@PathVariable int categoryId, ModelMap map) {
+	public String getPosts(@PathVariable Integer categoryId, ModelMap map) {
 		map.addAttribute("posts", this.pos.listByCategoryId(categoryId));
 		map.addAttribute("category", this.cs.fetchById(categoryId));
 		return "post-list";

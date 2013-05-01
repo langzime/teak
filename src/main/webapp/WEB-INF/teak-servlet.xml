@@ -74,23 +74,23 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	</bean>
 	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">  
-     <property name="sessionFactory" ref="sessionFactory"/>  
-	</bean> 
-	<tx:annotation-driven transaction-manager="transactionManager" /> 
-	
-<!-- 	<bean id="dao" -->
-<!-- 		class="org.nutz.dao.impl.NutDao"> -->
-<!-- 		<property name="dataSource"	ref="dataSource" /> -->
-<!-- 	</bean> -->
+        <property name="sessionFactory" ref="sessionFactory" />  
+  </bean>
+  <tx:annotation-driven transaction-manager="transactionManager" /> 
 	
 	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/admin/**" />
-			<bean class="im.dadoo.teak.interceptor.LoginInterceptor" />
-		</mvc:interceptor>
+		<bean class="org.springframework.orm.hibernate4.support.OpenSessionInViewInterceptor">     
+	     <property name="sessionFactory">     
+	      <ref bean="sessionFactory"/>     
+	     </property>   
+	  </bean>     
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="im.dadoo.teak.interceptor.CategorySessionInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<bean class="im.dadoo.teak.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- Scans within the base package of the application for @Components to 

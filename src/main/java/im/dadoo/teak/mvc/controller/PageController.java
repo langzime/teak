@@ -22,37 +22,31 @@ public class PageController {
 	private PageService pas;
 	
 	@RequestMapping(value = "/admin/page", method = RequestMethod.POST)
-	public String add(@RequestParam String name, @RequestParam String url, @RequestParam String title, 
-			@RequestParam String author, @RequestParam String content) {
-		Page page = new Page(name, url, title, author, content);
-		this.pas.insert(page);
+	public String add(@RequestParam String name, @RequestParam String title, 
+			@RequestParam String author, @RequestParam String html) {
+		this.pas.save(name, title, author, html);
 		return "redirect:/admin/pages";
 	}
 	
-	@RequestMapping(value = "/page/{pageId}/delete", method = RequestMethod.GET)
-	public String delete(@PathVariable int pageId) {
-		System.out.println(pageId);
-		this.pas.deleteById(pageId);
+	@RequestMapping(value = "/page/{id}/delete", method = RequestMethod.GET)
+	public String delete(@PathVariable Long id) {
+		this.pas.deleteById(id);
 		return "redirect:/admin/pages";
 	}
 	
-	@RequestMapping(value = "/admin/page/{pageId}/update", method = RequestMethod.POST)
-	public String update(@PathVariable int pageId, @RequestParam String name, @RequestParam String url,
-			@RequestParam String title, @RequestParam String author, 
-			@RequestParam String content, @RequestParam long publishTime) {
-		Page page = new Page(name, url, title, author, content, publishTime);
-		page.setId(pageId);
-		this.pas.update(page);
+	@RequestMapping(value = "/admin/page/{id}/update", method = RequestMethod.POST)
+	public String update(@PathVariable Long id, @RequestParam String name,
+			@RequestParam String title, @RequestParam String author, @RequestParam String html) {
+
+		this.pas.update(id, name, title, author, html);
 		return "redirect:/admin/pages";
 	}
 	
-	@RequestMapping(value = "/page/{pageId}", method = RequestMethod.GET)
-	public String getPost(@PathVariable long pageId, ModelMap map) {
-		Page page = this.pas.fetchById(pageId);
+	@RequestMapping(value = "/page/{id}", method = RequestMethod.GET)
+	public String getPost(@PathVariable Long id, ModelMap map) {
+		Page page = this.pas.visit(id);
 		if (page != null) {
 			map.addAttribute("page", page);
-			page.setClick(page.getClick() + 1);
-			this.pas.update(page);
 			return "page";
 		}
 		else {

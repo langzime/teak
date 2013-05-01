@@ -37,12 +37,12 @@ public class IndexController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(ModelMap map) {
-		Category activity = this.cs.fetchByUrlWithAll("activity", 10);
-		Category imagenews = this.cs.fetchByUrlWithAll("imagenews", 5);
-		Category notice = this.cs.fetchByUrlWithAll("notice", 10);
-		Category roll = this.cs.fetchByUrlWithAll("roll", 10);
+		Category activity = this.cs.fetchByName("学术活动");
+		Category imagenews = this.cs.fetchByName("图片新闻");
+		Category notice = this.cs.fetchByName("中心公告");
+		Category roll = this.cs.fetchByName("滚动新闻");
 		
-		Page introduction = this.pas.fetchByName("introduction");
+		Page introduction = this.pas.fetchByName("中心介绍");
 		List<Link> links = this.ls.list();
 		
 		map.addAttribute("imagenews", imagenews);

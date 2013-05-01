@@ -9,7 +9,7 @@ public class Link {
 
 	public Link(){}
 	
-	public static Link create(String url, String name, String description) {
+	public static Link create(String name, String url, String description) {
 		Link link = new Link();
 		link.url = url;
 		link.name = name;

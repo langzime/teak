@@ -9,6 +9,7 @@ import im.dadoo.teak.mvc.domain.Post;
 import im.dadoo.teak.mvc.service.CategoryService;
 import im.dadoo.teak.mvc.service.FileService;
 import im.dadoo.teak.mvc.service.PostService;
+import im.dadoo.teak.util.Util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,86 +35,68 @@ public class PostController {
 	//post增加页面
 	@RequestMapping(value = "/admin/post", method = RequestMethod.GET)
 	public String getPostAddPage(ModelMap map) {
-		map.addAttribute("categories", this.cs.list());
+		map.addAttribute("categories", this.cs.list(Util.STATE_NORMAL));
 		return "admin/post";
 	}
 	
 	//post增加响应
 	@RequestMapping(value = "/admin/post", method = RequestMethod.POST)
 	public String add(HttpSession session, @RequestParam String title, @RequestParam String author, 
-			@RequestParam String content, @RequestParam int categoryId, 
-			@RequestParam MultipartFile headerImage) throws IllegalStateException, IOException {
+			@RequestParam String html, @RequestParam Integer categoryId, 
+			@RequestParam MultipartFile thumbnail) throws IllegalStateException, IOException {
 		String root = session.getServletContext().getRealPath("/");
-		String headerImagePath = this.fs.save(headerImage, root);
-		System.out.println(headerImagePath);
-		Post post = new Post(title, author, content, headerImagePath, categoryId);
+		String thumbnailPath = this.fs.save(thumbnail, root);
+		System.out.println(thumbnailPath);
+		
+		this.pos.save(title, author, html, thumbnailPath, categoryId);
 
-		this.pos.insert(post);
 		return "redirect:/admin/posts";
 	}
 	
 	@RequestMapping(value = "/admin/post/{postId}/delete", method = RequestMethod.GET)
-	public String delete(@PathVariable int postId) {
-		System.out.println(postId);
-		this.pos.deleteById(postId);
+	public String delete(@PathVariable Long id) {
+		this.pos.deleteById(id);
 		return "redirect:/admin/posts";
 	}
 	
 	//post更新页面
-	@RequestMapping(value = "/admin/post/{postId}/update", method = RequestMethod.GET)
-	public String getPostUpdatePage(@PathVariable int postId, ModelMap map) {
-		Post post = this.pos.fetchById(postId);
-		map.addAttribute("categories", this.cs.list());
-		map.addAttribute("post", post);
+	@RequestMapping(value = "/admin/post/{id}/update", method = RequestMethod.GET)
+	public String getPostUpdatePage(@PathVariable Long id, ModelMap map) {
+		map.addAttribute("categories", this.cs.list(Util.STATE_NORMAL));
+		map.addAttribute("post", this.pos.fetchById(id));
 		return "admin/post";
 	}
 	
-	@RequestMapping(value = "/admin/post/{postId}/update", method = RequestMethod.POST)
-	public String update(HttpSession session, @PathVariable int postId, @RequestParam String title, 
-			@RequestParam String author, @RequestParam String content, 
-			@RequestParam MultipartFile headerImage,
-			@RequestParam long publishTime, @RequestParam int categoryId) throws IllegalStateException, IOException {
-		Post post = null;
-		if (headerImage != null && headerImage.getSize() > 0) {
+	@RequestMapping(value = "/admin/post/{id}/update", method = RequestMethod.POST)
+	public String update(HttpSession session, @PathVariable Long id, @RequestParam String title, 
+			@RequestParam String author, @RequestParam String html, 
+			@RequestParam MultipartFile thumbnail, @RequestParam Integer categoryId) throws IllegalStateException, IOException {
+		if (thumbnail != null && thumbnail.getSize() > 0) {
 			String root = session.getServletContext().getRealPath("/");
-			String headerImagePath = this.fs.save(headerImage, root);
-			post = new Post(title, author, content, headerImagePath, publishTime, categoryId);
+			String thumbnailPath = this.fs.save(thumbnail, root);
+			this.pos.update(id, title, author, html, thumbnailPath, categoryId);
 		}
 		else {
-			post = new Post(title, author, content, null, publishTime, categoryId);
-			Post t = this.pos.fetchById(postId);
-			post.setHeaderImagePath(t.getHeaderImagePath());
+			this.pos.update(id, title, author, html, categoryId);
 		}
-		post.setId(postId);
-		this.pos.update(post);
 		return "redirect:/admin/posts";
 	}
 	
 	@RequestMapping(value = "/admin/posts", method = RequestMethod.GET)
 	public String getPostAdminPage(ModelMap map) {
-		List<Post> posts = this.pos.listWithAll();
-		map.addAttribute("posts", posts);
+		map.addAttribute("posts", this.pos.list(Util.STATE_NORMAL));
 		return "admin/posts";
 	}
 	
-	@RequestMapping(value = "/post/{postId}", method = RequestMethod.GET)
-	public String getPost(@PathVariable long postId, ModelMap map) {
-		Post post = this.pos.fetchByIdWithAll(postId);
+	@RequestMapping(value = "/post/{id}", method = RequestMethod.GET)
+	public String getPost(@PathVariable Long id, ModelMap map) {
+		Post post = this.pos.visit(id);
 		if (post != null) {
 			map.addAttribute("post", post);
-			post.setClick(post.getClick() + 1);
-			this.pos.update(post);
 			return "post";
 		}
 		else {
 			return "404";
 		}
-	}
-	
-	@RequestMapping(value = "/posts/category/{categoryId}", method = RequestMethod.GET)
-	public String list(@PathVariable Integer categoryId, ModelMap map) {
-		map.addAttribute("posts", this.pos.listByCategoryId(categoryId));
-		map.addAttribute("category", this.cs.fetchById(categoryId));
-		return "post-list";
 	}
 }

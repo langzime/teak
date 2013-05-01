@@ -46,7 +46,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/user/{userId}/update", method = RequestMethod.GET)
-	public String getUserUpdatePage(@PathVariable int userId, ModelMap map) {
+	public String getUserUpdatePage(@PathVariable Integer userId, ModelMap map) {
 		User user = this.us.fetchById(userId);
 		map.addAttribute("user", user);
 		return "admin/user";
@@ -66,7 +66,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/category/{categoryId}/update", method = RequestMethod.GET)
-	public String getCategoryUpdatePage(@PathVariable int categoryId, ModelMap map) {
+	public String getCategoryUpdatePage(@PathVariable Integer categoryId, ModelMap map) {
 		Category category = this.cs.fetchById(categoryId);
 		map.addAttribute("categories", this.cs.list());
 		map.addAttribute("category", category);
@@ -92,7 +92,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/page/{pageId}/update", method = RequestMethod.GET)
-	public String getPageUpdatePage(@PathVariable int pageId, ModelMap map) {
+	public String getPageUpdatePage(@PathVariable Long pageId, ModelMap map) {
 		Page page = this.pas.fetchById(pageId);
 		map.addAttribute("page", page);
 		return "admin/page";
@@ -111,7 +111,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/link/{linkId}/update", method = RequestMethod.GET)
-	public String getLinkUpdatePage(@PathVariable int linkId, ModelMap map) {
+	public String getLinkUpdatePage(@PathVariable Integer linkId, ModelMap map) {
 		Link link = this.ls.fetchById(linkId);
 		map.addAttribute("link", link);
 		return "admin/link";

@@ -1,0 +1,147 @@
+@backgroundColor:red;
+@menuBackgroundColor:blue;
+
+@contentBoardTitleColor:#282841;
+@contentBoardAltColor:#63bd5a;
+
+@sidebarBoardTitleColor:#333333;
+@sidebarBoardAltColor:#a80000;
+
+a {
+	&:hover, &:focus {
+		text-decoration: none;
+	}	
+}
+
+ul, ol {
+	list-style:none;
+}
+
+h3 {
+	color:#282841;
+	margin-bottom:0px;
+}
+.header {
+	background-color:@backgroundColor;
+}
+
+
+.sidebar {
+	
+}
+
+
+.board {
+	
+}
+
+.footer {
+	background-color:green;
+}
+
+.board-title (@titleColor, @altColor){
+	border-bottom:1px solid #e4e4e4;
+	margin-top: 0;
+	margin-bottom: 30px;
+	padding-bottom: 0;
+
+	h1, h3 {
+		margin-bottom:0px;
+		a {
+			color: @titleColor;
+		}
+		&:after {
+			background-color: @altColor;
+			bottom: 0;
+			content: "";
+			margin-top: 10px;
+			margin-bottom: -1px;
+			display: block;
+			width: 50px;
+			height: 3px;
+		}
+		small {
+			font-size:12px;
+			display:block;
+			margin:10px 0px;
+		}
+	}
+}
+
+.post-list(@titleColor, @altColor) {
+	li {
+		position: relative;
+		border-bottom: 1px dotted #ddd;
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+	}
+	.number {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: @titleColor;
+		color: #ffffff;
+		width: 50px;
+		height: 32px;
+		font-size: 22px;
+		line-height: 32px;
+		text-align: center;
+		display: block;
+		border-radius: 4px;
+		background-clip: padding-box;
+
+		&:hover {
+			background-color: @altColor;
+		}
+
+	}
+	.list-content {
+		padding-left:60px;
+		.click {
+			color:#999999;
+			font-size:85%;
+			line-height:1px;
+		}
+	}
+	h5 {
+		display: block;
+		font-size: 11px;
+		line-height: 12px;
+		margin-bottom: 3px;
+	}
+}
+
+.content .board-title {
+	.board-title(@contentBoardTitleColor, @contentBoardAltColor);
+}
+
+.content .post-list {
+	.post-list(@contentBoardTitleColor, @contentBoardAltColor);
+}
+
+.sidebar .board-title {
+	.board-title(@sidebarBoardTitleColor, @sidebarBoardAltColor);
+}
+
+.sidebar .post-list {
+	.post-list(@sidebarBoardTitleColor, @sidebarBoardAltColor);
+}
+
+.img-post-text {
+	padding-top:50px;
+	padding-bottom:50px;
+
+	.post-title {
+		margin-bottom:20px;
+	}
+}
+
+/** posts **/
+
+.post-basic-info {
+	text-align:center;
+}
+
+.thumbnail-wrapper {
+	text-align:center;
+}
