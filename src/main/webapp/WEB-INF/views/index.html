@@ -6,146 +6,190 @@
 	<link href="/resources/css/index.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container">
-		<@lib.header />
-		<@lib.nav />
-		
-		<!-- 图片新闻 -->
-		<div class="row img-news">
-			<div class="span6 offset3">
-				<div id="myCarousel" class="carousel slide">
-					<div class="carousel-inner">
-					<#list imagenews.posts as post>
-						<#if post_index = 0> 
-						<div class="active item">
-						<#else>
-						<div class="item">
-						</#if>
-							<img style="width:600px;height:400px" src="${post.thumbnailPath}" alt="">
-							<div class="carousel-caption">
-								<h4><a href="/post/${post.id}">${post.title}</a></h4>
-							</div>
-						</div>
-						</#list>
-					</div>
-					<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-					<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-				</div>
-			</div><!--span6-->
-		</div><!-- row -->
-		
-		<!-- 主体 -->
-		<div class="row main">
-			<!-- 中间部分 -->
-			<div class="span8">
-				<div class="row">
-					<div class="span8 board1">
-						<h1>
-							<img src="/resources/img/board-h1.gif" alt="">
-							<a href="/page/${introduction.id}">${introduction.name}</a>
-						</h1>
-						&nbsp;&nbsp;
-						<#if (introduction.text)?length gt 200>
-							${introduction.text[0..199]}......<a href="/page/${introduction.id}">更多</a>
-						<#else>
-							${introduction.text}
-						</#if>
-					</div>
-				</div>
-				<div class="row">
-					<div class="span4 board1">
-						<h1>
-							<img src="/resources/img/board-h1.gif" alt="">
-							<a href="/category/${activity.id}">${activity.name}</a>
-						</h1>
-						<ul class="post-list">
-							<#list activity.posts as post>
-							<li>
-								<img src="/resources/img/li-header2.gif" alt="">&nbsp;&nbsp;<strong>${post.publishTime?number_to_date}</strong>
-								<a href="/post/${post.id}">
-									<#if (post.title)?length gt 20>
-										${post.title[0..19]}
-									<#else>
-										${post.title}
-									</#if>
-								</a>
-							</li>
-							</#list>
-						</ul>
-					</div>
-					<div class="span4 board1">
-						<h1>
-							<img src="/resources/img/board-h1.gif" alt="">
-							<a href="/category/${notice.id}">${notice.name}</a>
-						</h1>
-						<ul class="post-list">
-							<#list notice.posts as post>
-							<li>
-								<img src="/resources/img/li-header2.gif" alt="">&nbsp;&nbsp;<strong>${post.publishTime?number_to_date}</strong>
-								<a href="/post/${post.id}">
-									<#if (post.title)?length gt 20>
-										${post.title[0..19]}
-									<#else>
-										${post.title}
-									</#if>
-								</a>
-							</li>
-							</#list>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="span4">
-				<div class="row">
-					<div class="span4 board2">
-						<h1>
-							<img src="/resources/img/board-h1.gif" alt="">
-							<a href="/category/${roll.id}">${roll.name}</a>
-						</h1>
-						<marquee direction="up"  scrollamount="3" onMouseOut="this.start()" onMouseOver="this.stop()">
-						<ul class="post-list">
-							<#list roll.posts as post>
-							<li>
-								<img src="/resources/img/li-header2.gif" alt="">&nbsp;&nbsp;<strong>${post.publishTime?number_to_date}</strong>
-								<a href="/post/${post.id}">
-									<#if (post.title)?length gt 20>
-										${post.title[0..19]}
-									<#else>
-										${post.title}
-									</#if>
-								</a>
-							</li>
-							</#list>
-						</ul>
-						</marquee>
-					</div>
-				</div>
-				<div class="row">
-					<div class="span4 board2">
-						<h1>
-							<img src="/resources/img/board-h1.gif" alt="">
-							<a href="#">友情链接</a>
-						</h1>
-						<ul class="post-list">
-							<#list links as link>
-								<li>
-									<img src="/resources/img/li-header2.gif" alt="">
-									<a href="${link.url}">
-										<#if (link.name)?length gt 20>
-											${link.name[0..19]}
-										<#else>
-											${link.name}
-										</#if>
-									</a>
-								</li>
-							</#list>
-						</ul>
-					</div>
+	<@lib.header />
+	<@lib.nav />
+	
+	<!-- main -->
+	<@lib.main>
+		<div class="ad">
+			<div class="row">
+				<div class="span12">
 				</div>
 			</div>
 		</div>
-		<@lib.bottom />
-	</div>
+		<@carousel />
+			<!-- content -->
+			<div class="row">	
+				<div class="span8 content">
+					<!-- content-top -->
+					<div class="row">
+						<div class="span8 board">
+						</div>
+					</div>
+					<hr>
+					<!-- content-middle -->
+					<div class="row">
+						<@CategoryBoard category=activity />
+						<@CategoryBoard category=notice />
+					</div>
+					<hr>
+					<div class="row">
+						<@CategoryBoard category=activity />
+						<@CategoryBoard category=research />
+					</div>
+				</div>
+				
+				<!-- sidebar -->
+				<div class="span4 sidebar">
+					<div class="row">
+						<@PostListBoard name="滚动新闻" posts=roll />
+					</div>
+					<hr>
+					<div class="row">
+						<@LinkBoard name="友情链接" links=links />
+					</div>
+				</div>
+			</div>
+	</@lib.main>
+
+	<!-- footer -->
+	<@lib.footer />
+	
   <@lib.js />
 </body>
 </html>
+
+<#macro carousel>
+<!-- carousel -->
+<div class="row">
+	<div class="span12">
+		<div id="myCarousel" class="carousel slide">
+  		<ol class="carousel-indicators">
+  			<#list imagenews.posts as post>
+  				<#if post_index = 0>
+    				<li data-target="#myCarousel" data-slide-to="${post_index}" class="active"></li>
+    			<#else>
+    				<li data-target="#myCarousel" data-slide-to="${post_index}"></li>
+    			</#if>
+    		</#list>
+  		</ol>
+  		<!-- Carousel items -->
+  		<div class="carousel-inner">
+  			<#list imagenews.posts as post>
+  				<#if post_index = 0>
+	    		<div class="active item">
+	    		<#else>
+	    		<div class="item">
+	    		</#if>
+	    			<div class="row">
+	    				<div class="span4 offset1">
+	    					<div class="img-post-text">
+		    					<div class="post-title">
+		    						<h3>${post.title}</h3>
+		    					</div>
+		    					<div class="post-content-short">
+		    						<p>
+											<#if post.text?length gt 200>
+												${post.text[0..199]}
+											<#else>
+												${post.text}
+											</#if>
+										</p>
+		    					</div>
+		    				</div>
+	    				</div>
+	    				<div class="span7">
+	    					<img src="${post.thumbnailPath}">
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</#list>
+	  		<!-- Carousel nav -->
+	  		<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+	  		<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			</div>
+	</div>
+</div>
+</#macro>
+
+<#macro CategoryBoard category>
+<div class="span4 board">
+	<div class="board-title">
+		<h3>
+			<i class="icon-star"></i>
+			<a href="#">
+				<span><a href="/category/${category.id}">${category.name}</a></span>
+			</a>
+		</h3>
+	</div>
+	<div class="board-content">
+		<ol class="post-list">
+			<#list category.posts as post>
+			<li>
+				<a href="/post/${post.id}"><span class="number">${post_index + 1}</span></a>
+				<div class="list-content">
+					<h5><a href="/post/${post.id}">${post.title}</a></h5>
+					<i class="icon-calendar"></i>${post.publishDatetime?number_to_datetime}
+					<span class="click pull-right">
+						${post.click}&nbsp;<i class="icon-eye-open"></i>
+					</span>
+				</div>
+			</li>
+			</#list>
+		</ol>
+	</div>
+</div>
+</#macro>
+
+<#macro PostListBoard name posts>
+<div class="span4 board">
+	<div class="board-title">
+		<h3>
+				<i class="icon-tasks"></i>
+				<span>${name}</span>
+		</h3>
+	</div>
+	<div class="board-content">
+		<marquee direction="up" scrollamount="3" onmouseout="this.start()" onmouseover="this.stop()">
+			<ol class="post-list">
+				<#list posts[0..5] as post>
+				<li>
+					<a href="#"><span class="number">${post_index + 1}</span></a>
+					<div class="list-content">
+						<h5><a href="/post/${post.id}">${post.title}</a></h5>
+						<i class="icon-calendar"></i>${post.publishDatetime?number_to_datetime}
+						<span class="click pull-right">
+							${post.click}&nbsp;<i class="icon-eye-open"></i>
+						</span>
+					</div>
+				</li>
+				</#list>
+			</ol>
+		</marquee>
+	</div>
+</div>
+</#macro>
+
+<#macro LinkBoard name links>
+<div class="span4 board">
+	<div class="board-title">
+		<h3>
+				<i class="icon-gift"></i>
+				<span>${name}</span>
+		</h3>
+	</div>
+	<div class="board-content">
+			<ol class="post-list">
+				<#list links as link>
+				<li>
+					<div class="list-content" style="padding-left:0px">
+						<h5><a href="${link.url}">${link.name}</a></h5>
+						<a href="${link.url}/favicon.ico"><img src="${link.url}/favicon.ico"></a>${link.description}
+					</div>
+				</li>
+				</#list>
+			</ol>
+		</marquee>
+	</div>
+</div>
+</#macro>
