@@ -46,7 +46,7 @@ public class PostService {
 		post.setText(Util.parse(html));
 		post.setThumbnailPath(thumbnailPath);
 		post.setCategory(category);
-		
+		post.setUpdateDatetime(System.currentTimeMillis());
 		this.postDao.update(post);
 		
 	}

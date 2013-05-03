@@ -2,27 +2,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<@lib.meta />
-	<title>Teak CMS admin</title>
-	<@lib.css />
-	
+	<@lib.head title="管理界面"/>
 </head>
 <body>
-	<div class="container">
-		<@lib.header />
-		<@lib.nav />
-		<div class="row" style="margin-top:20px">
+	<@lib.header />
+	<@lib.nav />
+	
+	<!-- main -->
+	<@lib.main>
+		<div class="row">
 			<div class="span2">
-				<@lib.AdminLeftNav />
+				<@lib.AdminSidebar />
 			</div> <!-- span2 -->
 			<div class="span10">
 				
 			</div>
 		</div>
-		
-		<@lib.bottom />
-	</div>
-	<@lib.js />
+	</@lib.main>
 
+	<!-- footer -->
+	<@lib.footer />
+	
+  <@lib.js />
 </body>
 </html>

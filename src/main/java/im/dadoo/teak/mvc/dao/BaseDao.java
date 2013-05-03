@@ -35,8 +35,7 @@ public abstract class BaseDao<T> {
 	}
 	
 	public void deleteById(Serializable id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		session.delete(session.get(this.c, id));
+		this.delete(this.fetchById(id));
 	}
 	
 	public T fetchById(Serializable id) {

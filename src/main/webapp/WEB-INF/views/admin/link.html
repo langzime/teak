@@ -2,24 +2,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<@lib.meta />
 	<#if link??>
-		<title>Update Link</title>
+		<@lib.head title="修改链接"/>
 	<#else>
-		<title>Add Link</title>
+		<@lib.head title="新增链接"/>
 	</#if>
-	<@lib.css />
 </head>
 <body>
+	<@lib.header />
+	<@lib.nav />
 	
-	<div class="container">
-	
-		<@lib.header />
-		<@lib.nav />
-		
-		<div class="row" style="margin-top:20px">
+	<!-- main -->
+	<@lib.main>
+		<div class="row">
 			<div class="span2">
-				<@lib.AdminLeftNav />
+				<@lib.AdminSidebar />
 			</div> <!-- span2 -->
 			<div class="span10">
 				<#if link??>
@@ -57,11 +54,14 @@
 							<a class="btn" href="/admin/links">返回</a>
 						</div>
 					</fieldset>
-				</form>	
+				</form>
 			</div>
 		</div>
-		<@lib.bottom />
-	</div>
+	</@lib.main>
+
+	<!-- footer -->
+	<@lib.footer />
+	
   <@lib.js />
   <script>
 		$(function(){

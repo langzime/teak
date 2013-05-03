@@ -1,5 +1,6 @@
 package im.dadoo.teak.mvc.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import im.dadoo.teak.mvc.domain.Post;
@@ -17,6 +18,7 @@ public class PostDao extends BaseDao<Post> {
 		super(Post.class);
 	}
 	
+	@Override
 	public void delete(Post post) {
 		post.setState(Util.STATE_DELETE);
 	}

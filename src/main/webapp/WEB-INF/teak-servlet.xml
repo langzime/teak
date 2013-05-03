@@ -83,10 +83,18 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	     <property name="sessionFactory">     
 	      <ref bean="sessionFactory"/>     
 	     </property>   
-	  </bean>     
-		<mvc:interceptor>
+	  </bean>
+	  <mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="im.dadoo.teak.interceptor.CategorySessionInterceptor" />
+		</mvc:interceptor>    
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="im.dadoo.teak.interceptor.LinkSessionInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="im.dadoo.teak.interceptor.RollSessionInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/**" />

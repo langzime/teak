@@ -1,5 +1,7 @@
 package im.dadoo.teak.mvc.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import im.dadoo.teak.mvc.domain.Page;
@@ -52,5 +54,24 @@ public class PageController {
 		else {
 			return "404";
 		}
+	}
+	
+	@RequestMapping(value = "/admin/pages", method = RequestMethod.GET)
+	public String getPageAdminPage(ModelMap map) {
+		List<Page> pages = this.pas.list();
+		map.addAttribute("pages", pages);
+		return "admin/page-list";
+	}
+	
+	@RequestMapping(value = "/admin/page", method = RequestMethod.GET)
+	public String getPageAddPage() {
+		return "admin/page";
+	}
+	
+	@RequestMapping(value = "/admin/page/{pageId}/update", method = RequestMethod.GET)
+	public String getPageUpdatePage(@PathVariable Long pageId, ModelMap map) {
+		Page page = this.pas.fetchById(pageId);
+		map.addAttribute("page", page);
+		return "admin/page";
 	}
 }

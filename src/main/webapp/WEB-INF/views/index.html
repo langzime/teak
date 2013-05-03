@@ -3,7 +3,7 @@
 <html>
 <head>
 	<@lib.head title="中国当代写作研究中心"/>
-	<link href="/resources/css/index.css" rel="stylesheet">
+
 </head>
 <body>
 	<@lib.header />
@@ -18,38 +18,38 @@
 			</div>
 		</div>
 		<@carousel />
-			<!-- content -->
-			<div class="row">	
-				<div class="span8 content">
-					<!-- content-top -->
-					<div class="row">
-						<div class="span8 board">
-						</div>
-					</div>
-					<hr>
-					<!-- content-middle -->
-					<div class="row">
-						<@CategoryBoard category=activity />
-						<@CategoryBoard category=notice />
-					</div>
-					<hr>
-					<div class="row">
-						<@CategoryBoard category=activity />
-						<@CategoryBoard category=research />
+		<!-- content -->
+		<div class="row">	
+			<div class="span8 content">
+				<!-- content-top -->
+				<div class="row">
+					<div class="span8 board">
 					</div>
 				</div>
-				
-				<!-- sidebar -->
-				<div class="span4 sidebar">
-					<div class="row">
-						<@PostListBoard name="滚动新闻" posts=roll />
-					</div>
-					<hr>
-					<div class="row">
-						<@LinkBoard name="友情链接" links=links />
-					</div>
+				<hr>
+				<!-- content-middle -->
+				<div class="row">
+					<@CategoryBoard category=activity />
+					<@CategoryBoard category=notice />
+				</div>
+				<hr>
+				<div class="row">
+					<@CategoryBoard category=activity />
+					<@CategoryBoard category=research />
 				</div>
 			</div>
+			
+			<!-- sidebar -->
+			<div class="span4 sidebar">
+				<div class="row">
+					<@lib.PostListBoard name="滚动新闻" posts=roll />
+				</div>
+				<hr>
+				<div class="row">
+					<@lib.LinkBoard name="友情链接" sessionLinks=sessionLinks />
+				</div>
+			</div>
+		</div>
 	</@lib.main>
 
 	<!-- footer -->
@@ -65,17 +65,16 @@
 	<div class="span12">
 		<div id="myCarousel" class="carousel slide">
   		<ol class="carousel-indicators">
-  			<#list imagenews.posts as post>
-  				<#if post_index = 0>
-    				<li data-target="#myCarousel" data-slide-to="${post_index}" class="active"></li>
-    			<#else>
-    				<li data-target="#myCarousel" data-slide-to="${post_index}"></li>
-    			</#if>
-    		</#list>
+  			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
   		</ol>
   		<!-- Carousel items -->
   		<div class="carousel-inner">
   			<#list imagenews.posts as post>
+  				<#if post_index gt 9>
+  					<#break>
+  				</#if>
   				<#if post_index = 0>
 	    		<div class="active item">
 	    		<#else>
@@ -85,7 +84,7 @@
 	    				<div class="span4 offset1">
 	    					<div class="img-post-text">
 		    					<div class="post-title">
-		    						<h3>${post.title}</h3>
+		    						<h3><a href="/post/${post.id}">${post.title}</a></h3>
 		    					</div>
 		    					<div class="post-content-short">
 		    						<p>
@@ -99,21 +98,24 @@
 		    				</div>
 	    				</div>
 	    				<div class="span7">
-	    					<img src="${post.thumbnailPath}">
+	    					<#if post.thumbnailPath??>
+	    						<img style="max-width:100%;height:400px" src="${post.thumbnailPath}">
+	    					</#if>
 	    				</div>
 	    			</div>
 	    		</div>
 	    	</#list>
-	  		<!-- Carousel nav -->
-	  		<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-	  		<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 			</div>
+			<!-- Carousel nav -->
+  		<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  		<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+		</div>
 	</div>
 </div>
 </#macro>
 
 <#macro CategoryBoard category>
-<div class="span4 board">
+<div class="span4 category-board">
 	<div class="board-title">
 		<h3>
 			<i class="icon-star"></i>
@@ -125,6 +127,9 @@
 	<div class="board-content">
 		<ol class="post-list">
 			<#list category.posts as post>
+			<#if post_index gt 9>
+				<#break>
+			</#if>
 			<li>
 				<a href="/post/${post.id}"><span class="number">${post_index + 1}</span></a>
 				<div class="list-content">
@@ -137,59 +142,6 @@
 			</li>
 			</#list>
 		</ol>
-	</div>
-</div>
-</#macro>
-
-<#macro PostListBoard name posts>
-<div class="span4 board">
-	<div class="board-title">
-		<h3>
-				<i class="icon-tasks"></i>
-				<span>${name}</span>
-		</h3>
-	</div>
-	<div class="board-content">
-		<marquee direction="up" scrollamount="3" onmouseout="this.start()" onmouseover="this.stop()">
-			<ol class="post-list">
-				<#list posts[0..5] as post>
-				<li>
-					<a href="#"><span class="number">${post_index + 1}</span></a>
-					<div class="list-content">
-						<h5><a href="/post/${post.id}">${post.title}</a></h5>
-						<i class="icon-calendar"></i>${post.publishDatetime?number_to_datetime}
-						<span class="click pull-right">
-							${post.click}&nbsp;<i class="icon-eye-open"></i>
-						</span>
-					</div>
-				</li>
-				</#list>
-			</ol>
-		</marquee>
-	</div>
-</div>
-</#macro>
-
-<#macro LinkBoard name links>
-<div class="span4 board">
-	<div class="board-title">
-		<h3>
-				<i class="icon-gift"></i>
-				<span>${name}</span>
-		</h3>
-	</div>
-	<div class="board-content">
-			<ol class="post-list">
-				<#list links as link>
-				<li>
-					<div class="list-content" style="padding-left:0px">
-						<h5><a href="${link.url}">${link.name}</a></h5>
-						<a href="${link.url}/favicon.ico"><img src="${link.url}/favicon.ico"></a>${link.description}
-					</div>
-				</li>
-				</#list>
-			</ol>
-		</marquee>
 	</div>
 </div>
 </#macro>

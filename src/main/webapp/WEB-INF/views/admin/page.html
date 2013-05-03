@@ -2,24 +2,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<@lib.meta />
 	<#if page??>
-		<title>Update Page</title>
+		<@lib.head title="修改页面"/>
 	<#else>
-		<title>Add Page</title>
+		<@lib.head title="新增页面"/>
 	</#if>
-	<@lib.css />
 </head>
 <body>
+	<@lib.header />
+	<@lib.nav />
 	
-	<div class="container">
-	
-		<@lib.header />
-		<@lib.nav />
-		
-		<div class="row" style="margin-top:20px">
+	<!-- main -->
+	<@lib.main>
+		<div class="row">
 			<div class="span2">
-				<@lib.AdminLeftNav />
+				<@lib.AdminSidebar />
 			</div> <!-- span2 -->
 			<div class="span10">
 				<#if page??>
@@ -40,12 +37,6 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">页面英文名(唯一标识*)</label>
-							<div class="controls">
-								<input id="url" type="text" class="input-xlarge" name="url" maxlength="30">
-							</div>
-						</div>
-						<div class="control-group">
 							<label class="control-label">标题(*)</label>
 							<div class="controls">
 								<input id="title" type="text" class="input-xlarge" name="title" maxlength="50">
@@ -58,14 +49,9 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<div class="controls">
-								<input id="publishTime" type="hidden" class="input-xlarge" name="publishTime" readonly="">
-							</div>
-						</div>
-						<div class="control-group">
 							<label class="control-label">内容(*)</label>
 							<div class="controls">
-								<textarea id="content" class="input-xlarge" name="content" rows="12" cols="80" style="width:100%"></textarea>
+								<textarea id="html" class="input-xlarge" name="html" rows="12" cols="80" style="width:100%"></textarea>
 							</div>
 						</div>
 						<!-- control-group -->
@@ -77,26 +63,25 @@
 				</form>	
 			</div>
 		</div>
-		
-		<@lib.bottom />
-	</div>
+	</@lib.main>
+
+	<!-- footer -->
+	<@lib.footer />
+	
   <@lib.js />
   <script>
 		$(function(){
 			$('#collapsePage').addClass('in');
-			$('#content').xheditor({html5Upload:false,modalWidth:700,modalHeight:500,upBtnText:'浏览',upImgUrl:"/upload/image",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"/upload/image", upFlashExt:"flv,swf"});
+			$('#html').xheditor({html5Upload:false,modalWidth:700,modalHeight:500,upBtnText:'浏览',upImgUrl:"/upload/image",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"/upload/image", upFlashExt:"flv,swf"});
 			<#if page??>
 				$('#name').val('${page.name}');
-				$('#url').val('${page.url}');
 				$('#title').val('${page.title}');
 				$('#author').val('${page.author}');
-				$('#content').val("${page.content?js_string}");
-				$('#publishTime').val('${page.publishTime}');	
+				$('#html').val("${page.html?js_string}");
 			</#if>
 			
 			$('#page-form').submit(function(e){
-				if ($('#name').val() == undefined || $('#url').val() == undefined || 
-						$('#title').val() == undefined || $('#content').val() == undefined) {
+				if ($('#name').val() == undefined || $('#title').val() == undefined || $('#html').val() == undefined) {
 					alert("请将内容填写完整");
 					return false;
 				}

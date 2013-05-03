@@ -1,0 +1,61 @@
+<#import "../lib.html" as lib>
+<!DOCTYPE html>
+<html>
+<head>
+	<@lib.head title="分类管理"/>
+</head>
+<body>
+	<@lib.header />
+	<@lib.nav />
+	
+	<!-- main -->
+	<@lib.main>
+		<div class="row">
+			<div class="span2">
+				<@lib.AdminSidebar />
+			</div> <!-- span2 -->
+			<div class="span10">
+				<table class="table table-striped well">
+				  <thead>
+				    <tr>
+				      <th>分类名</th>
+				      <th>分类描述</th>
+				      <th>父类</th>
+				      <th>操作</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<#list categories as category>
+				    <tr>
+				      <td class="span3">${category.name}</td>
+				      <td class="span3">${category.description}</td>
+				      <td class="span3">
+				      	<#if category.sup??>
+				      		${category.sup.name}
+				      	<#else>
+				      		无
+				      	</#if>
+				      </td>
+				      <td class="span1">
+				      	<a href="/admin/category/${category.id}/update">修改</a>
+				      	<a href="/admin/category/${category.id}/delete">删除</a>
+				      </td>
+				    </tr>
+				    </#list>
+				  </tbody>
+				</table>	
+			</div>
+		</div>
+	</@lib.main>
+
+	<!-- footer -->
+	<@lib.footer />
+	
+  <@lib.js />
+  <script>
+		$(function(){
+			$('#collapseCategory').addClass('in');
+		});
+	</script>
+</body>
+</html>

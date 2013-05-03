@@ -2,17 +2,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<@lib.meta />
-	<title>404</title>
-	<@lib.css />
+	<@lib.head title="404"/>
 </head>
 <body>
-	<div class="container">
-		<@lib.header />
-		<@lib.nav />
-		
+	<@lib.header />
+	<@lib.nav />
+	
+	<!-- main -->
+	<@lib.main>
+
 		404
-	</div>
+	</@lib.main>
+
+	<!-- footer -->
+	<@lib.footer />
+	
   <@lib.js />
+  
 </body>
 </html>

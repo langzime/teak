@@ -42,7 +42,7 @@ public class PageService {
 		page.setAuthor(author);
 		page.setHtml(html);
 		page.setText(Util.parse(html));
-		
+		page.setUpdateDatetime(System.currentTimeMillis());
 		this.pageDao.update(page);
 	}
 	

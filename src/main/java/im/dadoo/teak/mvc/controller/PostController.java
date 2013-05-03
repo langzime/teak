@@ -53,7 +53,7 @@ public class PostController {
 		return "redirect:/admin/posts";
 	}
 	
-	@RequestMapping(value = "/admin/post/{postId}/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/post/{id}/delete", method = RequestMethod.GET)
 	public String delete(@PathVariable Long id) {
 		this.pos.deleteById(id);
 		return "redirect:/admin/posts";
@@ -85,7 +85,7 @@ public class PostController {
 	@RequestMapping(value = "/admin/posts", method = RequestMethod.GET)
 	public String getPostAdminPage(ModelMap map) {
 		map.addAttribute("posts", this.pos.list(Util.STATE_NORMAL));
-		return "admin/posts";
+		return "admin/post-list";
 	}
 	
 	@RequestMapping(value = "/post/{id}", method = RequestMethod.GET)

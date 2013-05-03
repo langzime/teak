@@ -54,10 +54,31 @@ public class CategoryController {
 		return "redirect:/admin/categories";
 	}
 	
-	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
-	public String getPosts(@PathVariable Integer categoryId, ModelMap map) {
-		map.addAttribute("posts", this.pos.listByCategoryId(categoryId));
-		map.addAttribute("category", this.cs.fetchById(categoryId));
-		return "post-list";
+	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
+	public String posts(@PathVariable Integer id, ModelMap map) {
+		map.addAttribute("category", this.cs.fetchById(id));
+		return "category";
 	}
+	
+	@RequestMapping(value = "/admin/categories", method = RequestMethod.GET)
+	public String getCategoryAdminPage(ModelMap map) {
+		List<Category> categories = this.cs.list();
+		map.addAttribute("categories", categories);
+		return "admin/category-list";
+	}
+	
+	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
+	public String getCategoryAddPage(ModelMap map) {
+		map.addAttribute("categories", this.cs.list());
+		return "admin/category";
+	}
+	
+	@RequestMapping(value = "/admin/category/{categoryId}/update", method = RequestMethod.GET)
+	public String getCategoryUpdatePage(@PathVariable Integer categoryId, ModelMap map) {
+		Category category = this.cs.fetchById(categoryId);
+		map.addAttribute("categories", this.cs.list());
+		map.addAttribute("category", category);
+		return "admin/category";
+	}
+	
 }

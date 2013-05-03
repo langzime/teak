@@ -82,8 +82,8 @@
 	</div>
 </#macro>
 
-<#macro AdminLeftNav>
-<div class="accordion" id="left-nav">
+<#macro AdminSidebar>
+<div class="accordion admin-sidebar">
 	<div class="accordion-group">
   	<div class="accordion-heading">
      <a class="accordion-toggle" data-toggle="collapse" data-parent="#left-nav" href="#collapseUser">
@@ -169,27 +169,68 @@
 </div>
 </#macro>
 
-<#macro bottom>
-<div class="row bottom">
-	<div class="span12">	
-		<ul>
-			<li>版权所有&copy;华中科技大学中国当代写作研究中心&nbsp;2012&nbsp;|</li>
-			<li>&nbsp;地址：湖北省武汉市珞喻路1037号华中科技大学东五楼三楼&nbsp;|</li>
-			<li>&nbsp;邮编：430074&nbsp;|</li>
-			<li>&nbsp;联系电话：027-87559614&nbsp;|</li>
-			<li>&nbsp;邮箱：jiangjun1870@126.com&nbsp;|&nbsp;</li>
-			<li><a href="/admin">管理入口</a></li>
-		</ul>
+<#macro PostListBoard name posts>
+<div class="span4 roll-board">
+	<div class="board-title">
+		<h3>
+				<i class="icon-tasks"></i>
+				<span>${name}</span>
+		</h3>
+	</div>
+	<div class="board-content">
+		<marquee direction="up" scrollamount="3" onmouseout="this.start()" onmouseover="this.stop()">
+			<ol class="post-list">
+				<#list posts as post>
+				<#if post_index gt 9>
+					<#break>
+				</#if>
+				<li>
+					<a href="#"><span class="number">${post_index + 1}</span></a>
+					<div class="list-content">
+						<h5><a href="/post/${post.id}">${post.title}</a></h5>
+						<i class="icon-calendar"></i>${post.publishDatetime?number_to_datetime}
+						<span class="click pull-right">
+							${post.click}&nbsp;<i class="icon-eye-open"></i>
+						</span>
+					</div>
+				</li>
+				</#list>
+			</ol>
+		</marquee>
+	</div>
+</div>
+</#macro>
+
+<#macro LinkBoard name sessionLinks>
+<div class="span4 link-board">
+	<div class="board-title">
+		<h3>
+				<i class="icon-gift"></i>
+				<span>${name}</span>
+		</h3>
+	</div>
+	<div class="board-content">
+			<ol class="post-list">
+				<#list sessionLinks as link>
+				<li>
+					<div class="list-content" style="padding-left:0px">
+						<h5><a href="${link.url}">${link.name}</a></h5>
+						<a href="${link.url}/favicon.ico"><img src="${link.url}/favicon.ico"></a>${link.description}
+					</div>
+				</li>
+				</#list>
+			</ol>
+		</marquee>
 	</div>
 </div>
 </#macro>
 
 <#macro footer>
 <div class="footer">
-	<div class="container" style="margin:50px 0px">
+	<div class="container">
 		<div class="row">
 			<div class="span12">
-				<div class="span2 offset3">
+				<div class="span2 offset2">
 					<h3><i class="icon-plus-sign"></i>&nbsp;管理入口</h3>
 					<br>
 					<ul>

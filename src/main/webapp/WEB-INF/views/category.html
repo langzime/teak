@@ -2,47 +2,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<@lib.meta />
-	<title>${category.name}</title>
-	<@lib.css />
+	<@lib.head title="${category.name}"/>
 </head>
 <body>
+	<@lib.header />
+	<@lib.nav />
 	
-	<div class="container">
-	
-		<@lib.header />
-		<@lib.nav />
-		
-		<div class="row" style="margin-top:20px">
-			<div class="span12">
-				<h2>${category.name}</h2>
+	<!-- main -->
+	<@lib.main>
+
+			<!-- content -->
+			<div class="row">	
+				<div class="span8 content">
+					<div class="post-list-board">
+						<div class="board-title">
+							<h2>
+									<i class="icon-star"></i>
+									<span>${category.name}</span>
+							</h2>
+						</div>
+						<div class="board-content">
+							<ol class="post-list">
+								<#list category.posts as post>
+								<li>
+									<div class="row">
+										<div class="span2">
+											<div class="post-basic-info">
+												<#if post.thumbnailPath??>
+													<img src="${post.thumbnailPath}" width="100px" height="100px">
+												<#else>
+													<img src="http://0.s3.envato.com/files/48740456/francesco724.jpg"  width="100px" height="100px">
+												</#if>
+												<p><i class="icon-time"></i>${post.publishDatetime?number_to_datetime}</p>
+											</div>
+										</div>
+										<div class="span5">
+											<h3><a href="/post/${post.id}">${post.title}</a></h3>
+											<p>
+												<#if post.text?length gt 100>
+													${post.text[0..99]}
+												<#else>
+													${post.text}
+												</#if>
+											</p>
+											<a href="/post/${post.id}"><i class="icon-circle-arrow-right"></i>更多</a>
+										</div>
+									</div>
+								</li>
+								</#list>
+							</ol>
+						</div>
+						<!-- page -->
+						<div class="pagination">
+							<ul>
+								<li class="active"><span>&laquo;</span></li>
+								<li class="active"><span>1</span></li>
+								<li class="active"><span>2</span></li>
+								<li class="active"><span>&raquo;</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				<!-- sidebar -->
+				<div class="span4 sidebar">
+					<div class="row">
+						<@lib.PostListBoard name="滚动新闻" posts=roll />
+					</div>
+					<hr>
+					<div class="row">
+						<@lib.LinkBoard name="友情链接" sessionLinks=sessionLinks />
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="span3">
-				<ul class="nav nav-tabs nav-stacked">
-				<#list category.subCategories as sub>
-					<li><a href="/category/${sub.id}">${sub.name}</a></li>
-				</#list>
-				</ul>
-			</div>
-			<div class="span9">
-				<table class="table">
-					<tbody>
-						<#list category.posts as post>
-							<tr>
-									<td class="span1"><img src="/resources/img/li-header.jpg" alt=""></td>
-									<td class="span6"><a href="/post/${post.id}">${post.title}</a></td>
-									<td class="span2">[${post.publishTime?number_to_datetime}]</td>
-							</tr>
-						</#list>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		
-		<@lib.bottom />
-	</div>
+	</@lib.main>
+
+	<!-- footer -->
+	<@lib.footer />
 	
   <@lib.js />
 </body>

@@ -1,0 +1,59 @@
+<#import "../lib.html" as lib>
+<!DOCTYPE html>
+<html>
+<head>
+	<@lib.head title="文章管理"/>
+</head>
+<body>
+	<@lib.header />
+	<@lib.nav />
+	
+	<!-- main -->
+	<@lib.main>
+		<div class="row">
+			<div class="span2">
+				<@lib.AdminSidebar />
+			</div> <!-- span2 -->
+			<div class="span10">
+				<table class="table table-striped well">
+				  <thead>
+				    <tr>
+				    	<th>页面名</th>
+				      <th>标题</th>
+				      <th>作者</th>
+				      <th>点击量</th>
+				      <th>发布时间</th>
+				      <th>操作</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<#list pages as page>
+				    <tr>
+				      <td class="span2"><a href="/page/${page.id}">${page.name}</a></td>
+				      <td class="span2">${page.title}</td>
+				      <td class="span2">${page.author}</td>
+				      <td class="span1">${page.click}</td>
+				      <td class="span2">${page.publishDatetime?number_to_datetime}</td>
+				      <td class="span1">
+				      	<a href="/admin/page/${page.id}/update">修改</a>
+				      	<a href="/admin/page/${page.id}/delete" onClick="return confirm('确定要删除吗？删除后不可恢复')">删除</a>
+				      </td>
+				    </tr>
+				    </#list>
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</@lib.main>
+
+	<!-- footer -->
+	<@lib.footer />
+	
+  <@lib.js />
+  <script>
+		$(function(){
+			$('#collapsePage').addClass('in');
+		});
+	</script>
+</body>
+</html>
