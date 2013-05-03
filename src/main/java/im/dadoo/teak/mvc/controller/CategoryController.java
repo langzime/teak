@@ -62,21 +62,21 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/admin/categories", method = RequestMethod.GET)
 	public String getCategoryAdminPage(ModelMap map) {
-		List<Category> categories = this.cs.list();
+		List<Category> categories = this.cs.list(Util.STATE_NORMAL);
 		map.addAttribute("categories", categories);
 		return "admin/category-list";
 	}
 	
 	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
 	public String getCategoryAddPage(ModelMap map) {
-		map.addAttribute("categories", this.cs.list());
+		map.addAttribute("categories", this.cs.list(Util.STATE_NORMAL));
 		return "admin/category";
 	}
 	
 	@RequestMapping(value = "/admin/category/{categoryId}/update", method = RequestMethod.GET)
 	public String getCategoryUpdatePage(@PathVariable Integer categoryId, ModelMap map) {
 		Category category = this.cs.fetchById(categoryId);
-		map.addAttribute("categories", this.cs.list());
+		map.addAttribute("categories", this.cs.list(Util.STATE_NORMAL));
 		map.addAttribute("category", category);
 		return "admin/category";
 	}

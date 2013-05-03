@@ -8,6 +8,7 @@ import im.dadoo.teak.mvc.domain.Page;
 import im.dadoo.teak.mvc.domain.Post;
 import im.dadoo.teak.mvc.service.FileService;
 import im.dadoo.teak.mvc.service.PageService;
+import im.dadoo.teak.util.Util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,7 +59,7 @@ public class PageController {
 	
 	@RequestMapping(value = "/admin/pages", method = RequestMethod.GET)
 	public String getPageAdminPage(ModelMap map) {
-		List<Page> pages = this.pas.list();
+		List<Page> pages = this.pas.list(Util.STATE_NORMAL);
 		map.addAttribute("pages", pages);
 		return "admin/page-list";
 	}

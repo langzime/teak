@@ -31,15 +31,12 @@ public class MenuService {
 		List<Category> categoryMenu = menu.getCategoryMenu();
 		
 		Category c1 = this.categoryDao.fetchByName("中心公告");
-		c1.getSubs().size();
 		categoryMenu.add(c1);
 		
 		Category c2 = this.categoryDao.fetchByName("学术活动");
-		c2.getSubs().size();
 		categoryMenu.add(c2);
 		
 		Category c3 = this.categoryDao.fetchByName("学术研究");
-		c3.getSubs().size();
 		categoryMenu.add(c3);
 		
 		List<Page> pageMenu = menu.getPageMenu();
