@@ -29,7 +29,7 @@
 				<hr>
 				<!-- content-middle -->
 				<div class="row">
-					<@CategoryBoard category=activity />
+					<@PageBoard page=introduction />
 					<@CategoryBoard category=notice />
 				</div>
 				<hr>
@@ -142,6 +142,26 @@
 			</li>
 			</#list>
 		</ol>
+	</div>
+</div>
+</#macro>
+
+<#macro PageBoard page>
+<div class="span4 category-board">
+	<div class="board-title">
+		<h3>
+			<i class="icon-star"></i>
+			<a href="#">
+				<span><a href="/page/${page.id}">${page.name}</a></span>
+			</a>
+		</h3>
+	</div>
+	<div class="board-content">
+		<#if page.text?length gt 390>
+			<p>${page.text[0..389]}...<a href="/page/${page.id}">更多</a></p>
+		<#else>
+			<p>${page.text}</p>
+		</#if>
 	</div>
 </div>
 </#macro>
