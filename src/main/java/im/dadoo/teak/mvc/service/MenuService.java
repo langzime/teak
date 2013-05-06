@@ -39,6 +39,9 @@ public class MenuService {
 		Category c3 = this.categoryDao.fetchByName("学术研究");
 		categoryMenu.add(c3);
 		
+		Category c4 = this.categoryDao.fetchByName("图片新闻");
+		categoryMenu.add(c4);
+		
 		List<Page> pageMenu = menu.getPageMenu();
 		
 		Page p1 = this.pageDao.fetchByName("中心介绍");
